@@ -1,88 +1,64 @@
-local TweenService = game:GetService("TweenService")
-
--- Criando a interface do usuário
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-local NotificationHolder = Instance.new("Frame")
-NotificationHolder.Size = UDim2.new(0, 300, 1, -25)
-NotificationHolder.Position = UDim2.new(1, -25, 1, -25)
-NotificationHolder.AnchorPoint = Vector2.new(1, 1)
-NotificationHolder.BackgroundTransparency = 1
-NotificationHolder.Parent = ScreenGui
-
--- Função para criar elementos
-local function MakeElement(elementType, properties)
-    local element = Instance.new(elementType)
-    for prop, value in pairs(properties) do
-        element[prop] = value
-    end
-    return element
-end
-
--- Função de notificação
 local NightLib = {}
 
+local TweenService = game:GetService("TweenService")
+
 function NightLib:MakeNotification(NotificationConfig)
-    spawn(function()
-        NotificationConfig.Name = NotificationConfig.Name or "Notification"
-        NotificationConfig.Content = NotificationConfig.Content or "Test"
-        NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://83913533460895"
-        NotificationConfig.Time = NotificationConfig.Time or 15
+    local title = NotificationConfig.Name or "Notificação"
+    local content = NotificationConfig.Content or "Conteúdo da notificação."
+    local time = NotificationConfig.Time or 5
 
-        local NotificationParent = MakeElement("Frame", {
-            Size = UDim2.new(1, 0, 0, 0),
-            AutomaticSize = Enum.AutomaticSize.Y,
-            Parent = NotificationHolder
-        })
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    screenGui.ResetOnSpawn = false
 
-        local NotificationFrame = MakeElement("Frame", {
-            Size = UDim2.new(1, 0, 0, 0),
-            Position = UDim2.new(1, -55, 0, 0),
-            BackgroundTransparency = 0,
-            AutomaticSize = Enum.AutomaticSize.Y,
-            Parent = NotificationParent,
-            BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-        })
+    local notificationFrame = Instance.new("Frame")
+    notificationFrame.Size = UDim2.new(0.3, 0, 0.13, 0)
+    notificationFrame.Position = UDim2.new(1, 20, 0.85, 0)
+    notificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    notificationFrame.BorderSizePixel = 0
+    notificationFrame.AnchorPoint = Vector2.new(1, 1)
+    notificationFrame.Parent = screenGui
 
-        -- Criação dos elementos da notificação
-        MakeElement("ImageLabel", {
-            Size = UDim2.new(0, 20, 0, 20),
-            ImageColor3 = Color3.fromRGB(240, 240, 240),
-            Image = NotificationConfig.Image,
-            Parent = NotificationFrame,
-        })
+    local border = Instance.new("UIStroke")
+    border.Thickness = 2
+    border.Color = Color3.fromRGB(255, 255, 0)
+    border.Parent = notificationFrame
 
-        MakeElement("TextLabel", {
-            Size = UDim2.new(1, -30, 0, 20),
-            Position = UDim2.new(0, 30, 0, 0),
-            Font = Enum.Font.GothamBold,
-            Text = NotificationConfig.Name,
-            Parent = NotificationFrame,
-        })
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = notificationFrame
 
-        MakeElement("TextLabel", {
-            Size = UDim2.new(1, 0, 0, 0),
-            Position = UDim2.new(0, 0, 0, 25),
-            Font = Enum.Font.GothamSemibold,
-            Text = NotificationConfig.Content,
-            RichText = true,
-            AutomaticSize = Enum.AutomaticSize.Y,
-            TextColor3 = Color3.fromRGB(200, 200, 200),
-            TextWrapped = true,
-            Parent = NotificationFrame,
-        })
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(1, -20, 0.3, 0)
+    titleLabel.Position = UDim2.new(0, 10, 0, 5)
+    titleLabel.Text = title
+    titleLabel.TextColor3 = Color3.new(1, 1, 1)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.TextSize = 18
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    titleLabel.Parent = notificationFrame
 
-        -- Animação de entrada
-        TweenService:Create(NotificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 0, 0, 0)}):Play()
+    local contentLabel = Instance.new("TextLabel")
+    contentLabel.Size = UDim2.new(1, -20, 0.6, 0)
+    contentLabel.Position = UDim2.new(0, 10, 0.3, 0)
+    contentLabel.Text = content
+    contentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    contentLabel.BackgroundTransparency = 1
+    contentLabel.TextSize = 14
+    contentLabel.Font = Enum.Font.Gotham
+    contentLabel.TextWrapped = true
+    contentLabel.TextXAlignment = Enum.TextXAlignment.Left
+    contentLabel.Parent = notificationFrame
 
-        wait(NotificationConfig.Time - 0.88)
+    notificationFrame:TweenPosition(UDim2.new(0.98, 0, 0.85, 0), 'Out', 'Quint', 0.5, true)
 
-        -- Animação de saída
-        TweenService:Create(NotificationFrame, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
-        wait(0.3)
-        NotificationFrame:Destroy()
-    end)
-end    
+    wait(time)
+
+    notificationFrame:TweenPosition(UDim2.new(1.2, 0, 0.85, 0), 'In', 'Quint', 0.5, true)
+
+    wait(0.5)
+    screenGui:Destroy()
+end
 
 return NightLib
