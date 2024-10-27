@@ -1,70 +1,49 @@
--- NotificationModule.lua
-
+-- Notification Module
 local NotificationModule = {}
 
-function NotificationModule.createNotification(title, content, time)
-    -- Cria o ScreenGui para segurar a notificação
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    screenGui.ResetOnSpawn = false
+-- Função para criar a notificação
+function NotificationModule:MakeNotification(NotificationConfig)
+	local screenGui = Instance.new("ScreenGui")
+	local NotificationHolder = Instance.new("Frame")
+	local NotificationFrame = Instance.new("Frame")
+	
+	screenGui.Name = "NotificationGui"
+	screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-    -- Cria o Frame da notificação
-    local notificationFrame = Instance.new("Frame")
-    notificationFrame.Size = UDim2.new(0.3, 0, 0.13, 0)
-    notificationFrame.Position = UDim2.new(1, 20, 0.85, 0) -- Inicialmente fora da tela, parte inferior direita
-    notificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Fundo preto
-    notificationFrame.BorderSizePixel = 0
-    notificationFrame.AnchorPoint = Vector2.new(1, 1)
-    notificationFrame.Parent = screenGui
+	NotificationHolder.Size = UDim2.new(0, 300, 0, 0)
+	NotificationHolder.Position = UDim2.new(0.5, -150, 0.1, 0)
+	NotificationHolder.BackgroundTransparency = 1
+	NotificationHolder.Parent = screenGui
 
-    -- Adiciona uma borda amarela ao Frame
-    local border = Instance.new("UIStroke")
-    border.Thickness = 2 -- Espessura da borda
-    border.Color = Color3.fromRGB(255, 255, 0) -- Cor amarela
-    border.Parent = notificationFrame
+	NotificationFrame.Size = UDim2.new(1, 0, 0, 50)
+	NotificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	NotificationFrame.BorderSizePixel = 0
+	NotificationFrame.Parent = NotificationHolder
 
-    -- Adiciona bordas arredondadas
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 10)
-    corner.Parent = notificationFrame
+	local TitleLabel = Instance.new("TextLabel")
+	TitleLabel.Size = UDim2.new(1, 0, 0.5, 0)
+	TitleLabel.Text = NotificationConfig.Name or "Notification"
+	TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TitleLabel.BackgroundTransparency = 1
+	TitleLabel.Parent = NotificationFrame
 
-    -- Cria o título da notificação
-    local titleLabel = Instance.new("TextLabel")
-    titleLabel.Size = UDim2.new(1, -20, 0.3, 0)
-    titleLabel.Position = UDim2.new(0, 10, 0, 5)
-    titleLabel.Text = title
-    titleLabel.TextColor3 = Color3.new(1, 1, 1)
-    titleLabel.BackgroundTransparency = 1
-    titleLabel.TextSize = 18
-    titleLabel.Font = Enum.Font.GothamBold
-    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-    titleLabel.Parent = notificationFrame
+	local ContentLabel = Instance.new("TextLabel")
+	ContentLabel.Size = UDim2.new(1, 0, 0.5, 0)
+	ContentLabel.Position = UDim2.new(0, 0, 0.5, 0)
+	ContentLabel.Text = NotificationConfig.Content or "Notification content..."
+	ContentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+	ContentLabel.BackgroundTransparency = 1
+	ContentLabel.Parent = NotificationFrame
 
-    -- Cria o conteúdo da notificação
-    local contentLabel = Instance.new("TextLabel")
-    contentLabel.Size = UDim2.new(1, -20, 0.6, 0)
-    contentLabel.Position = UDim2.new(0, 10, 0.3, 0)
-    contentLabel.Text = content
-    contentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    contentLabel.BackgroundTransparency = 1
-    contentLabel.TextSize = 14
-    contentLabel.Font = Enum.Font.Gotham
-    contentLabel.TextWrapped = true
-    contentLabel.TextXAlignment = Enum.TextXAlignment.Left
-    contentLabel.Parent = notificationFrame
+	-- Animação de aparição
+	NotificationFrame:TweenPosition(UDim2.new(0.5, -150, 0.1, 0), "Out", "Quad", 0.3, true)
 
-    -- Animação de entrada (suave)
-    notificationFrame:TweenPosition(UDim2.new(0.98, 0, 0.85, 0), 'Out', 'Quint', 0.5, true)
-
-    -- Aguarda o tempo definido antes de desaparecer
-    wait(time or 5)
-
-    -- Animação de saída (suave)
-    notificationFrame:TweenPosition(UDim2.new(1.2, 0, 0.85, 0), 'In', 'Quint', 0.5, true)
-
-    -- Remove a notificação após a animação
-    wait(0.5)
-    screenGui:Destroy()
+	-- Remove a notificação após um certo tempo
+	wait(NotificationConfig.Time or 5)
+	NotificationFrame:TweenPosition(UDim2.new(0.5, -150, -0.2, 0), "Out", "Quad", 0.3, true, function()
+		screenGui:Destroy()
+	end)
 end
 
+-- Retorna o módulo
 return NotificationModule
