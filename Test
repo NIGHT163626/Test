@@ -1,49 +1,78 @@
--- Notification Module
-local NotificationModule = {}
-
--- Função para criar a notificação
-function NotificationModule:MakeNotification(NotificationConfig)
-	local screenGui = Instance.new("ScreenGui")
+-- Função para criar e exibir notificações
+function CreateNotificationHolder()
 	local NotificationHolder = Instance.new("Frame")
-	local NotificationFrame = Instance.new("Frame")
-	
-	screenGui.Name = "NotificationGui"
-	screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
+	NotificationHolder.Name = "NotificationHolder"
 	NotificationHolder.Size = UDim2.new(0, 300, 0, 0)
-	NotificationHolder.Position = UDim2.new(0.5, -150, 0.1, 0)
+	NotificationHolder.Position = UDim2.new(1, -25, 1, -25)
+	NotificationHolder.AnchorPoint = Vector2.new(1, 1)
 	NotificationHolder.BackgroundTransparency = 1
-	NotificationHolder.Parent = screenGui
+	NotificationHolder.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-	NotificationFrame.Size = UDim2.new(1, 0, 0, 50)
-	NotificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	NotificationFrame.BorderSizePixel = 0
-	NotificationFrame.Parent = NotificationHolder
+	local UIListLayout = Instance.new("UIListLayout")
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+	UIListLayout.Padding = UDim.new(0, 5)
+	UIListLayout.Parent = NotificationHolder
 
-	local TitleLabel = Instance.new("TextLabel")
-	TitleLabel.Size = UDim2.new(1, 0, 0.5, 0)
-	TitleLabel.Text = NotificationConfig.Name or "Notification"
-	TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TitleLabel.BackgroundTransparency = 1
-	TitleLabel.Parent = NotificationFrame
+	return NotificationHolder
+end
 
-	local ContentLabel = Instance.new("TextLabel")
-	ContentLabel.Size = UDim2.new(1, 0, 0.5, 0)
-	ContentLabel.Position = UDim2.new(0, 0, 0.5, 0)
-	ContentLabel.Text = NotificationConfig.Content or "Notification content..."
-	ContentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-	ContentLabel.BackgroundTransparency = 1
-	ContentLabel.Parent = NotificationFrame
+local NotificationHolder = CreateNotificationHolder()
 
-	-- Animação de aparição
-	NotificationFrame:TweenPosition(UDim2.new(0.5, -150, 0.1, 0), "Out", "Quad", 0.3, true)
+function MakeNotification(NotificationConfig)
+	spawn(function()
+		NotificationConfig.Name = NotificationConfig.Name or "Notification"
+		NotificationConfig.Content = NotificationConfig.Content or "Test"
+		NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://83913533460895"
+		NotificationConfig.Time = NotificationConfig.Time or 15
 
-	-- Remove a notificação após um certo tempo
-	wait(NotificationConfig.Time or 5)
-	NotificationFrame:TweenPosition(UDim2.new(0.5, -150, -0.2, 0), "Out", "Quad", 0.3, true, function()
-		screenGui:Destroy()
+		local NotificationFrame = Instance.new("Frame")
+		NotificationFrame.Size = UDim2.new(1, 0, 0, 0)
+		NotificationFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+		NotificationFrame.BackgroundTransparency = 0
+		NotificationFrame.Parent = NotificationHolder
+
+		local TitleLabel = Instance.new("TextLabel")
+		TitleLabel.Size = UDim2.new(1, 0, 0, 20)
+		TitleLabel.Text = NotificationConfig.Name
+		TitleLabel.Font = Enum.Font.SourceSansBold
+		TitleLabel.TextColor3 = Color3.new(1, 1, 0)
+		TitleLabel.BackgroundTransparency = 1
+		TitleLabel.Parent = NotificationFrame
+
+		local ContentLabel = Instance.new("TextLabel")
+		ContentLabel.Size = UDim2.new(1, 0, 0, 20)
+		ContentLabel.Position = UDim2.new(0, 0, 0, 25)
+		ContentLabel.Text = NotificationConfig.Content
+		ContentLabel.Font = Enum.Font.SourceSans
+		ContentLabel.TextColor3 = Color3.new(1, 1, 1)
+		ContentLabel.BackgroundTransparency = 1
+		ContentLabel.Parent = NotificationFrame
+
+		local ImageLabel = Instance.new("ImageLabel")
+		ImageLabel.Size = UDim2.new(0, 20, 0, 20)
+		ImageLabel.Position = UDim2.new(0, 0, 0, 5)
+		ImageLabel.Image = NotificationConfig.Image
+		ImageLabel.BackgroundTransparency = 1
+		ImageLabel.Parent = NotificationFrame
+
+		-- Efeitos de transição
+		NotificationFrame:TweenPosition(UDim2.new(0, 0, 0, 0), 'In', 'Quint', 0.5, true)
+
+		wait(NotificationConfig.Time - 0.88)
+		
+		-- Transições de desaparecimento
+		NotificationFrame:TweenPosition(UDim2.new(1, 0, 0, 0), 'Out', 'Quint', 0.5, true)
+		wait(0.5)
+		NotificationFrame:Destroy()
 	end)
 end
 
--- Retorna o módulo
-return NotificationModule
+-- Exemplo de uso
+MakeNotification({
+	Name = "Título da Notificação",
+	Content = "Conteúdo da Notificação...",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
