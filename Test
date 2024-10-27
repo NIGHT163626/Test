@@ -1,78 +1,88 @@
--- Função para criar e exibir notificações
-function CreateNotificationHolder()
-	local NotificationHolder = Instance.new("Frame")
-	NotificationHolder.Name = "NotificationHolder"
-	NotificationHolder.Size = UDim2.new(0, 300, 0, 0)
-	NotificationHolder.Position = UDim2.new(1, -25, 1, -25)
-	NotificationHolder.AnchorPoint = Vector2.new(1, 1)
-	NotificationHolder.BackgroundTransparency = 1
-	NotificationHolder.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local TweenService = game:GetService("TweenService")
 
-	local UIListLayout = Instance.new("UIListLayout")
-	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
-	UIListLayout.Padding = UDim.new(0, 5)
-	UIListLayout.Parent = NotificationHolder
+-- Criando a interface do usuário
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-	return NotificationHolder
+local NotificationHolder = Instance.new("Frame")
+NotificationHolder.Size = UDim2.new(0, 300, 1, -25)
+NotificationHolder.Position = UDim2.new(1, -25, 1, -25)
+NotificationHolder.AnchorPoint = Vector2.new(1, 1)
+NotificationHolder.BackgroundTransparency = 1
+NotificationHolder.Parent = ScreenGui
+
+-- Função para criar elementos
+local function MakeElement(elementType, properties)
+    local element = Instance.new(elementType)
+    for prop, value in pairs(properties) do
+        element[prop] = value
+    end
+    return element
 end
 
-local NotificationHolder = CreateNotificationHolder()
+-- Função de notificação
+local NightLib = {}
 
-function MakeNotification(NotificationConfig)
-	spawn(function()
-		NotificationConfig.Name = NotificationConfig.Name or "Notification"
-		NotificationConfig.Content = NotificationConfig.Content or "Test"
-		NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://83913533460895"
-		NotificationConfig.Time = NotificationConfig.Time or 15
+function NightLib:MakeNotification(NotificationConfig)
+    spawn(function()
+        NotificationConfig.Name = NotificationConfig.Name or "Notification"
+        NotificationConfig.Content = NotificationConfig.Content or "Test"
+        NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://83913533460895"
+        NotificationConfig.Time = NotificationConfig.Time or 15
 
-		local NotificationFrame = Instance.new("Frame")
-		NotificationFrame.Size = UDim2.new(1, 0, 0, 0)
-		NotificationFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-		NotificationFrame.BackgroundTransparency = 0
-		NotificationFrame.Parent = NotificationHolder
+        local NotificationParent = MakeElement("Frame", {
+            Size = UDim2.new(1, 0, 0, 0),
+            AutomaticSize = Enum.AutomaticSize.Y,
+            Parent = NotificationHolder
+        })
 
-		local TitleLabel = Instance.new("TextLabel")
-		TitleLabel.Size = UDim2.new(1, 0, 0, 20)
-		TitleLabel.Text = NotificationConfig.Name
-		TitleLabel.Font = Enum.Font.SourceSansBold
-		TitleLabel.TextColor3 = Color3.new(1, 1, 0)
-		TitleLabel.BackgroundTransparency = 1
-		TitleLabel.Parent = NotificationFrame
+        local NotificationFrame = MakeElement("Frame", {
+            Size = UDim2.new(1, 0, 0, 0),
+            Position = UDim2.new(1, -55, 0, 0),
+            BackgroundTransparency = 0,
+            AutomaticSize = Enum.AutomaticSize.Y,
+            Parent = NotificationParent,
+            BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+        })
 
-		local ContentLabel = Instance.new("TextLabel")
-		ContentLabel.Size = UDim2.new(1, 0, 0, 20)
-		ContentLabel.Position = UDim2.new(0, 0, 0, 25)
-		ContentLabel.Text = NotificationConfig.Content
-		ContentLabel.Font = Enum.Font.SourceSans
-		ContentLabel.TextColor3 = Color3.new(1, 1, 1)
-		ContentLabel.BackgroundTransparency = 1
-		ContentLabel.Parent = NotificationFrame
+        -- Criação dos elementos da notificação
+        MakeElement("ImageLabel", {
+            Size = UDim2.new(0, 20, 0, 20),
+            ImageColor3 = Color3.fromRGB(240, 240, 240),
+            Image = NotificationConfig.Image,
+            Parent = NotificationFrame,
+        })
 
-		local ImageLabel = Instance.new("ImageLabel")
-		ImageLabel.Size = UDim2.new(0, 20, 0, 20)
-		ImageLabel.Position = UDim2.new(0, 0, 0, 5)
-		ImageLabel.Image = NotificationConfig.Image
-		ImageLabel.BackgroundTransparency = 1
-		ImageLabel.Parent = NotificationFrame
+        MakeElement("TextLabel", {
+            Size = UDim2.new(1, -30, 0, 20),
+            Position = UDim2.new(0, 30, 0, 0),
+            Font = Enum.Font.GothamBold,
+            Text = NotificationConfig.Name,
+            Parent = NotificationFrame,
+        })
 
-		-- Efeitos de transição
-		NotificationFrame:TweenPosition(UDim2.new(0, 0, 0, 0), 'In', 'Quint', 0.5, true)
+        MakeElement("TextLabel", {
+            Size = UDim2.new(1, 0, 0, 0),
+            Position = UDim2.new(0, 0, 0, 25),
+            Font = Enum.Font.GothamSemibold,
+            Text = NotificationConfig.Content,
+            RichText = true,
+            AutomaticSize = Enum.AutomaticSize.Y,
+            TextColor3 = Color3.fromRGB(200, 200, 200),
+            TextWrapped = true,
+            Parent = NotificationFrame,
+        })
 
-		wait(NotificationConfig.Time - 0.88)
-		
-		-- Transições de desaparecimento
-		NotificationFrame:TweenPosition(UDim2.new(1, 0, 0, 0), 'Out', 'Quint', 0.5, true)
-		wait(0.5)
-		NotificationFrame:Destroy()
-	end)
-end
+        -- Animação de entrada
+        TweenService:Create(NotificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 0, 0, 0)}):Play()
 
--- Exemplo de uso
-MakeNotification({
-	Name = "Título da Notificação",
-	Content = "Conteúdo da Notificação...",
-	Image = "rbxassetid://4483345998",
-	Time = 5
-})
+        wait(NotificationConfig.Time - 0.88)
+
+        -- Animação de saída
+        TweenService:Create(NotificationFrame, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
+        wait(0.3)
+        NotificationFrame:Destroy()
+    end)
+end    
+
+return NightLib
