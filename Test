@@ -1,54 +1,103 @@
--- Carrega a biblioteca de UI
-local UILibrary = require(path.to.UILibrary)  -- Substitua 'path.to.UILibrary' pelo caminho real da biblioteca
+-- Nome do Módulo
+local MyGuiLibrary = {}
 
--- Cria uma nova janela
-local Window = UILibrary:MakeWindow({ Name = "Título da biblioteca", Title = "Poison Key System", HidePremium = false, SaveConfig = true, ConfigFolder = "PoisonKeySystem" })
+-- Variáveis Globais
+local ElementFunction = {}
+local ItemParent = script.Parent -- Ajuste conforme a hierarquia do seu projeto
 
--- Adiciona um botão "Pegar Key" com callback
-UILibrary:AddButton(Window, "Pegar Key", function()
-    print("Pegar Key clicado!")
-    -- Aqui você pode adicionar a lógica para pegar a chave
-end, {
-    Size = UDim2.new(0.35, 0, 0.1, 0),
-    Position = UDim2.new(0.1, 0, 0.5, 0),
-    BackgroundColor = Color3.new(0.3, 0.3, 0.3),
-    TextColor = Color3.new(1, 1, 0),
-    BorderSize = 2,
-    BorderColor = Color3.new(1, 1, 0),
-    TextSize = 24,
-    Font = Enum.Font.SourceSansBold
-})
+-- Função para criar a GUI
+function MyGuiLibrary:CreateGui()
+    local ScreenGui = Instance.new("ScreenGui")
+    local MainFrame = Instance.new("Frame")
 
--- Adiciona um botão "Checar Key" com callback
-UILibrary:AddButton(Window, "Checar Key", function()
-    print("Checar Key clicado!")
-    -- Aqui você pode adicionar a lógica para checar a chave
-end, {
-    Size = UDim2.new(0.35, 0, 0.1, 0),
-    Position = UDim2.new(0.55, 0, 0.5, 0),
-    BackgroundColor = Color3.new(0.3, 0.3, 0.3),
-    TextColor = Color3.new(1, 1, 0),
-    BorderSize = 2,
-    BorderColor = Color3.new(1, 1, 0),
-    TextSize = 24,
-    Font = Enum.Font.SourceSansBold
-})
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Adiciona um TextBox com placeholder personalizado
-local keyInput = UILibrary:AddTextBox(Window, "Digite sua chave...", {
-    Size = UDim2.new(0.8, 0, 0.1, 0),
-    Position = UDim2.new(0.1, 0, 0.35, 0),
-    BackgroundColor = Color3.new(0.2, 0.2, 0.2),
-    TextColor = Color3.new(1, 1, 1),
-    TextSize = 20,
-    Font = Enum.Font.SourceSans
-})
+    MainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainFrame.BackgroundTransparency = 0.5
+    MainFrame.Parent = ScreenGui
 
--- Adiciona um Label
-local infoLabel = UILibrary:AddLabel(Window, "Digite a chave e clique em 'Checar Key'", {
-    Size = UDim2.new(1, 0, 0.1, 0),
-    Position = UDim2.new(0, 0, 0.15, 0),
-    TextColor = Color3.new(1, 1, 0),
-    TextSize = 20,
-    Font = Enum.Font.SourceSansBold
-})
+    ItemParent = MainFrame -- Definindo o pai como o MainFrame
+end
+
+-- Função para adicionar um Label
+function ElementFunction:AddLabel(Text, Width, Height)
+    local LabelWidth = Width or 1
+    local LabelHeight = Height or 200
+
+    local LabelFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
+        Size = UDim2.new(LabelWidth, 0, 0, LabelHeight),
+        BackgroundTransparency = 0.7,
+        Parent = ItemParent
+    }), {
+        AddThemeObject(SetProps(MakeElement("Label", Text, 22), {
+            Size = UDim2.new(1, -12, 1, 0),
+            Position = UDim2.new(0, 12, 0, 0),
+            Font = Enum.Font.GothamBold,
+            Name = "Content"
+        }), "Text"),
+        AddThemeObject(MakeElement("Stroke"), "Stroke")
+    }), "Second")
+
+    return LabelFrame.Content -- Retornar o Label para manipulação posterior
+end
+
+-- Função para adicionar um Botão
+function ElementFunction:AddButton(Text, Width, Height, Callback)
+    local ButtonWidth = Width or 0.3
+    local ButtonHeight = Height or 50
+
+    local ButtonFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
+        Size = UDim2.new(ButtonWidth, 0, 0, ButtonHeight),
+        BackgroundTransparency = 0.5,
+        Parent = ItemParent
+    }), {
+        AddThemeObject(SetProps(MakeElement("Label", Text, 22), {
+            Size = UDim2.new(1, 0, 1, 0),
+            Position = UDim2.new(0, 0, 0, 0),
+            Font = Enum.Font.GothamBold,
+            TextColor3 = Color3.fromRGB(0, 0, 0),
+            Name = "Content"
+        }), "Text"),
+        AddThemeObject(MakeElement("Stroke"), "Stroke")
+    }), "Second")
+
+    ButtonFrame.MouseButton1Click:Connect(function()
+        if Callback then
+            Callback()
+        end
+    end)
+
+    return ButtonFrame -- Retornar o botão para manipulação posterior
+end
+
+-- Função para adicionar uma Caixa de Texto
+function ElementFunction:AddTextBox(PlaceholderText, Width, Height)
+    local TextBoxWidth = Width or 0.8
+    local TextBoxHeight = Height or 50
+
+    local TextBoxFrame = AddThemeObject(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
+        Size = UDim2.new(TextBoxWidth, 0, 0, TextBoxHeight),
+        BackgroundTransparency = 0.5,
+        Parent = ItemParent
+    }), "TextBox")
+
+    local TextBox = AddThemeObject(SetProps(MakeElement("TextBox", "", 22), {
+        Size = UDim2.new(1, -12, 1, 0),
+        Position = UDim2.new(0, 6, 0, 0),
+        PlaceholderText = PlaceholderText or "Digite aqui...",
+        BackgroundColor3 = Color3.fromRGB(240, 240, 240),
+        TextColor3 = Color3.fromRGB(0, 0, 0),
+        TextScaled = true,
+        Name = "Content"
+    }), "Text")
+
+    return TextBoxFrame, TextBox -- Retornar ambos para manipulação posterior
+end
+
+-- Adicionando a tabela ElementFunction ao MyGuiLibrary
+MyGuiLibrary.ElementFunction = ElementFunction
+
+-- Retornar o módulo
+return MyGuiLibrary
