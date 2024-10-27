@@ -1,103 +1,70 @@
--- Nome do Módulo
-local MyGuiLibrary = {}
+-- NotificationModule.lua
 
--- Variáveis Globais
-local ElementFunction = {}
-local ItemParent = script.Parent -- Ajuste conforme a hierarquia do seu projeto
+local NotificationModule = {}
 
--- Função para criar a GUI
-function MyGuiLibrary:CreateGui()
-    local ScreenGui = Instance.new("ScreenGui")
-    local MainFrame = Instance.new("Frame")
+function NotificationModule.createNotification(title, content, time)
+    -- Cria o ScreenGui para segurar a notificação
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    screenGui.ResetOnSpawn = false
 
-    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    -- Cria o Frame da notificação
+    local notificationFrame = Instance.new("Frame")
+    notificationFrame.Size = UDim2.new(0.3, 0, 0.13, 0)
+    notificationFrame.Position = UDim2.new(1, 20, 0.85, 0) -- Inicialmente fora da tela, parte inferior direita
+    notificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Fundo preto
+    notificationFrame.BorderSizePixel = 0
+    notificationFrame.AnchorPoint = Vector2.new(1, 1)
+    notificationFrame.Parent = screenGui
 
-    MainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
-    MainFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
-    MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    MainFrame.BackgroundTransparency = 0.5
-    MainFrame.Parent = ScreenGui
+    -- Adiciona uma borda amarela ao Frame
+    local border = Instance.new("UIStroke")
+    border.Thickness = 2 -- Espessura da borda
+    border.Color = Color3.fromRGB(255, 255, 0) -- Cor amarela
+    border.Parent = notificationFrame
 
-    ItemParent = MainFrame -- Definindo o pai como o MainFrame
+    -- Adiciona bordas arredondadas
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = notificationFrame
+
+    -- Cria o título da notificação
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(1, -20, 0.3, 0)
+    titleLabel.Position = UDim2.new(0, 10, 0, 5)
+    titleLabel.Text = title
+    titleLabel.TextColor3 = Color3.new(1, 1, 1)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.TextSize = 18
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    titleLabel.Parent = notificationFrame
+
+    -- Cria o conteúdo da notificação
+    local contentLabel = Instance.new("TextLabel")
+    contentLabel.Size = UDim2.new(1, -20, 0.6, 0)
+    contentLabel.Position = UDim2.new(0, 10, 0.3, 0)
+    contentLabel.Text = content
+    contentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    contentLabel.BackgroundTransparency = 1
+    contentLabel.TextSize = 14
+    contentLabel.Font = Enum.Font.Gotham
+    contentLabel.TextWrapped = true
+    contentLabel.TextXAlignment = Enum.TextXAlignment.Left
+    contentLabel.Parent = notificationFrame
+
+    -- Animação de entrada (suave)
+    notificationFrame:TweenPosition(UDim2.new(0.98, 0, 0.85, 0), 'Out', 'Quint', 0.5, true)
+
+    -- Aguarda o tempo definido antes de desaparecer
+    wait(time or 5)
+
+    -- Animação de saída (suave)
+    notificationFrame:TweenPosition(UDim2.new(1.2, 0, 0.85, 0), 'In', 'Quint', 0.5, true)
+
+    -- Remove a notificação após a animação
+    wait(0.5)
+    screenGui:Destroy()
 end
 
--- Função para adicionar um Label
-function ElementFunction:AddLabel(Text, Width, Height)
-    local LabelWidth = Width or 1
-    local LabelHeight = Height or 200
-
-    local LabelFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-        Size = UDim2.new(LabelWidth, 0, 0, LabelHeight),
-        BackgroundTransparency = 0.7,
-        Parent = ItemParent
-    }), {
-        AddThemeObject(SetProps(MakeElement("Label", Text, 22), {
-            Size = UDim2.new(1, -12, 1, 0),
-            Position = UDim2.new(0, 12, 0, 0),
-            Font = Enum.Font.GothamBold,
-            Name = "Content"
-        }), "Text"),
-        AddThemeObject(MakeElement("Stroke"), "Stroke")
-    }), "Second")
-
-    return LabelFrame.Content -- Retornar o Label para manipulação posterior
-end
-
--- Função para adicionar um Botão
-function ElementFunction:AddButton(Text, Width, Height, Callback)
-    local ButtonWidth = Width or 0.3
-    local ButtonHeight = Height or 50
-
-    local ButtonFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-        Size = UDim2.new(ButtonWidth, 0, 0, ButtonHeight),
-        BackgroundTransparency = 0.5,
-        Parent = ItemParent
-    }), {
-        AddThemeObject(SetProps(MakeElement("Label", Text, 22), {
-            Size = UDim2.new(1, 0, 1, 0),
-            Position = UDim2.new(0, 0, 0, 0),
-            Font = Enum.Font.GothamBold,
-            TextColor3 = Color3.fromRGB(0, 0, 0),
-            Name = "Content"
-        }), "Text"),
-        AddThemeObject(MakeElement("Stroke"), "Stroke")
-    }), "Second")
-
-    ButtonFrame.MouseButton1Click:Connect(function()
-        if Callback then
-            Callback()
-        end
-    end)
-
-    return ButtonFrame -- Retornar o botão para manipulação posterior
-end
-
--- Função para adicionar uma Caixa de Texto
-function ElementFunction:AddTextBox(PlaceholderText, Width, Height)
-    local TextBoxWidth = Width or 0.8
-    local TextBoxHeight = Height or 50
-
-    local TextBoxFrame = AddThemeObject(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-        Size = UDim2.new(TextBoxWidth, 0, 0, TextBoxHeight),
-        BackgroundTransparency = 0.5,
-        Parent = ItemParent
-    }), "TextBox")
-
-    local TextBox = AddThemeObject(SetProps(MakeElement("TextBox", "", 22), {
-        Size = UDim2.new(1, -12, 1, 0),
-        Position = UDim2.new(0, 6, 0, 0),
-        PlaceholderText = PlaceholderText or "Digite aqui...",
-        BackgroundColor3 = Color3.fromRGB(240, 240, 240),
-        TextColor3 = Color3.fromRGB(0, 0, 0),
-        TextScaled = true,
-        Name = "Content"
-    }), "Text")
-
-    return TextBoxFrame, TextBox -- Retornar ambos para manipulação posterior
-end
-
--- Adicionando a tabela ElementFunction ao MyGuiLibrary
-MyGuiLibrary.ElementFunction = ElementFunction
-
--- Retornar o módulo
-return MyGuiLibrary
+return NotificationModule
