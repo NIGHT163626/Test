@@ -1,67 +1,103 @@
--- UI Library para criação de interfaces no Roblox
+-- UI Library for Poison Key System
+
 local PoisonKeyLib = {}
 PoisonKeyLib.__index = PoisonKeyLib
 
--- Função para criar uma nova instância da biblioteca
 function PoisonKeyLib:new()
     local self = setmetatable({}, PoisonKeyLib)
-    self.gui = Instance.new('ScreenGui')
-    self.gui.Parent = game.Players.LocalPlayer:WaitForChild('PlayerGui')
+
+    -- Cria a janela principal
+    self:CreateWindow()
+    
+    -- Adiciona os botões
+    self:DiscordButton()
+    self:PegarKeyButton()
+    self:ChecarKeyButton()
+    
+    -- Adiciona a TextBox
+    self:CreateTextBox()
+
     return self
 end
 
--- Módulo para inicialização de janela
-function PoisonKeyLib:CreateWindow(config)
-    local window = Instance.new('Frame')
-    window.Size = config.Size or UDim2.new(0, 400, 0, 300)
-    window.Position = config.Position or UDim2.new(0.5, -200, 0.5, -150)
-    window.BackgroundColor3 = config.BackgroundColor or Color3.new(1, 1, 1)
-    window.Parent = self.gui
-    return window
+function PoisonKeyLib:CreateWindow()
+    local window = Instance.new('ScreenGui')
+    local frame = Instance.new('Frame')
+    
+    -- Configurações de janela
+    window.Parent = game.Players.LocalPlayer.PlayerGui
+    frame.Size = UDim2.new(0, 400, 0, 300)
+    frame.Position = UDim2.new(0.5, -200, 0.5, -150)
+    frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    frame.Parent = window
+    self.Window = window
+    self.Frame = frame
 end
 
--- Módulo para criação de botões
-function PoisonKeyLib:CreateButton(parent, buttonText, callbacks, options)
+function PoisonKeyLib:DiscordButton()
+    local button = Instance.new('ImageButton')
+    button.Image = "rbxassetid://11529076255" -- Ícone do Discord
+    button.Size = UDim2.new(0, 100, 0, 50)
+    button.Position = UDim2.new(0.1, 0, 0.1, 0)
+    button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+    
+    -- Adicionando um texto para melhor usabilidade
+    local buttonText = Instance.new('TextLabel')
+    buttonText.Text = "Discord"
+    buttonText.Size = UDim2.new(1, 0, 1, 0)
+    buttonText.BackgroundTransparency = 1
+    buttonText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    buttonText.Parent = button
+
+    button.MouseButton1Click:Connect(function()
+        print("Discord button pressed")
+        -- Aqui você pode adicionar a lógica do botão Discord
+    end)
+
+    button.Parent = self.Frame
+end
+
+function PoisonKeyLib:PegarKeyButton()
     local button = Instance.new('TextButton')
-    button.Text = buttonText
-    button.Size = options.Size or UDim2.new(0, 100, 0, 50)
-    button.BackgroundColor3 = options.BackgroundColor or Color3.new(1, 0, 0)
-    button.TextColor3 = options.TextColor or Color3.new(1, 1, 1)
-
-    -- Gerenciamento de eventos
-    if callbacks.MouseButton1Click then
-        button.MouseButton1Click:Connect(function()
-            if callbacks.MouseButton1Click then
-                button.BackgroundColor3 = Color3.new(1, 0.5, 0.5)
-                callbacks.MouseButton1Click()
-                wait(0.1)
-                button.BackgroundColor3 = options.BackgroundColor or Color3.new(1, 0, 0)
-            end
-        end)
-    end
+    button.Text = "Pegar Key"
+    button.Size = UDim2.new(0, 100, 0, 50)
+    button.Position = UDim2.new(0.1, 0, 0.2, 0)
+    button.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
     
-    if callbacks.MouseEnter then
-        button.MouseEnter:Connect(callbacks.MouseEnter)
-    end
+    button.MouseButton1Click:Connect(function()
+        print("Pegar Key button pressed")
+        -- Aqui você pode adicionar a lógica do botão Pegar Key
+    end)
 
-    if callbacks.MouseLeave then
-        button.MouseLeave:Connect(callbacks.MouseLeave)
-    end
-    
-    button.Parent = parent
-    return button
+    button.Parent = self.Frame
 end
 
--- Módulo para criação de TextBox
-function PoisonKeyLib:CreateTextBox(parent, placeholderText, options)
+function PoisonKeyLib:ChecarKeyButton()
+    local button = Instance.new('TextButton')
+    button.Text = "Checar Key"
+    button.Size = UDim2.new(0, 100, 0, 50)
+    button.Position = UDim2.new(0.1, 0, 0.3, 0)
+    button.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+    button.MouseButton1Click:Connect(function()
+        print("Checar Key button pressed")
+        -- Aqui você pode adicionar a lógica do botão Checar Key
+    end)
+
+    button.Parent = self.Frame
+end
+
+function PoisonKeyLib:CreateTextBox()
     local textBox = Instance.new('TextBox')
-    textBox.PlaceholderText = placeholderText
-    textBox.Size = options.Size or UDim2.new(0, 200, 0, 50)
-    textBox.BackgroundColor3 = options.BackgroundColor or Color3.new(1, 1, 1)
-    textBox.TextColor3 = options.TextColor or Color3.new(0, 0, 0)
-    
-    textBox.Parent = parent
-    return textBox
+    textBox.PlaceholderText = "Enter Key"
+    textBox.Size = UDim2.new(0, 200, 0, 50)
+    textBox.Position = UDim2.new(0.1, 0, 0.4, 0)
+    textBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    textBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+    textBox.Parent = self.Frame
 end
 
 return PoisonKeyLib
