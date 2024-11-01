@@ -1,64 +1,88 @@
-local NightLib = {}
+local PoisonLib = {}
 
-local TweenService = game:GetService("TweenService")
+-- Função para criar a janela principal
+function PoisonLib:MakeWindow(config)
+    local window = {} -- Guarda referências para adicionar componentes depois
 
-function NightLib:MakeNotification(NotificationConfig)
-    local title = NotificationConfig.Name or "Notificação"
-    local content = NotificationConfig.Content or "Conteúdo da notificação."
-    local time = NotificationConfig.Time or 5
+    -- Configuração da interface principal (como o Frame)
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    
+    local Frame = Instance.new("Frame")
+    Frame.Size = UDim2.new(0, 400, 0, 300)
+    Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    Frame.BorderSizePixel = 0
+    Frame.Active = true
+    Frame.Draggable = true
+    Frame.Parent = ScreenGui
+    
+    -- Guarda a referência do Frame principal
+    window.Frame = Frame
 
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    screenGui.ResetOnSpawn = false
+    -- Função para adicionar um botão à janela
+    function window:AddButton(config)
+        local ButtonFrame = Instance.new("Frame")
+        ButtonFrame.Size = UDim2.new(0.35, 0, 0.15, 0)
+        ButtonFrame.BackgroundTransparency = 1
+        ButtonFrame.Parent = Frame
+        
+        local ButtonStroke = Instance.new("UIStroke")
+        ButtonStroke.Thickness = 2
+        ButtonStroke.Color = Color3.fromRGB(255, 255, 0) -- Amarelo
+        ButtonStroke.Parent = ButtonFrame
 
-    local notificationFrame = Instance.new("Frame")
-    notificationFrame.Size = UDim2.new(0.3, 0, 0.13, 0)
-    notificationFrame.Position = UDim2.new(1, 20, 0.85, 0)
-    notificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    notificationFrame.BorderSizePixel = 0
-    notificationFrame.AnchorPoint = Vector2.new(1, 1)
-    notificationFrame.Parent = screenGui
+        local Button = Instance.new("TextButton")
+        Button.Size = UDim2.new(1, 0, 1, 0)
+        Button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        Button.Text = config.Name or "Button"
+        Button.TextSize = 18
+        Button.Font = Enum.Font.GothamBold
+        Button.TextColor3 = Color3.fromRGB(150, 150, 150)
+        Button.Parent = ButtonFrame
 
-    local border = Instance.new("UIStroke")
-    border.Thickness = 2
-    border.Color = Color3.fromRGB(255, 255, 0)
-    border.Parent = notificationFrame
+        Button.MouseButton1Click:Connect(function()
+            if config.Callback then
+                config.Callback()
+            end
+        end)
 
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 10)
-    corner.Parent = notificationFrame
+        return Button
+    end
 
-    local titleLabel = Instance.new("TextLabel")
-    titleLabel.Size = UDim2.new(1, -20, 0.3, 0)
-    titleLabel.Position = UDim2.new(0, 10, 0, 5)
-    titleLabel.Text = title
-    titleLabel.TextColor3 = Color3.new(1, 1, 1)
-    titleLabel.BackgroundTransparency = 1
-    titleLabel.TextSize = 18
-    titleLabel.Font = Enum.Font.GothamBold
-    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-    titleLabel.Parent = notificationFrame
+    -- Função para adicionar um textbox à janela
+    function window:AddTextbox(config)
+        local TextBoxFrame = Instance.new("Frame")
+        TextBoxFrame.Size = UDim2.new(0.8, 0, 0.2, 0)
+        TextBoxFrame.BackgroundTransparency = 1
+        TextBoxFrame.Parent = Frame
 
-    local contentLabel = Instance.new("TextLabel")
-    contentLabel.Size = UDim2.new(1, -20, 0.6, 0)
-    contentLabel.Position = UDim2.new(0, 10, 0.3, 0)
-    contentLabel.Text = content
-    contentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    contentLabel.BackgroundTransparency = 1
-    contentLabel.TextSize = 14
-    contentLabel.Font = Enum.Font.Gotham
-    contentLabel.TextWrapped = true
-    contentLabel.TextXAlignment = Enum.TextXAlignment.Left
-    contentLabel.Parent = notificationFrame
+        local TextBoxStroke = Instance.new("UIStroke")
+        TextBoxStroke.Thickness = 2 -- Espessura da borda
+        TextBoxStroke.Color = Color3.fromRGB(255, 255, 0) -- Amarelo
+        TextBoxStroke.Parent = TextBoxFrame
 
-    notificationFrame:TweenPosition(UDim2.new(0.98, 0, 0.85, 0), 'Out', 'Quint', 0.5, true)
+        local TextBox = Instance.new("TextBox")
+        TextBox.Size = UDim2.new(1, 0, 1, 0)
+        TextBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        TextBox.PlaceholderText = config.Name or "Enter text..."
+        TextBox.Text = config.Default or ""
+        TextBox.TextSize = 18
+        TextBox.Font = Enum.Font.GothamBold
+        TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextBox.Parent = TextBoxFrame
 
-    wait(time)
+        TextBox.FocusLost:Connect(function(enterPressed)
+            if enterPressed and config.Callback then
+                config.Callback(TextBox.Text)
+            end
+        end)
 
-    notificationFrame:TweenPosition(UDim2.new(1.2, 0, 0.85, 0), 'In', 'Quint', 0.5, true)
+        return TextBox
+    end
 
-    wait(0.5)
-    screenGui:Destroy()
+    return window
 end
 
-return NightLib
+return PoisonLib
