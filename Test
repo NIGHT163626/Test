@@ -2,7 +2,7 @@
 local PoisonLib = {}
 
 -- Função principal para criar uma nova janela
-function PoisonLib:MakeWindow(options)
+function PoisonLib:MakeWindow(windowName)
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -35,7 +35,7 @@ function PoisonLib:MakeWindow(options)
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
     Title.Position = UDim2.new(0, 0, 0.05, 0)
-    Title.Text = options.Name or "Poison Key System"
+    Title.Text = windowName or "Poison Key System"
     Title.TextScaled = true
     Title.Font = Enum.Font.GothamBold
     Title.TextColor3 = Color3.fromRGB(255, 255, 0)
@@ -47,31 +47,35 @@ function PoisonLib:MakeWindow(options)
 
     -- Função para adicionar botões
     function Window:AddButton(buttonOptions)
-        local ButtonFrame = Instance.new("Frame")
-        ButtonFrame.Size = UDim2.new(0.35, 0, 0.15, 0)
-        ButtonFrame.Position = buttonOptions.Position or UDim2.new(0.1, 0, 0.5, 0)
-        ButtonFrame.BackgroundTransparency = 1
-        ButtonFrame.Parent = Frame
+        local function createButton()
+            local ButtonFrame = Instance.new("Frame")
+            ButtonFrame.Size = UDim2.new(0.35, 0, 0.15, 0)
+            ButtonFrame.Position = buttonOptions.Position or UDim2.new(0.1, 0, 0.5, 0)
+            ButtonFrame.BackgroundTransparency = 1
+            ButtonFrame.Parent = Frame
 
-        local ButtonStroke = Instance.new("UIStroke")
-        ButtonStroke.Thickness = 2
-        ButtonStroke.Color = Color3.fromRGB(255, 255, 0)
-        ButtonStroke.Parent = ButtonFrame
+            local ButtonStroke = Instance.new("UIStroke")
+            ButtonStroke.Thickness = 2
+            ButtonStroke.Color = Color3.fromRGB(255, 255, 0)
+            ButtonStroke.Parent = ButtonFrame
 
-        local Button = Instance.new("TextButton")
-        Button.Size = UDim2.new(1, 0, 1, 0)
-        Button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        Button.Text = buttonOptions.Name or "Button"
-        Button.TextSize = 18
-        Button.TextColor3 = Color3.fromRGB(150, 150, 150)
-        Button.Font = Enum.Font.GothamBold
-        Button.Parent = ButtonFrame
+            local Button = Instance.new("TextButton")
+            Button.Size = UDim2.new(1, 0, 1, 0)
+            Button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+            Button.Text = buttonOptions.Name or "Button"
+            Button.TextSize = 18
+            Button.TextColor3 = Color3.fromRGB(150, 150, 150)
+            Button.Font = Enum.Font.GothamBold
+            Button.Parent = ButtonFrame
 
-        local ButtonCorner = Instance.new("UICorner")
-        ButtonCorner.CornerRadius = UDim.new(0, 5)
-        ButtonCorner.Parent = Button
+            local ButtonCorner = Instance.new("UICorner")
+            ButtonCorner.CornerRadius = UDim.new(0, 5)
+            ButtonCorner.Parent = Button
 
-        Button.MouseButton1Click:Connect(buttonOptions.Callback or function() end)
+            Button.MouseButton1Click:Connect(buttonOptions.Callback or function() end)
+        end
+
+        createButton()
     end
 
     -- Função para adicionar um TextBox
