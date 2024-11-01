@@ -1,13 +1,11 @@
+-- Início da UI Library
 local PoisonLib = {}
 
--- Função para criar a janela principal
-function PoisonLib:MakeWindow(config)
-    local window = {} -- Guarda referências para adicionar componentes depois
-
-    -- Configuração da interface principal (como o Frame)
+-- Função principal para criar uma nova janela
+function PoisonLib:MakeWindow(options)
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    
+
     local Frame = Instance.new("Frame")
     Frame.Size = UDim2.new(0, 400, 0, 300)
     Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -17,72 +15,100 @@ function PoisonLib:MakeWindow(config)
     Frame.Active = true
     Frame.Draggable = true
     Frame.Parent = ScreenGui
-    
-    -- Guarda a referência do Frame principal
-    window.Frame = Frame
 
-    -- Função para adicionar um botão à janela
-    function window:AddButton(config)
+    local FrameCorner = Instance.new("UICorner")
+    FrameCorner.CornerRadius = UDim.new(0, 10)
+    FrameCorner.Parent = Frame
+
+    local Close = Instance.new("TextButton")
+    Close.Size = UDim2.new(0, 40, 0, 40)
+    Close.Position = UDim2.new(1, -40, 0, 0)
+    Close.BackgroundTransparency = 1
+    Close.Text = "×"
+    Close.TextScaled = true
+    Close.TextColor3 = Color3.fromRGB(150, 150, 150)
+    Close.Parent = Frame
+    Close.MouseButton1Click:Connect(function()
+        ScreenGui:Destroy()
+    end)
+
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, 0, 0, 30)
+    Title.Position = UDim2.new(0, 0, 0.05, 0)
+    Title.Text = options.Name or "Poison Key System"
+    Title.TextScaled = true
+    Title.Font = Enum.Font.GothamBold
+    Title.TextColor3 = Color3.fromRGB(255, 255, 0)
+    Title.BackgroundTransparency = 1
+    Title.Parent = Frame
+
+    -- Tabela para armazenar métodos para adicionar componentes
+    local Window = {}
+
+    -- Função para adicionar botões
+    function Window:AddButton(buttonOptions)
         local ButtonFrame = Instance.new("Frame")
         ButtonFrame.Size = UDim2.new(0.35, 0, 0.15, 0)
+        ButtonFrame.Position = buttonOptions.Position or UDim2.new(0.1, 0, 0.5, 0)
         ButtonFrame.BackgroundTransparency = 1
         ButtonFrame.Parent = Frame
-        
+
         local ButtonStroke = Instance.new("UIStroke")
         ButtonStroke.Thickness = 2
-        ButtonStroke.Color = Color3.fromRGB(255, 255, 0) -- Amarelo
+        ButtonStroke.Color = Color3.fromRGB(255, 255, 0)
         ButtonStroke.Parent = ButtonFrame
 
         local Button = Instance.new("TextButton")
         Button.Size = UDim2.new(1, 0, 1, 0)
         Button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        Button.Text = config.Name or "Button"
+        Button.Text = buttonOptions.Name or "Button"
         Button.TextSize = 18
-        Button.Font = Enum.Font.GothamBold
         Button.TextColor3 = Color3.fromRGB(150, 150, 150)
+        Button.Font = Enum.Font.GothamBold
         Button.Parent = ButtonFrame
 
-        Button.MouseButton1Click:Connect(function()
-            if config.Callback then
-                config.Callback()
-            end
-        end)
+        local ButtonCorner = Instance.new("UICorner")
+        ButtonCorner.CornerRadius = UDim.new(0, 5)
+        ButtonCorner.Parent = Button
 
-        return Button
+        Button.MouseButton1Click:Connect(buttonOptions.Callback or function() end)
     end
 
-    -- Função para adicionar um textbox à janela
-    function window:AddTextbox(config)
+    -- Função para adicionar um TextBox
+    function Window:AddTextbox(textboxOptions)
         local TextBoxFrame = Instance.new("Frame")
         TextBoxFrame.Size = UDim2.new(0.8, 0, 0.2, 0)
+        TextBoxFrame.Position = textboxOptions.Position or UDim2.new(0.1, 0, 0.5, 0)
         TextBoxFrame.BackgroundTransparency = 1
         TextBoxFrame.Parent = Frame
 
         local TextBoxStroke = Instance.new("UIStroke")
-        TextBoxStroke.Thickness = 2 -- Espessura da borda
-        TextBoxStroke.Color = Color3.fromRGB(255, 255, 0) -- Amarelo
+        TextBoxStroke.Thickness = 2
+        TextBoxStroke.Color = Color3.fromRGB(255, 255, 0)
         TextBoxStroke.Parent = TextBoxFrame
 
         local TextBox = Instance.new("TextBox")
         TextBox.Size = UDim2.new(1, 0, 1, 0)
         TextBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        TextBox.PlaceholderText = config.Name or "Enter text..."
-        TextBox.Text = config.Default or ""
+        TextBox.PlaceholderText = textboxOptions.Placeholder or "Enter Key..."
+        TextBox.Text = textboxOptions.Default or ""
         TextBox.TextSize = 18
-        TextBox.Font = Enum.Font.GothamBold
         TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextBox.Font = Enum.Font.Gotham
         TextBox.Parent = TextBoxFrame
 
+        local TextBoxCorner = Instance.new("UICorner")
+        TextBoxCorner.CornerRadius = UDim.new(0, 5)
+        TextBoxCorner.Parent = TextBox
+
         TextBox.FocusLost:Connect(function(enterPressed)
-            if enterPressed and config.Callback then
-                config.Callback(TextBox.Text)
+            if enterPressed and textboxOptions.Callback then
+                textboxOptions.Callback(TextBox.Text)
             end
         end)
-
-        return TextBox
     end
 
-    return window
+    return Window
 end
 
 return PoisonLib
