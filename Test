@@ -112,6 +112,27 @@ function PoisonLib:MakeWindow(windowName)
         end)
     end
 
+    -- Função para adicionar um botão Discord
+    function Window:AddDiscordButton()
+        local DiscordButton = Instance.new("TextButton")
+        DiscordButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+        DiscordButton.Position = UDim2.new(0.5, 0, 0.32, 0) -- Centralizado
+        DiscordButton.BackgroundColor3 = Color3.fromRGB(0, 122, 255) -- Azul do botão
+        DiscordButton.Text = "Discord"
+        DiscordButton.TextScaled = true
+        DiscordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        DiscordButton.Font = Enum.Font.GothamBold
+        DiscordButton.Parent = Frame
+
+        local DiscordButtonCorner = Instance.new("UICorner")
+        DiscordButtonCorner.CornerRadius = UDim.new(0, 5)
+        DiscordButtonCorner.Parent = DiscordButton
+
+        DiscordButton.MouseButton1Click:Connect(function()
+            setclipboard("https://discord.gg/seuconvite") -- Substitua pelo link do seu Discord
+        end)
+    end
+
     return Window
 end
 
