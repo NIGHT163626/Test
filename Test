@@ -1,139 +1,200 @@
--- Início da UI Library
-local PoisonLib = {}
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Função principal para criar uma nova janela
-function PoisonLib:MakeWindow(windowName)
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 400, 0, 300)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BackgroundTransparency = 0.3
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
 
-    local Frame = Instance.new("Frame")
-    Frame.Size = UDim2.new(0, 400, 0, 300)
-    Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-    Frame.AnchorPoint = Vector2.new(0.5, 0.5)
-    Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-    Frame.BorderSizePixel = 0
-    Frame.Active = true
-    Frame.Draggable = true
-    Frame.Parent = ScreenGui
+local FrameStroke = Instance.new("UIStroke")
+FrameStroke.Color = Color3.fromHex("#EFEA26")
+FrameStroke.Thickness = 3
+FrameStroke.Parent = MainFrame
 
-    local FrameCorner = Instance.new("UICorner")
-    FrameCorner.CornerRadius = UDim.new(0, 10)
-    FrameCorner.Parent = Frame
+local FrameCorner = Instance.new("UICorner")
+FrameCorner.CornerRadius = UDim.new(0, 10)
+FrameCorner.Parent = MainFrame
 
-    local Close = Instance.new("TextButton")
-    Close.Size = UDim2.new(0, 40, 0, 40)
-    Close.Position = UDim2.new(1, -40, 0, 0)
-    Close.BackgroundTransparency = 1
-    Close.Text = "×"
-    Close.TextScaled = true
-    Close.TextColor3 = Color3.fromRGB(150, 150, 150)
-    Close.Parent = Frame
-    Close.MouseButton1Click:Connect(function()
-        ScreenGui:Destroy()
-    end)
+local Close = Instance.new("TextButton")
+Close.Size = UDim2.new(0, 40, 0, 40)
+Close.Position = UDim2.new(1, -40, 0, 0)
+Close.BackgroundTransparency = 1
+Close.Text = "×"
+Close.TextScaled = true
+Close.TextColor3 = Color3.fromRGB(150, 150, 150)
+Close.Parent = MainFrame
+Close.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
 
-    local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(1, 0, 0, 30)
-    Title.Position = UDim2.new(0, 0, 0.05, 0)
-    Title.Text = windowName or "Poison Key System"
-    Title.TextScaled = true
-    Title.Font = Enum.Font.GothamBold
-    Title.TextColor3 = Color3.fromRGB(255, 255, 0)
-    Title.BackgroundTransparency = 1
-    Title.Parent = Frame
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 100)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Poison Key System"
+Title.TextSize = 48
+Title.TextColor3 = Color3.fromHex("#EFEA26")
+Title.Font = Enum.Font.SourceSansBold
+Title.BackgroundTransparency = 1
+Title.Parent = MainFrame
 
-    -- Tabela para armazenar métodos para adicionar componentes
-    local Window = {}
+local TextBox = Instance.new("TextBox")
+TextBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+TextBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+TextBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextBox.PlaceholderText = "Enter Key"
+TextBox.Text = ""
+TextBox.TextSize = 18
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextScaled = false
+TextBox.TextXAlignment = Enum.TextXAlignment.Center
+TextBox.ClearTextOnFocus = false
+TextBox.ClipsDescendants = true
+TextBox.Parent = MainFrame
 
-    -- Função para adicionar botões
-    function Window:AddButton(buttonOptions)
-        local function createButton()
-            local ButtonFrame = Instance.new("Frame")
-            ButtonFrame.Size = UDim2.new(0.35, 0, 0.15, 0)
-            ButtonFrame.Position = buttonOptions.Position or UDim2.new(0.1, 0, 0.5, 0)
-            ButtonFrame.BackgroundTransparency = 1
-            ButtonFrame.Parent = Frame
+local TextBoxCorner = Instance.new("UICorner")
+TextBoxCorner.CornerRadius = UDim.new(0, 5)
+TextBoxCorner.Parent = TextBox
 
-            local ButtonStroke = Instance.new("UIStroke")
-            ButtonStroke.Thickness = 2
-            ButtonStroke.Color = Color3.fromRGB(255, 255, 0)
-            ButtonStroke.Parent = ButtonFrame
+TextBox.Focused:Connect(function()
+    TextBox.Text = ""
+end)
 
-            local Button = Instance.new("TextButton")
-            Button.Size = UDim2.new(1, 0, 1, 0)
-            Button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            Button.Text = buttonOptions.Name or "Button"
-            Button.TextSize = 18
-            Button.TextColor3 = Color3.fromRGB(150, 150, 150)
-            Button.Font = Enum.Font.GothamBold
-            Button.Parent = ButtonFrame
+local GetKey = Instance.new("TextButton")
+GetKey.Size = UDim2.new(0.35, 0, 0.15, 0)
+GetKey.Position = UDim2.new(0.1, 0, 0.55, 0)
+GetKey.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+GetKey.Text = "Get Key"
+GetKey.TextSize = 24
+GetKey.TextColor3 = Color3.fromRGB(255, 255, 255)
+GetKey.Font = Enum.Font.SourceSansBold
+GetKey.Parent = MainFrame
 
-            local ButtonCorner = Instance.new("UICorner")
-            ButtonCorner.CornerRadius = UDim.new(0, 5)
-            ButtonCorner.Parent = Button
+local GetKeyStroke = Instance.new("UIStroke")
+GetKeyStroke.Color = Color3.fromHex("#EFEA26")
+GetKeyStroke.Thickness = 2
+GetKeyStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+GetKeyStroke.Parent = GetKey
 
-            Button.MouseButton1Click:Connect(buttonOptions.Callback or function() end)
-        end
+local GetKeyCorner = Instance.new("UICorner")
+GetKeyCorner.CornerRadius = UDim.new(0, 5)
+GetKeyCorner.Parent = GetKey
 
-        createButton()
-    end
+local CheckKey = Instance.new("TextButton")
+CheckKey.Size = UDim2.new(0.35, 0, 0.15, 0)
+CheckKey.Position = UDim2.new(0.55, 0, 0.55, 0)
+CheckKey.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+CheckKey.Text = "Check Key"
+CheckKey.TextSize = 24
+CheckKey.TextColor3 = Color3.fromRGB(255, 255, 255)
+CheckKey.Font = Enum.Font.SourceSansBold
+CheckKey.Parent = MainFrame
 
-    -- Função para adicionar um TextBox
-    function Window:AddTextbox(textboxOptions)
-        local TextBoxFrame = Instance.new("Frame")
-        TextBoxFrame.Size = UDim2.new(0.8, 0, 0.2, 0)
-        TextBoxFrame.Position = textboxOptions.Position or UDim2.new(0.1, 0, 0.5, 0)
-        TextBoxFrame.BackgroundTransparency = 1
-        TextBoxFrame.Parent = Frame
+local CheckKeyStroke = Instance.new("UIStroke")
+CheckKeyStroke.Color = Color3.fromHex("#EFEA26")
+CheckKeyStroke.Thickness = 2
+CheckKeyStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+CheckKeyStroke.Parent = CheckKey
 
-        local TextBoxStroke = Instance.new("UIStroke")
-        TextBoxStroke.Thickness = 2
-        TextBoxStroke.Color = Color3.fromRGB(255, 255, 0)
-        TextBoxStroke.Parent = TextBoxFrame
+local DiscordButton = Instance.new("TextButton")
+DiscordButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+DiscordButton.Position = UDim2.new(0.325, 0, 0.75, 0)
+DiscordButton.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+DiscordButton.Text = ""
+DiscordButton.Parent = MainFrame
 
-        local TextBox = Instance.new("TextBox")
-        TextBox.Size = UDim2.new(1, 0, 1, 0)
-        TextBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        TextBox.PlaceholderText = textboxOptions.Placeholder or "Enter Key..."
-        TextBox.Text = textboxOptions.Default or ""
-        TextBox.TextSize = 18
-        TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-        TextBox.Font = Enum.Font.Gotham
-        TextBox.Parent = TextBoxFrame
+local DiscordButtonStroke = Instance.new("UIStroke")
+DiscordButtonStroke.Color = Color3.fromHex("#EFEA26")
+DiscordButtonStroke.Thickness = 2
+DiscordButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+DiscordButtonStroke.Parent = DiscordButton
 
-        local TextBoxCorner = Instance.new("UICorner")
-        TextBoxCorner.CornerRadius = UDim.new(0, 5)
-        TextBoxCorner.Parent = TextBox
+local DiscordButtonCorner = Instance.new("UICorner")
+DiscordButtonCorner.CornerRadius = UDim.new(0, 5)
+DiscordButtonCorner.Parent = DiscordButton
 
-        TextBox.FocusLost:Connect(function(enterPressed)
-            if enterPressed and textboxOptions.Callback then
-                textboxOptions.Callback(TextBox.Text)
-            end
-        end)
-    end
+local Icon = Instance.new("ImageLabel")
+Icon.Size = UDim2.new(0, 35, 0, 35)
+Icon.Position = UDim2.new(0, 20, 0.5, -17)
+Icon.BackgroundTransparency = 1
+Icon.Image = "rbxassetid://84828491431270"
+Icon.Parent = DiscordButton
 
-    -- Função para adicionar um botão Discord
-    function Window:AddDiscordButton()
-        local DiscordButton = Instance.new("TextButton")
-        DiscordButton.Size = UDim2.new(0.35, 0, 0.15, 0)
-        DiscordButton.Position = UDim2.new(0.5, 0, 0.32, 0) -- Centralizado
-        DiscordButton.BackgroundColor3 = Color3.fromRGB(0, 122, 255) -- Azul do botão
-        DiscordButton.Text = "Discord"
-        DiscordButton.TextScaled = true
-        DiscordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-        DiscordButton.Font = Enum.Font.GothamBold
-        DiscordButton.Parent = Frame
+local DiscordText = Instance.new("TextLabel")
+DiscordText.Size = UDim2.new(1, -60, 1, 0)
+DiscordText.Position = UDim2.new(0, 40, 0, 0)
+DiscordText.BackgroundTransparency = 1
+DiscordText.Text = "Discord"
+DiscordText.TextSize = 20
+DiscordText.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiscordText.Font = Enum.Font.SourceSansBold
+DiscordText.Parent = DiscordButton
 
-        local DiscordButtonCorner = Instance.new("UICorner")
-        DiscordButtonCorner.CornerRadius = UDim.new(0, 5)
-        DiscordButtonCorner.Parent = DiscordButton
-
-        DiscordButton.MouseButton1Click:Connect(function()
-            setclipboard("https://discord.gg/seuconvite") -- Substitua pelo link do seu Discord
-        end)
-    end
-
-    return Window
+-- Callbacks Globais
+_G.GetKeyCallback = function()
+    setclipboard("Link para obter a chave")
+    print("Get Key clicado!")
 end
 
-return PoisonLib
+_G.CheckKeyCallback = function(enteredKey)
+    local validKey = "YourRealKey"
+    if enteredKey == validKey then
+        print("Chave correta!")
+        TextBox.PlaceholderText = "Key Valida!"
+        TextBox.Text = ""
+        wait(1)
+        ScreenGui:Destroy()
+        loadstring(game:HttpGet('https://pastebin.com/raw/YSL3xKYU'))()
+    else
+        print("Chave inválida. Tente novamente.")
+        TextBox.PlaceholderText = "Key Invalida."
+        TextBox.Text = ""
+        wait(1)
+        TextBox.PlaceholderText = "Enter Key..."
+        TextBox.Text = ""
+    end
+end
+
+_G.DiscordCallback = function()
+    setclipboard("https://discord.gg/seuLink")
+    print("Link do Discord copiado!")
+end
+
+-- Conectando os eventos aos callbacks
+GetKey.MouseButton1Click:Connect(function()
+    if _G.GetKeyCallback then
+        _G.GetKeyCallback()
+    end
+end)
+
+CheckKey.MouseButton1Click:Connect(function()
+    local enteredKey = TextBox.Text
+    if _G.CheckKeyCallback then
+        _G.CheckKeyCallback(enteredKey)
+    end
+end)
+
+DiscordButton.MouseButton1Click:Connect(function()
+    if _G.DiscordCallback then
+        _G.DiscordCallback()
+    end
+end)
+
+-- Inicialize o valor de _G.Destroi
+_G.Destroi = false
+
+-- Função para destruir a GUI quando _G.Destroi é verdadeiro
+spawn(function()
+    while wait(0.1) do  -- Verificação a cada 0.1 segundos
+        if _G.Destroi then
+            ScreenGui:Destroy()
+            _G.Destroi = false  -- Reseta o valor para evitar chamadas futuras
+            break
+        end
+    end
+end)
