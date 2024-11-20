@@ -70,11 +70,9 @@ TextBox.TextYAlignment = Enum.TextYAlignment.Center
 TextBox.ClearTextOnFocus = false
 TextBox.Parent = TextBoxHolder
 
--- Variáveis getgenv para o valor da chave
-getgenv().Key = ""
-
+-- Atualiza o valor de getgenv().InputKey quando o texto é alterado
 TextBox:GetPropertyChangedSignal("Text"):Connect(function()
-    getgenv().Key = TextBox.Text
+    getgenv().InputKey = TextBox.Text
 end)
 
 -- Função para criar botões
@@ -89,6 +87,7 @@ local function createButton(text, size, position, parent, callback)
     button.Font = Enum.Font.SourceSansBold
     button.Parent = parent
 
+    -- Adicionando a borda amarela ao botão
     local buttonStroke = Instance.new("UIStroke")
     buttonStroke.Color = Color3.fromHex("#EFEA26")
     buttonStroke.Thickness = 2
@@ -103,32 +102,50 @@ local function createButton(text, size, position, parent, callback)
     return button
 end
 
--- Variáveis getgenv para os botões
-getgenv().GetKeyAction = function()
-    local getKeyLink = "https://www.exemplo.com/pegar-key"  -- Coloque o link correto aqui
-    setclipboard(getKeyLink)  -- Copia o link para a área de transferência
-    print("Link de Get Key copiado!")
-end
+-- Botão Get Key
+local GetKeyButton = createButton("Get Key", UDim2.new(0.35, 0, 0.15, 0), UDim2.new(0.1, 0, 0.55, 0), MainFrame, function()
+    if getgenv().GetKeyCallback then
+        getgenv().GetKeyCallback()
+    else
+        print("Callback de Get Key não definido.")
+    end
+end)
 
-getgenv().CheckKeyAction = function()
-    local key = getgenv().Key
+-- Botão Check Key
+local CheckKeyButton = createButton("Check Key", UDim2.new(0.35, 0, 0.15, 0), UDim2.new(0.55, 0, 0.55, 0), MainFrame, function()
+    local key = getgenv().InputKey or ""
     if key == "" then
         print("Por favor, insira uma chave.")
     else
-        print("Verificando chave: " .. key)
+        if getgenv().CheckKeyCallback then
+            getgenv().CheckKeyCallback(key)
+        else
+            print("Callback de Check Key não definido.")
+        end
     end
-end
+end)
 
-getgenv().DiscordAction = function()
-    print("Discord button clicked")
-end
+-- Botão Discord
+local DiscordButton = Instance.new("TextButton")
+DiscordButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+DiscordButton.Position = UDim2.new(0.325, 0, 0.75, 0)
+DiscordButton.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+DiscordButton.Text = ""
+DiscordButton.TextSize = 24
+DiscordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiscordButton.Font = Enum.Font.SourceSansBold
+DiscordButton.Parent = MainFrame
 
--- Botões com getgenv
-local GetKeyButton = createButton("Get Key", UDim2.new(0.35, 0, 0.15, 0), UDim2.new(0.1, 0, 0.55, 0), MainFrame, getgenv().GetKeyAction)
+-- Adicionando a borda amarela (UIStroke) no botão Discord
+local buttonStroke = Instance.new("UIStroke")
+buttonStroke.Color = Color3.fromHex("#EFEA26")
+buttonStroke.Thickness = 2
+buttonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+buttonStroke.Parent = DiscordButton
 
-local CheckKeyButton = createButton("Check Key", UDim2.new(0.35, 0, 0.15, 0), UDim2.new(0.55, 0, 0.55, 0), MainFrame, getgenv().CheckKeyAction)
-
-local DiscordButton = createButton("", UDim2.new(0.35, 0, 0.15, 0), UDim2.new(0.325, 0, 0.75, 0), MainFrame, getgenv().DiscordAction)
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 5)
+buttonCorner.Parent = DiscordButton
 
 -- Ícone do Discord
 local Icon = Instance.new("ImageLabel")
@@ -148,3 +165,11 @@ DiscordText.TextColor3 = Color3.fromRGB(255, 255, 255)
 DiscordText.Font = Enum.Font.SourceSansBold
 DiscordText.TextXAlignment = Enum.TextXAlignment.Center
 DiscordText.Parent = DiscordButton
+
+DiscordButton.MouseButton1Click:Connect(function()
+    if getgenv().DiscordCallback then
+        getgenv().DiscordCallback()
+    else
+        print("Callback de Discord não definido.")
+    end
+end)
