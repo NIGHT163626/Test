@@ -1,3 +1,20 @@
+-- Definindo os Callbacks (fora do RAW)
+getgenv().GetKeyCallback = function()
+    print("Callback: Abrindo página para obter a chave.")
+end
+
+getgenv().CheckKeyCallback = function(key)
+    if key == "minha-chave" then
+        print("Callback: Chave válida! Acesso concedido.")
+    else
+        print("Callback: Chave inválida.")
+    end
+end
+
+getgenv().DiscordCallback = function()
+    print("Callback: Abrindo o Discord.")
+end
+
 -- Criando a GUI
 local KeySystemGui = Instance.new("ScreenGui")
 KeySystemGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -70,11 +87,6 @@ TextBox.TextYAlignment = Enum.TextYAlignment.Center
 TextBox.ClearTextOnFocus = false
 TextBox.Parent = TextBoxHolder
 
--- Atualiza o valor de getgenv().InputKey quando o texto é alterado
-TextBox:GetPropertyChangedSignal("Text"):Connect(function()
-    getgenv().InputKey = TextBox.Text
-end)
-
 -- Função para criar botões
 local function createButton(text, size, position, parent, callback)
     local button = Instance.new("TextButton")
@@ -113,7 +125,7 @@ end)
 
 -- Botão Check Key
 local CheckKeyButton = createButton("Check Key", UDim2.new(0.35, 0, 0.15, 0), UDim2.new(0.55, 0, 0.55, 0), MainFrame, function()
-    local key = getgenv().InputKey or ""
+    local key = TextBox.Text
     if key == "" then
         print("Por favor, insira uma chave.")
     else
