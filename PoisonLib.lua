@@ -88,7 +88,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	local keybind = keybind or Enum.KeyCode.RightControl
 	local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
 	if gamename == "" then 
-	    gamename = ""..PlaceName.Name
+	    gamename = ""
     end
 	
 	local Darkrai = Instance.new("ScreenGui") -- guess i am using hubname wrong
@@ -163,7 +163,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	BindButton.Position = UDim2.new(0.847561002, 0, 0, 0)
 	BindButton.Size = UDim2.new(0, 100, 0, 27)
 	BindButton.Font = Enum.Font.GothamSemibold
-	BindButton.Text = "[Discord:https://discord.gg/SqhzvMY6]"
+	BindButton.Text = "[https://discord.gg/SqhzvMY6]"
 	BindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 	BindButton.TextSize = 13.000
 
