@@ -92,7 +92,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
     end
 	
 	local Darkrai = Instance.new("ScreenGui") -- guess i am using hubname wrong
-	Darkrai.Name = "Darkrai" -- wait
+	Darkrai.Name = "Poison Scripts Hub" -- wait
 	Darkrai.Parent = game.CoreGui
 	Darkrai.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -139,7 +139,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Name.Size = UDim2.new(0, 61, 0, 27)
 	Name.Font = Enum.Font.GothamSemibold
 	Name.Text = hubname
-	Name.TextColor3 = Color3.fromRGB(255, 255, 0)
+	Name.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Name.TextSize = 17.000
 
 	local Hub = Instance.new("TextLabel")
@@ -151,7 +151,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	Hub.Size = UDim2.new(0, 81, 0, 27)
 	Hub.Font = Enum.Font.GothamSemibold
 	Hub.Text = "  | "..gamename
-	Hub.TextColor3 = Color3.fromRGB(255, 255, 0)
+	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Hub.TextSize = 17.000
 	Hub.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -163,8 +163,8 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	BindButton.Position = UDim2.new(0.847561002, 0, 0, 0)
 	BindButton.Size = UDim2.new(0, 100, 0, 27)
 	BindButton.Font = Enum.Font.GothamSemibold
-	BindButton.Text = "[RightControl]"
-	BindButton.TextColor3 = Color3.fromRGB(147,112,219)
+	BindButton.Text = "[Discord:https://discord.gg/SqhzvMY6]"
+	BindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 	BindButton.TextSize = 13.000
 
 	local Tab = Instance.new("Frame")
