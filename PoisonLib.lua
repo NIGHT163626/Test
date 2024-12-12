@@ -544,22 +544,19 @@ function CFAHub:CreateWindow(title, gameName, intro)
     UIPageLayout.Padding = UDim.new(0, 0)
     UIPageLayout.TweenTime = 0.500
 
-    Header.Name = "Header"
-    Header.Parent = Container
-    Header.BackgroundColor3 = themes.Header
-    Objects[Header] = "Header"
-    Header.BorderColor3 = Color3.fromRGB(43, 43, 43)
-    Header.Size = UDim2.new(0, 673, 0, 29)
+    -- Cabeçalho
+local Header = Instance.new("Frame")
+Header.Name = "Header"
+Header.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Header.BorderSizePixel = 0
+Header.Size = UDim2.new(1, 0, 0, 50)
+Header.Parent = script.Parent
 
-    HeaderCorner.CornerRadius = UDim.new(0, 4)
-    HeaderCorner.Name = "HeaderCorner"
-    HeaderCorner.Parent = Header
-
-    -- Coverup no Header
+-- Coverup no Header
 local coverup = Instance.new("Frame")
 coverup.Name = "coverup"
 coverup.Parent = Header
-coverup.BackgroundColor3 = themes.Header
+coverup.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 coverup.BorderSizePixel = 0
 coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
 coverup.Size = UDim2.new(1, 0, 0, 7)
@@ -574,8 +571,7 @@ logo.BackgroundTransparency = 1.000
 logo.Position = UDim2.new(0.03, 0, 0.5, 0)
 logo.Size = UDim2.new(0, 25, 0, 25)
 logo.ZIndex = 2
-logo.Image = themes.Logo
-Objects[logo] = "Logo"
+logo.Image = "rbxassetid://12345678" -- Substitua pelo ID correto da imagem
 
 -- Título no Header
 local Title = Instance.new("TextLabel")
@@ -587,10 +583,9 @@ Title.Position = UDim2.new(0.058, 0, 0, 0)
 Title.Size = UDim2.new(0, 625, 0, 29)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSansSemibold
-Title.Text = title .. " - " .. gameName
+Title.Text = "Título - Nome do Jogo" -- Substitua pelo título e nome do jogo
 Title.RichText = true
-Title.TextColor3 = themes.TextColor
-Objects[Title] = "TextColor"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -598,12 +593,11 @@ Title.TextXAlignment = Enum.TextXAlignment.Left
 -- TabFrame
 local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
-TabFrame.Parent = Container
+TabFrame.Parent = script.Parent
 TabFrame.AnchorPoint = Vector2.new(0, 0.5)
-TabFrame.BackgroundColor3 = themes.Background
-Objects[TabFrame] = "Background"
+TabFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.49751243, 15)
+TabFrame.Position = UDim2.new(0.01, 0, 0.5, 15)
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
@@ -621,7 +615,7 @@ TabScroll.Position = UDim2.new(0, 0, 0, 0)
 TabScroll.Size = UDim2.new(1, 0, 1, 0)
 TabScroll.ZIndex = 2
 TabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-TabScroll.ScrollBarImageColor3 = themes.ScrollBar
+TabScroll.ScrollBarImageColor3 = Color3.fromRGB(200, 200, 200)
 TabScroll.ScrollBarThickness = 6
 
 local TabGridLayout = Instance.new("UIGridLayout")
@@ -640,18 +634,16 @@ end)
 local SearchBar = Instance.new("TextBox")
 SearchBar.Name = "SearchBar"
 SearchBar.Parent = Header -- Adicionada ao Header
-SearchBar.BackgroundColor3 = themes.Header
+SearchBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 SearchBar.BorderSizePixel = 0
-SearchBar.Position = UDim2.new(0, 0, 0.85, 0) -- Logo acima das abas
-SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
+SearchBar.Position = UDim2.new(0, 10, 0, 10) -- Posiciona no canto superior esquerdo
+SearchBar.Size = UDim2.new(0.2, 0, 0, 25) -- Ajusta a largura e mantém altura fixa
 SearchBar.Font = Enum.Font.SourceSansSemibold
 SearchBar.Text = ""
 SearchBar.PlaceholderText = "🔍 Search"
 SearchBar.TextSize = 18
-SearchBar.TextColor3 = themes.TextColor
+SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
 SearchBar.ClearTextOnFocus = true
-
-Objects[SearchBar] = "TextColor"
 
 -- Função para filtrar abas
 SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
