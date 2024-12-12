@@ -120,7 +120,7 @@ function lib:Window(text, preset, closebind)
 
     Title.Name = "Title"
     Title.Parent = Main
-    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
     Title.BackgroundTransparency = 1.000
     Title.Position = UDim2.new(0.0339285731, 0, 0.0564263314, 0)
     Title.Size = UDim2.new(0, 200, 0, 23)
@@ -132,7 +132,7 @@ function lib:Window(text, preset, closebind)
 
     DragFrame.Name = "DragFrame"
     DragFrame.Parent = Main
-    DragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    DragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
     DragFrame.BackgroundTransparency = 1.000
     DragFrame.Size = UDim2.new(0, 560, 0, 41)
 
