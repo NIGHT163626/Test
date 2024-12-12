@@ -166,53 +166,6 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 	BindButton.Text = ""
 	BindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 	BindButton.TextSize = 13.000
-	
-local SearchBar
-local Tabs = {};
-
-	if WindowConfig.SearchBar then
-		local SearchBox = Create("TextBox", {
-			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = 1,
-			TextColor3 = Color3.fromRGB(255, 255, 255),
-			PlaceholderColor3 = Color3.fromRGB(210,210,210),
-			PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
-			Font = Enum.Font.GothamBold,
-			TextWrapped = true,
-			Text = '',
-			TextXAlignment = Enum.TextXAlignment.Center,
-			TextSize = 14,
-			ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
-		})
-
-		local TextboxActual = AddThemeObject(SearchBox, "Text")
-
-		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
-			Parent = WindowStuff,
-			Size = UDim2.new(0, 130, 0, 24),
-			Position = UDim2.new(1.013, -12, 0.075, 0),
-			AnchorPoint = Vector2.new(1, 0.5)
-		}), {
-			AddThemeObject(MakeElement("Stroke"), "Stroke"),
-			TextboxActual
-		}), "Main")
-
-		local function SearchHandle()
-			local Text = string.lower(SearchBox.Text);
-
-			for i,v in pairs(Tabs) do
-				if v:IsA('TextButton') then
-					if string.find(string.lower(i), Text) then
-						v.Visible = true
-					else
-						v.Visible = false
-					end
-				end
-			end
-		end
-
-		AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle);
-	end
 
 	local Tab = Instance.new("Frame")
 	Tab.Name = "Tab"
