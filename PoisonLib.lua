@@ -1,4 +1,4 @@
- local Library = {}
+local Library = {}
 -- Random UI Name
 local LibraryName = tostring(math.random(100000,200000))..tostring(math.random(100000,200000))..tostring(math.random(100000,200000))
 
@@ -186,7 +186,7 @@ function Library:Create(xHubName,xGameName)
         Tab.Parent = Tabs
         Tab.Active = true
         Tab.Visible = xVisible
-        Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        Tab.BackgroundColor3 = Color3.fromRGB(31, 30, 46)
         Tab.BorderSizePixel = 0
         Tab.Size = UDim2.new(0, 438, 0, 352)
         Tab.ScrollBarThickness = 5
@@ -199,7 +199,7 @@ function Library:Create(xHubName,xGameName)
 
         TabButton.Name = "TabButton"
         TabButton.Parent = ActualSide
-        TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        TabButton.BackgroundColor3 = Color3.fromRGB(55, 74, 251)
         TabButton.BorderSizePixel = 0
         TabButton.Size = UDim2.new(0, 139, 0, 35)
         TabButton.Font = Enum.Font.Gotham
@@ -213,10 +213,10 @@ function Library:Create(xHubName,xGameName)
         Tab.ChildRemoved:Connect(Size)
 
         if xVisible then 
-            TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            TabButton.BackgroundColor3 = Color3.fromRGB(55, 74, 251)
             TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         else 
-            TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            TabButton.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             TabButton.TextColor3 = Color3.fromRGB(190, 190, 190)
         end
 
@@ -224,7 +224,7 @@ function Library:Create(xHubName,xGameName)
             Size()
             for i,v in pairs(ActualSide:GetChildren()) do 
                 if v:IsA("TextButton") then 
-                    v.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    v.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                     v.TextColor3 = Color3.fromRGB(190, 190, 190)
                 end
             end
@@ -235,7 +235,7 @@ function Library:Create(xHubName,xGameName)
 
             Tab.Visible = true
             game:GetService("TweenService"):Create(TabButton, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                BackgroundColor3 = Color3.fromRGB(55, 74, 251)
             }):Play()
             game:GetService("TweenService"):Create(TabButton, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                 TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -253,7 +253,7 @@ function Library:Create(xHubName,xGameName)
 
             LabelFrame.Name = tostring(Name).."_Label"
             LabelFrame.Parent = Tab
-            LabelFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            LabelFrame.BackgroundColor3 = Color3.fromRGB(55, 74, 251)
             LabelFrame.Position = UDim2.new(0.0456621014, 0, 0, 0)
             LabelFrame.Size = UDim2.new(0, 408, 0, 35)
 
@@ -262,7 +262,7 @@ function Library:Create(xHubName,xGameName)
 
             Label.Name = "Label"
             Label.Parent = LabelFrame
-            Label.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Label.BackgroundTransparency = 1.000
             Label.BorderSizePixel = 0
             Label.Size = UDim2.new(0, 408, 0, 35)
@@ -273,12 +273,12 @@ function Library:Create(xHubName,xGameName)
 
             Label.MouseEnter:Connect(function()
                 game:GetService("TweenService"):Create(LabelFrame, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(63, 83, 255)
                 }):Play()
             end)
             Label.MouseLeave:Connect(function()
                 game:GetService("TweenService"):Create(LabelFrame, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(55, 74, 251)
                 }):Play()
             end)
 
@@ -301,7 +301,7 @@ function Library:Create(xHubName,xGameName)
 
             ButtonFrame.Name = tostring(Name).."_Button"
             ButtonFrame.Parent = Tab
-            ButtonFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ButtonFrame.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             ButtonFrame.Size = UDim2.new(0, 408, 0, 35)
             
             ButtonFrameCorner.Name = "ButtonFrameCorner"
@@ -309,7 +309,7 @@ function Library:Create(xHubName,xGameName)
             
             Button.Name = "Button"
             Button.Parent = ButtonFrame
-            Button.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            Button.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             Button.Size = UDim2.new(0, 408, 0, 35)
             Button.Font = Enum.Font.Gotham
             Button.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -327,23 +327,23 @@ function Library:Create(xHubName,xGameName)
 
             Button.MouseButton1Down:Connect(function()
                 game:GetService("TweenService"):Create(Button, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(55, 74, 251)
                 }):Play()
                 wait(0.1)
                 game:GetService("TweenService"):Create(Button, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                 }):Play()
                 pcall(Callback)
             end)
 
             Button.MouseEnter:Connect(function()
                 game:GetService("TweenService"):Create(Button, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(48, 51, 70)
                 }):Play()
             end)
             Button.MouseLeave:Connect(function()
                 game:GetService("TweenService"):Create(Button, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                 }):Play()
             end)
 
@@ -369,13 +369,13 @@ function Library:Create(xHubName,xGameName)
 
             ToggleFrame.Name = tostring(Name).."_Toggle"
             ToggleFrame.Parent = Tab
-            ToggleFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ToggleFrame.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             ToggleFrame.BorderSizePixel = 0
             ToggleFrame.Size = UDim2.new(0, 408, 0, 35)
 
             ToggleName.Name = "ToggleName"
             ToggleName.Parent = ToggleFrame
-            ToggleName.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ToggleName.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             ToggleName.BackgroundTransparency = 1.000
             ToggleName.BorderSizePixel = 0
             ToggleName.Size = UDim2.new(0, 347, 0, 35)
@@ -394,7 +394,7 @@ function Library:Create(xHubName,xGameName)
 
             ToggleF.Name = "ToggleF"
             ToggleF.Parent = ToggleFrame
-            ToggleF.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ToggleF.BackgroundColor3 = Color3.fromRGB(55, 55, 75)
             ToggleF.BackgroundTransparency = 0
             ToggleF.BorderSizePixel = 0
             ToggleF.Position = UDim2.new(0.867647052, 0, 0.142857149, 0)
@@ -406,7 +406,7 @@ function Library:Create(xHubName,xGameName)
 
             ToggleButton.Name = "ToggleButton"
             ToggleButton.Parent = ToggleF
-            ToggleButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ToggleButton.BackgroundColor3 = Color3.fromRGB(55, 55, 75)
             ToggleButton.BackgroundTransparency = 1
             ToggleButton.BorderSizePixel = 0
             ToggleButton.Size = UDim2.new(0, 45, 0, 23)
@@ -417,7 +417,7 @@ function Library:Create(xHubName,xGameName)
 
             ToggleCircle.Name = "ToggleCircle"
             ToggleCircle.Parent = ToggleF
-            ToggleCircle.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            ToggleCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             ToggleCircle.BackgroundTransparency = 1.000
             ToggleCircle.Position = UDim2.new(0.093, 0,0.153, 0)
             ToggleCircle.Size = UDim2.new(0, 17, 0, 17)
@@ -429,10 +429,10 @@ function Library:Create(xHubName,xGameName)
             ToggleButton.MouseButton1Down:Connect(function()
                 ToggleEnabled = not ToggleEnabled
                 if ToggleEnabled then 
-                    game:GetService("TweenService"):Create(ToggleF, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}):Play() 
+                    game:GetService("TweenService"):Create(ToggleF, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(55, 74, 251)}):Play() 
                     game:GetService("TweenService"):Create(ToggleCircle, TweenInfo.new(0.3), {Position = UDim2.new(0.559, 0,0.153, 0)}):Play() 
                 else
-                    game:GetService("TweenService"):Create(ToggleF, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}):Play() 
+                    game:GetService("TweenService"):Create(ToggleF, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(55, 55, 75)}):Play() 
                     game:GetService("TweenService"):Create(ToggleCircle, TweenInfo.new(0.3), {Position = UDim2.new(0.093, 0,0.153, 0)}):Play() 
                 end
                 pcall(Callback,ToggleEnabled)
@@ -457,7 +457,7 @@ function Library:Create(xHubName,xGameName)
 
             SliderFrame.Name = tostring(Name).."_Slider"
             SliderFrame.Parent = Tab
-            SliderFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            SliderFrame.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             SliderFrame.Size = UDim2.new(0, 408, 0, 50)
 
             SliderFrameCorner.Name = "SliderFrameCorner"
@@ -465,7 +465,7 @@ function Library:Create(xHubName,xGameName)
 
             SliderButton.Name = "SliderButton"
             SliderButton.Parent = SliderFrame
-            SliderButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            SliderButton.BackgroundColor3 = Color3.fromRGB(55, 55, 75)
             SliderButton.BorderSizePixel = 0
             SliderButton.Position = UDim2.new(0.0242369417, 0, 0.639999986, 0)
             SliderButton.Size = UDim2.new(0, 389, 0, 10)
@@ -479,7 +479,7 @@ function Library:Create(xHubName,xGameName)
 
             SliderTrail.Name = "SliderTrail"
             SliderTrail.Parent = SliderButton
-            SliderTrail.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            SliderTrail.BackgroundColor3 = Color3.fromRGB(55, 74, 251)
             SliderTrail.Size = UDim2.new(0, 0, 0, 10)
             SliderTrail.BorderSizePixel = 0
 
@@ -488,7 +488,7 @@ function Library:Create(xHubName,xGameName)
 
             SliderName.Name = "SliderName"
             SliderName.Parent = SliderFrame
-            SliderName.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            SliderName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             SliderName.BackgroundTransparency = 1.000
             SliderName.BorderSizePixel = 0
             SliderName.Size = UDim2.new(0, 320, 0, 26)
@@ -504,7 +504,7 @@ function Library:Create(xHubName,xGameName)
 
             SliderValue.Name = "SliderValue"
             SliderValue.Parent = SliderFrame
-            SliderValue.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             SliderValue.BackgroundTransparency = 1.000
             SliderValue.BorderSizePixel = 0
             SliderValue.TextTransparency = 1.000
@@ -573,7 +573,7 @@ function Library:Create(xHubName,xGameName)
 
             TextboxFrame.Name = tostring(Name).."_Textbox"
             TextboxFrame.Parent = Tab
-            TextboxFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            TextboxFrame.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             TextboxFrame.Size = UDim2.new(0, 408, 0, 35)
 
             TextboxFrameCorner.Name = "TextboxFrameCorner"
@@ -581,7 +581,7 @@ function Library:Create(xHubName,xGameName)
 
             TextboxName.Name = "TextboxName"
             TextboxName.Parent = TextboxFrame
-            TextboxName.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            TextboxName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             TextboxName.BackgroundTransparency = 1.000
             TextboxName.BorderSizePixel = 0
             TextboxName.Size = UDim2.new(0, 235, 0, 35)
@@ -597,7 +597,7 @@ function Library:Create(xHubName,xGameName)
 
             Textbox.Name = "Textbox"
             Textbox.Parent = TextboxFrame
-            Textbox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            Textbox.BackgroundColor3 = Color3.fromRGB(55, 55, 75)
             Textbox.BorderSizePixel = 0
             Textbox.Position = UDim2.new(0.610294104, 0, 0.171428576, 0)
             Textbox.Size = UDim2.new(0, 150, 0, 23)
@@ -613,13 +613,13 @@ function Library:Create(xHubName,xGameName)
 
             Textbox.Focused:Connect(function()
                 game:GetService("TweenService"):Create(Textbox, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(55, 74, 251)
                 }):Play()
             end)
 
             Textbox.FocusLost:Connect(function()
                 game:GetService("TweenService"):Create(Textbox, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(55, 55, 75)
                 }):Play()
                 Callback(Textbox.Text)
             end)
@@ -638,7 +638,7 @@ function Library:Create(xHubName,xGameName)
 
             KeybindFrame.Name = tostring(Name).."_Keybind"
             KeybindFrame.Parent = Tab
-            KeybindFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            KeybindFrame.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             KeybindFrame.BorderSizePixel = 0
             KeybindFrame.Size = UDim2.new(0, 408, 0, 35)
             
@@ -647,7 +647,7 @@ function Library:Create(xHubName,xGameName)
             
             KeybindName.Name = "KeybindName"
             KeybindName.Parent = KeybindFrame
-            KeybindName.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            KeybindName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             KeybindName.BackgroundTransparency = 1.000
             KeybindName.BorderSizePixel = 0
             KeybindName.Size = UDim2.new(0, 235, 0, 35)
@@ -663,7 +663,7 @@ function Library:Create(xHubName,xGameName)
             
             KeybindButton.Name = "KeybindButton"
             KeybindButton.Parent = KeybindFrame
-            KeybindButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            KeybindButton.BackgroundColor3 = Color3.fromRGB(55, 55, 75)
             KeybindButton.Position = UDim2.new(0.610294104, 0, 0.171428576, 0)
             KeybindButton.Size = UDim2.new(0, 150, 0, 23)
             KeybindButton.Font = Enum.Font.Gotham
@@ -677,13 +677,13 @@ function Library:Create(xHubName,xGameName)
 
             KeybindButton.MouseButton1Click:connect(function() 
                 game.TweenService:Create(KeybindButton, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(55, 74, 251)
                 }):Play()
                 KeybindButton.Text = ". . ."
                 local v1, v2 = game:GetService('UserInputService').InputBegan:wait();
                 if v1.KeyCode.Name ~= "Unknown" then
                     game.TweenService:Create(KeybindButton, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                        BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                        BackgroundColor3 = Color3.fromRGB(55, 55, 75)
                     }):Play()
                     KeybindButton.Text = v1.KeyCode.Name
                     Keyx = v1.KeyCode.Name;
@@ -717,7 +717,7 @@ function Library:Create(xHubName,xGameName)
 
             DropdownFrame.Name = tostring(Name).."_Dropdown"
             DropdownFrame.Parent = Tab
-            DropdownFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            DropdownFrame.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             DropdownFrame.BorderSizePixel = 0
             DropdownFrame.Size = UDim2.new(0, 408, 0, 35)
 
@@ -726,7 +726,7 @@ function Library:Create(xHubName,xGameName)
 
             DropdownName.Name = "DropdownName"
             DropdownName.Parent = DropdownFrame
-            DropdownName.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            DropdownName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             DropdownName.BackgroundTransparency = 1.000
             DropdownName.BorderSizePixel = 0
             DropdownName.Size = UDim2.new(0, 358, 0, 35)
@@ -752,7 +752,7 @@ function Library:Create(xHubName,xGameName)
 
             DropdownButton.Name = "DropdownButton"
             DropdownButton.Parent = DropdownFrame
-            DropdownButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            DropdownButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             DropdownButton.BackgroundTransparency = 1.000
             DropdownButton.BorderSizePixel = 0
             DropdownButton.Size = UDim2.new(0, 408, 0, 35)
@@ -763,7 +763,7 @@ function Library:Create(xHubName,xGameName)
 
             DropList.Name = "DropList"
             DropList.Parent = DropdownFrame
-            DropList.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            DropList.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
             DropList.BackgroundTransparency = 1.000
             DropList.BorderSizePixel = 0
             DropList.ClipsDescendants = true
@@ -784,12 +784,12 @@ function Library:Create(xHubName,xGameName)
 
             DropdownButton.MouseEnter:Connect(function()
                 game:GetService("TweenService"):Create(DropdownFrame, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(48, 51, 70)
                 }):Play()
             end)
             DropdownButton.MouseLeave:Connect(function()
                 game:GetService("TweenService"):Create(DropdownFrame, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                 }):Play()
             end)
 
@@ -831,7 +831,7 @@ function Library:Create(xHubName,xGameName)
                 
                 Option.Name = tostring(v).."_Option"
                 Option.Parent = DropList
-                Option.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                Option.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                 Option.Size = UDim2.new(0, 408, 0, 35)
                 Option.Font = Enum.Font.Gotham
                 Option.Text = v
@@ -864,12 +864,12 @@ function Library:Create(xHubName,xGameName)
 
                 Option.MouseEnter:Connect(function()
                     game:GetService("TweenService"):Create(Option, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                        BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                        BackgroundColor3 = Color3.fromRGB(48, 51, 70)
                     }):Play()
                 end)
                 Option.MouseLeave:Connect(function()
                     game:GetService("TweenService"):Create(Option, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                        BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                        BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                     }):Play()
                 end)
             end
@@ -884,7 +884,7 @@ function Library:Create(xHubName,xGameName)
     
                     Option.Name = tostring(v).."_Option"
                     Option.Parent = DropList
-                    Option.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                    Option.BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                     Option.Size = UDim2.new(0, 408, 0, 35)
                     Option.Font = Enum.Font.Gotham
                     Option.Text = v
@@ -917,12 +917,12 @@ function Library:Create(xHubName,xGameName)
     
                     Option.MouseEnter:Connect(function()
                         game:GetService("TweenService"):Create(Option, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                            BackgroundColor3 = Color3.fromRGB(48, 51, 70)
                         }):Play()
                     end)
                     Option.MouseLeave:Connect(function()
                         game:GetService("TweenService"):Create(Option, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+                            BackgroundColor3 = Color3.fromRGB(40, 42, 60)
                         }):Play()
                     end)
                 end
