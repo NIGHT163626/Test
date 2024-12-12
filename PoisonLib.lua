@@ -108,7 +108,7 @@ function lib:Window(text, preset, closebind)
 
     TabHold.Name = "TabHold"
     TabHold.Parent = Main
-    TabHold.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+    TabHold.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TabHold.BackgroundTransparency = 1.000
     TabHold.Position = UDim2.new(0.0339285731, 0, 0.147335425, 0)
     TabHold.Size = UDim2.new(0, 107, 0, 254)
@@ -120,7 +120,7 @@ function lib:Window(text, preset, closebind)
 
     Title.Name = "Title"
     Title.Parent = Main
-    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Title.BackgroundTransparency = 1.000
     Title.Position = UDim2.new(0.0339285731, 0, 0.0564263314, 0)
     Title.Size = UDim2.new(0, 200, 0, 23)
