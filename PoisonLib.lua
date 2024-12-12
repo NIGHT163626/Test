@@ -555,75 +555,114 @@ function CFAHub:CreateWindow(title, gameName, intro)
     HeaderCorner.Name = "HeaderCorner"
     HeaderCorner.Parent = Header
 
-    coverup.Name = "coverup"
-    coverup.Parent = Header
-    coverup.BackgroundColor3 = themes.Header
-    coverup.BorderSizePixel = 0
-    coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
-    coverup.Size = UDim2.new(1, 0, 0, 7)
+    -- Coverup no Header
+local coverup = Instance.new("Frame")
+coverup.Name = "coverup"
+coverup.Parent = Header
+coverup.BackgroundColor3 = themes.Header
+coverup.BorderSizePixel = 0
+coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
+coverup.Size = UDim2.new(1, 0, 0, 7)
 
-    logo.Name = "logo"
-    logo.Parent = Header
-    logo.AnchorPoint = Vector2.new(0.5, 0.5)
-    logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    logo.BackgroundTransparency = 1.000
-    logo.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
-    logo.Size = UDim2.new(0, 25, 0, 25)
-    logo.ZIndex = 2
-    logo.Image = themes.Logo
-    Objects[logo] = "Logo"
+-- Logo no Header
+local logo = Instance.new("ImageLabel")
+logo.Name = "logo"
+logo.Parent = Header
+logo.AnchorPoint = Vector2.new(0.5, 0.5)
+logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+logo.BackgroundTransparency = 1.000
+logo.Position = UDim2.new(0.03, 0, 0.5, 0)
+logo.Size = UDim2.new(0, 25, 0, 25)
+logo.ZIndex = 2
+logo.Image = themes.Logo
+Objects[logo] = "Logo"
 
-    Title.Name = "Title"
-    Title.Parent = Header
-    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Title.BackgroundTransparency = 1.000
-    Title.Position = UDim2.new(0.0579494797, 0, 0, 0)
-    Title.Size = UDim2.new(0, 625, 0, 29)
-    Title.ZIndex = 2
-    Title.Font = Enum.Font.SourceSansSemibold
-    Title.Text = title .. " - " .. gameName
-    Title.RichText = true
-    Title.TextColor3 = themes.TextColor
-    Objects[Title] = "TextColor"
-    Title.TextSize = 22.000
-    Title.TextWrapped = true
-    Title.TextXAlignment = Enum.TextXAlignment.Left
+-- Título no Header
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Parent = Header
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.Position = UDim2.new(0.058, 0, 0, 0)
+Title.Size = UDim2.new(0, 625, 0, 29)
+Title.ZIndex = 2
+Title.Font = Enum.Font.SourceSansSemibold
+Title.Text = title .. " - " .. gameName
+Title.RichText = true
+Title.TextColor3 = themes.TextColor
+Objects[Title] = "TextColor"
+Title.TextSize = 22.000
+Title.TextWrapped = true
+Title.TextXAlignment = Enum.TextXAlignment.Left
 
-    TabFrame.Name = "TabFrame"
-    TabFrame.Parent = Container
-    TabFrame.AnchorPoint = Vector2.new(0, 0.5)
-    TabFrame.BackgroundColor3 = themes.Background
-    Objects[TabFrame] = "Background"
-    TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    TabFrame.Position = UDim2.new(0.00999999978, 0, 0.49751243, 15)
-    TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
+-- TabFrame
+local TabFrame = Instance.new("Frame")
+TabFrame.Name = "TabFrame"
+TabFrame.Parent = Container
+TabFrame.AnchorPoint = Vector2.new(0, 0.5)
+TabFrame.BackgroundColor3 = themes.Background
+Objects[TabFrame] = "Background"
+TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TabFrame.Position = UDim2.new(0.01, 0, 0.49751243, 15)
+TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
-    TabCorner.CornerRadius = UDim.new(0, 4)
-    TabCorner.Name = "TabCorner"
-    TabCorner.Parent = TabFrame
+local TabCorner = Instance.new("UICorner")
+TabCorner.CornerRadius = UDim.new(0, 4)
+TabCorner.Name = "TabCorner"
+TabCorner.Parent = TabFrame
 
-    TabScroll.Name = "TabScroll"
-    TabScroll.Parent = TabFrame
-    TabScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TabScroll.BackgroundTransparency = 1.000
-    TabScroll.BorderSizePixel = 0
-    TabScroll.Position = UDim2.new(0, 0, 0, 0)
-    TabScroll.Size = UDim2.new(1, 0, 1, 0)
-    TabScroll.ZIndex = 2
-    TabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-    TabScroll.ScrollBarImageColor3 = themes.ScrollBar
-    TabScroll.ScrollBarThickness = 6
+local TabScroll = Instance.new("ScrollingFrame")
+TabScroll.Name = "TabScroll"
+TabScroll.Parent = TabFrame
+TabScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TabScroll.BackgroundTransparency = 1.000
+TabScroll.BorderSizePixel = 0
+TabScroll.Position = UDim2.new(0, 0, 0, 0)
+TabScroll.Size = UDim2.new(1, 0, 1, 0)
+TabScroll.ZIndex = 2
+TabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+TabScroll.ScrollBarImageColor3 = themes.ScrollBar
+TabScroll.ScrollBarThickness = 6
 
-    TabGridLayout.Name = "TabGridLayout"
-    TabGridLayout.Parent = TabScroll
-    TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    TabGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
+local TabGridLayout = Instance.new("UIGridLayout")
+TabGridLayout.Name = "TabGridLayout"
+TabGridLayout.Parent = TabScroll
+TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+TabGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
 
-    TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        local absoluteSize = TabGridLayout.AbsoluteContentSize
-        TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y+6)
-    end)
+TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    local absoluteSize = TabGridLayout.AbsoluteContentSize
+    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
+end)
+
+-- Barra de Pesquisa no Header
+local SearchBar = Instance.new("TextBox")
+SearchBar.Name = "SearchBar"
+SearchBar.Parent = Header -- Adicionada ao Header
+SearchBar.BackgroundColor3 = themes.Header
+SearchBar.BorderSizePixel = 0
+SearchBar.Position = UDim2.new(0, 0, 0.85, 0) -- Logo acima das abas
+SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
+SearchBar.Font = Enum.Font.SourceSansSemibold
+SearchBar.Text = ""
+SearchBar.PlaceholderText = "🔍 Search"
+SearchBar.TextSize = 18
+SearchBar.TextColor3 = themes.TextColor
+SearchBar.ClearTextOnFocus = true
+
+Objects[SearchBar] = "TextColor"
+
+-- Função para filtrar abas
+SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
+    local searchText = string.lower(SearchBar.Text) -- Texto digitado em minúsculas
+    for _, tabButton in pairs(TabScroll:GetChildren()) do
+        if tabButton:IsA("TextButton") then
+            local tabName = string.lower(tabButton.Name) -- Nome da aba em minúsculas
+            tabButton.Visible = string.find(tabName, searchText) ~= nil
+        end
+    end
+end)
 
     ShadowBlue.Name = "Glow"
     ShadowBlue.Parent = Container
