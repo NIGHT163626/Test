@@ -544,6 +544,17 @@ function CFAHub:CreateWindow(title, gameName, intro)
     UIPageLayout.Padding = UDim.new(0, 0)
     UIPageLayout.TweenTime = 0.500
 
+    Header.Name = "Header"
+    Header.Parent = Container
+    Header.BackgroundColor3 = themes.Header
+    Objects[Header] = "Header"
+    Header.BorderColor3 = Color3.fromRGB(43, 43, 43)
+    Header.Size = UDim2.new(0, 673, 0, 29)
+
+    HeaderCorner.CornerRadius = UDim.new(0, 4)
+    HeaderCorner.Name = "HeaderCorner"
+    HeaderCorner.Parent = Header
+
     -- Coverup no Header
 local coverup = Instance.new("Frame")
 coverup.Name = "coverup"
@@ -651,7 +662,7 @@ SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
             tabButton.Visible = string.find(tabName, searchText) ~= nil
         end
     end
-end)
+end) 
 
     ShadowBlue.Name = "Glow"
     ShadowBlue.Parent = Container
