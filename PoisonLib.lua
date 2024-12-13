@@ -555,7 +555,7 @@ function CFAHub:CreateWindow(title, gameName, intro)
     HeaderCorner.Name = "HeaderCorner"
     HeaderCorner.Parent = Header
 
-    -- Coverup no Header
+   -- Coverup no Header
 local coverup = Instance.new("Frame")
 coverup.Name = "coverup"
 coverup.Parent = Header
@@ -595,6 +595,34 @@ Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
+-- Barra de Pesquisa no Header (Agora acima das abas)
+local SearchBar = Instance.new("TextBox")
+SearchBar.Name = "SearchBar"
+SearchBar.Parent = Header -- Adicionada ao Header
+SearchBar.BackgroundColor3 = themes.Header
+SearchBar.BorderSizePixel = 0
+SearchBar.Position = UDim2.new(0, 0, 0.75, 0) -- Barra de pesquisa acima das abas
+SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
+SearchBar.Font = Enum.Font.SourceSansSemibold
+SearchBar.Text = ""
+SearchBar.PlaceholderText = "🔍 Search"
+SearchBar.TextSize = 18
+SearchBar.TextColor3 = themes.TextColor
+SearchBar.ClearTextOnFocus = true
+
+Objects[SearchBar] = "TextColor"
+
+-- Função para filtrar abas
+SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
+    local searchText = string.lower(SearchBar.Text) -- Texto digitado em minúsculas
+    for _, tabButton in pairs(TabScroll:GetChildren()) do
+        if tabButton:IsA("TextButton") then
+            local tabName = string.lower(tabButton.Name) -- Nome da aba em minúsculas
+            tabButton.Visible = string.find(tabName, searchText) ~= nil
+        end
+    end
+end)
+
 -- TabFrame (Volta para o lugar anterior)
 local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
@@ -603,7 +631,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.49751243, 15)  -- Volta para a posição anterior
+TabFrame.Position = UDim2.new(0.01, 0, 0.85, 15)  -- Posição ajustada para baixo
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
@@ -634,34 +662,6 @@ TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
 TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     local absoluteSize = TabGridLayout.AbsoluteContentSize
     TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
-end)
-
--- Barra de Pesquisa no Header (Agora um pouco mais para baixo)
-local SearchBar = Instance.new("TextBox")
-SearchBar.Name = "SearchBar"
-SearchBar.Parent = Header -- Adicionada ao Header
-SearchBar.BackgroundColor3 = themes.Header
-SearchBar.BorderSizePixel = 0
-SearchBar.Position = UDim2.new(0, 0, 0.758620679, 0) -- Coloca a barra de pesquisa logo abaixo do Header
-SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
-SearchBar.Font = Enum.Font.SourceSansSemibold
-SearchBar.Text = ""
-SearchBar.PlaceholderText = "🔍 Search"
-SearchBar.TextSize = 18
-SearchBar.TextColor3 = themes.TextColor
-SearchBar.ClearTextOnFocus = true
-
-Objects[SearchBar] = "TextColor"
-
--- Função para filtrar abas
-SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
-    local searchText = string.lower(SearchBar.Text) -- Texto digitado em minúsculas
-    for _, tabButton in pairs(TabScroll:GetChildren()) do
-        if tabButton:IsA("TextButton") then
-            local tabName = string.lower(tabButton.Name) -- Nome da aba em minúsculas
-            tabButton.Visible = string.find(tabName, searchText) ~= nil
-        end
-    end
 end)
 
     ShadowBlue.Name = "Glow"
