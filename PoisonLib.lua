@@ -555,13 +555,15 @@ function CFAHub:CreateWindow(title, gameName, intro)
     HeaderCorner.Name = "HeaderCorner"
     HeaderCorner.Parent = Header
 
-    coverup.Name = "coverup"
+    -- Criando a área de coverup
+coverup.Name = "coverup"
 coverup.Parent = Header
 coverup.BackgroundColor3 = themes.Header
 coverup.BorderSizePixel = 0
 coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
 coverup.Size = UDim2.new(1, 0, 0, 7)
 
+-- Criando o logo
 logo.Name = "logo"
 logo.Parent = Header
 logo.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -573,6 +575,7 @@ logo.ZIndex = 2
 logo.Image = themes.Logo
 Objects[logo] = "Logo"
 
+-- Criando o título
 Title.Name = "Title"
 Title.Parent = Header
 Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -589,19 +592,21 @@ Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
+-- Criando o TabFrame
 TabFrame.Name = "TabFrame"
 TabFrame.Parent = Container
 TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.00999999978, 0, 0.49751243, 45)  -- Ajustado para dar espaço para a barra de pesquisa
+TabFrame.Position = UDim2.new(0.00999999978, 0, 0.49751243, 45)  -- Posição ajustada para dar espaço à barra de pesquisa
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 TabCorner.CornerRadius = UDim.new(0, 4)
 TabCorner.Name = "TabCorner"
 TabCorner.Parent = TabFrame
 
+-- Criando a área de rolagem das tabs
 TabScroll.Name = "TabScroll"
 TabScroll.Parent = TabFrame
 TabScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -620,10 +625,69 @@ TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 TabGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
 
+-- Ajustando o CanvasSize quando o conteúdo do TabGridLayout mudar
 TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    -- Obtendo o tamanho absoluto do conteúdo
     local absoluteSize = TabGridLayout.AbsoluteContentSize
-    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y+6)
+    -- Ajustando o CanvasSize do TabScroll baseado no tamanho do conteúdo
+    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
 end)
+
+-- Lista de abas (Tabs)
+local Tabs = {}
+
+-- Adicionando a Barra de Pesquisa
+if WindowConfig.SearchBar then
+    -- Criando o campo de texto para a pesquisa
+    local SearchBox = Create("TextBox", {
+        Size = UDim2.new(0, 130, 0, 24),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        PlaceholderColor3 = Color3.fromRGB(210, 210, 210),
+        PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
+        Font = Enum.Font.GothamBold,
+        TextWrapped = true,
+        Text = '',
+        TextXAlignment = Enum.TextXAlignment.Center,
+        TextSize = 14,
+        ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+    })
+
+    -- Estilo da caixa de texto
+    local TextboxActual = AddThemeObject(SearchBox, "Text")
+
+    -- Criando a estrutura do SearchBar com um contorno arredondado
+    local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
+        Parent = WindowStuff,
+        Size = UDim2.new(0, 130, 0, 24),
+        Position = UDim2.new(1.013, -12, 0.075, 0), -- Ajuste para ficar no local correto
+        AnchorPoint = Vector2.new(1, 0.5)
+    }), {
+        AddThemeObject(MakeElement("Stroke"), "Stroke"),
+        TextboxActual
+    }), "Main")
+
+    -- Função para lidar com a pesquisa nas abas
+    local function SearchHandle()
+        local Text = string.lower(SearchBox.Text)
+
+        -- Iterando pelas abas para mostrar/ocultar com base na pesquisa
+        for i, v in pairs(Tabs) do
+            if v:IsA('TextButton') then
+                if string.find(string.lower(i), Text) then
+                    v.Visible = true
+                else
+                    v.Visible = false
+                end
+            end
+        end
+    end
+
+    -- Conectando o evento de mudança de texto na caixa de pesquisa à função de busca
+    AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle)
+end
+
+-- Finalizando o layout das tabs, se necessário
 
 local Tabs = {}
 
