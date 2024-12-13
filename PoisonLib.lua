@@ -603,7 +603,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.55, 0) -- Posicionado abaixo da barra de pesquisa
+TabFrame.Position = UDim2.new(0.01, 0, 0.80, 0)  -- Ajustado para ficar abaixo da barra de pesquisa
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
@@ -642,7 +642,7 @@ SearchBar.Name = "SearchBar"
 SearchBar.Parent = Header -- Adicionada ao Header
 SearchBar.BackgroundColor3 = themes.Header
 SearchBar.BorderSizePixel = 0
-SearchBar.Position = UDim2.new(0.01, 0, 0.75, 0) -- Mais à esquerda e diretamente acima das abas
+SearchBar.Position = UDim2.new(0.01, 0, 0.75, 0) -- Ajustada para ficar mais à esquerda e em cima das abas
 SearchBar.Size = UDim2.new(0.24, 0, 0, 25) -- Ajustada para alinhar com a largura das abas
 SearchBar.Font = Enum.Font.SourceSansSemibold
 SearchBar.Text = ""
