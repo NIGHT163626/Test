@@ -545,134 +545,85 @@ function CFAHub:CreateWindow(title, gameName, intro)
     UIPageLayout.TweenTime = 0.500
 
     Header.Name = "Header"
-Header.Parent = Container
-Header.BackgroundColor3 = themes.Header
-Objects[Header] = "Header"
-Header.BorderColor3 = Color3.fromRGB(43, 43, 43)
-Header.Size = UDim2.new(0, 673, 0, 29)
+    Header.Parent = Container
+    Header.BackgroundColor3 = themes.Header
+    Objects[Header] = "Header"
+    Header.BorderColor3 = Color3.fromRGB(43, 43, 43)
+    Header.Size = UDim2.new(0, 673, 0, 29)
 
-HeaderCorner.CornerRadius = UDim.new(0, 4)
-HeaderCorner.Name = "HeaderCorner"
-HeaderCorner.Parent = Header
+    HeaderCorner.CornerRadius = UDim.new(0, 4)
+    HeaderCorner.Name = "HeaderCorner"
+    HeaderCorner.Parent = Header
 
-coverup.Name = "coverup"
-coverup.Parent = Header
-coverup.BackgroundColor3 = themes.Header
-coverup.BorderSizePixel = 0
-coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
-coverup.Size = UDim2.new(1, 0, 0, 7)
+    coverup.Name = "coverup"
+    coverup.Parent = Header
+    coverup.BackgroundColor3 = themes.Header
+    coverup.BorderSizePixel = 0
+    coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
+    coverup.Size = UDim2.new(1, 0, 0, 7)
 
-logo.Name = "logo"
-logo.Parent = Header
-logo.AnchorPoint = Vector2.new(0.5, 0.5)
-logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-logo.BackgroundTransparency = 1.000
-logo.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
-logo.Size = UDim2.new(0, 25, 0, 25)
-logo.ZIndex = 2
-logo.Image = themes.Logo
-Objects[logo] = "Logo"
+    logo.Name = "logo"
+    logo.Parent = Header
+    logo.AnchorPoint = Vector2.new(0.5, 0.5)
+    logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    logo.BackgroundTransparency = 1.000
+    logo.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
+    logo.Size = UDim2.new(0, 25, 0, 25)
+    logo.ZIndex = 2
+    logo.Image = themes.Logo
+    Objects[logo] = "Logo"
 
-Title.Name = "Title"
-Title.Parent = Header
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.0579494797, 0, 0, 0)
-Title.Size = UDim2.new(0, 500, 0, 29)
-Title.ZIndex = 2
-Title.Font = Enum.Font.SourceSansSemibold
-Title.Text = title .. " - " .. gameName
-Title.RichText = true
-Title.TextColor3 = themes.TextColor
-Objects[Title] = "TextColor"
-Title.TextSize = 22.000
-Title.TextWrapped = true
-Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.Name = "Title"
+    Title.Parent = Header
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundTransparency = 1.000
+    Title.Position = UDim2.new(0.0579494797, 0, 0, 0)
+    Title.Size = UDim2.new(0, 625, 0, 29)
+    Title.ZIndex = 2
+    Title.Font = Enum.Font.SourceSansSemibold
+    Title.Text = title .. " - " .. gameName
+    Title.RichText = true
+    Title.TextColor3 = themes.TextColor
+    Objects[Title] = "TextColor"
+    Title.TextSize = 22.000
+    Title.TextWrapped = true
+    Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- Barra de Pesquisa
-local SearchBar = Instance.new("Frame")
-SearchBar.Name = "SearchBar"
-SearchBar.Parent = Header
-SearchBar.AnchorPoint = Vector2.new(1, 0.5)
-SearchBar.Position = UDim2.new(1, -12, 0.5, 0)
-SearchBar.Size = UDim2.new(0, 150, 0, 24)
-SearchBar.BackgroundColor3 = themes.SearchBar
-SearchBar.BorderSizePixel = 0
+    TabFrame.Name = "TabFrame"
+    TabFrame.Parent = Container
+    TabFrame.AnchorPoint = Vector2.new(0, 0.5)
+    TabFrame.BackgroundColor3 = themes.Background
+    Objects[TabFrame] = "Background"
+    TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+    TabFrame.Position = UDim2.new(0.00999999978, 0, 0.49751243, 15)
+    TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
-local SearchCorner = Instance.new("UICorner")
-SearchCorner.CornerRadius = UDim.new(0, 6)
-SearchCorner.Parent = SearchBar
+    TabCorner.CornerRadius = UDim.new(0, 4)
+    TabCorner.Name = "TabCorner"
+    TabCorner.Parent = TabFrame
 
-local SearchBox = Instance.new("TextBox")
-SearchBox.Name = "SearchBox"
-SearchBox.Parent = SearchBar
-SearchBox.Size = UDim2.new(1, -10, 1, 0)
-SearchBox.Position = UDim2.new(0, 5, 0, 0)
-SearchBox.BackgroundTransparency = 1
-SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search"
-SearchBox.Font = Enum.Font.GothamBold
-SearchBox.Text = ""
-SearchBox.TextSize = 14
-SearchBox.TextXAlignment = Enum.TextXAlignment.Center
-SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+    TabScroll.Name = "TabScroll"
+    TabScroll.Parent = TabFrame
+    TabScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TabScroll.BackgroundTransparency = 1.000
+    TabScroll.BorderSizePixel = 0
+    TabScroll.Position = UDim2.new(0, 0, 0, 0)
+    TabScroll.Size = UDim2.new(1, 0, 1, 0)
+    TabScroll.ZIndex = 2
+    TabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    TabScroll.ScrollBarImageColor3 = themes.ScrollBar
+    TabScroll.ScrollBarThickness = 6
 
--- TabFrame
-TabFrame.Name = "TabFrame"
-TabFrame.Parent = Container
-TabFrame.AnchorPoint = Vector2.new(0, 0.5)
-TabFrame.BackgroundColor3 = themes.Background
-Objects[TabFrame] = "Background"
-TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.00999999978, 0, 0.49751243, 15)
-TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
+    TabGridLayout.Name = "TabGridLayout"
+    TabGridLayout.Parent = TabScroll
+    TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    TabGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
 
-TabCorner.CornerRadius = UDim.new(0, 4)
-TabCorner.Name = "TabCorner"
-TabCorner.Parent = TabFrame
-
-TabScroll.Name = "TabScroll"
-TabScroll.Parent = TabFrame
-TabScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TabScroll.BackgroundTransparency = 1.000
-TabScroll.BorderSizePixel = 0
-TabScroll.Position = UDim2.new(0, 0, 0, 0)
-TabScroll.Size = UDim2.new(1, 0, 1, 0)
-TabScroll.ZIndex = 2
-TabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-TabScroll.ScrollBarImageColor3 = themes.ScrollBar
-TabScroll.ScrollBarThickness = 6
-
-TabGridLayout.Name = "TabGridLayout"
-TabGridLayout.Parent = TabScroll
-TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-TabGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
-
-TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-    local absoluteSize = TabGridLayout.AbsoluteContentSize
-    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
-end)
-
-local Tabs = {}
-
--- Função de busca
-local function SearchHandle()
-    local text = string.lower(SearchBox.Text)
-
-    for i, v in pairs(Tabs) do
-        if v:IsA("TextButton") then
-            if string.find(string.lower(i), text) then
-                v.Visible = true
-            else
-                v.Visible = false
-            end
-        end
-    end
-end
-
-SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
+    TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        local absoluteSize = TabGridLayout.AbsoluteContentSize
+        TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y+6)
+    end)
 
     ShadowBlue.Name = "Glow"
     ShadowBlue.Parent = Container
