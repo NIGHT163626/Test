@@ -622,7 +622,7 @@ SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
     end
 end)
 
--- TabFrame (Posição original das abas/tabs)
+-- TabFrame (Posição ajustada das abas/tabs mais próxima da barra de pesquisa)
 local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
 TabFrame.Parent = Container
@@ -630,7 +630,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.85, 15)  -- Posição original das abas
+TabFrame.Position = UDim2.new(0.01, 0, 0.795, 15)  -- Ajustei para ficar logo abaixo da barra de pesquisa
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
