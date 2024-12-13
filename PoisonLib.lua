@@ -595,7 +595,7 @@ Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- TabFrame (Agora ajustado para um pouco mais em cima)
+-- TabFrame (Volta para o lugar anterior)
 local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
 TabFrame.Parent = Container
@@ -603,7 +603,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.85, 0)  -- Ajustado para estar logo abaixo da barra de pesquisa
+TabFrame.Position = UDim2.new(0.01, 0, 0.49751243, 15)  -- Volta para a posição anterior
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
@@ -636,14 +636,14 @@ TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
 end)
 
--- Barra de Pesquisa no Header (Agora um pouco mais à esquerda)
+-- Barra de Pesquisa no Header (Agora um pouco mais para baixo)
 local SearchBar = Instance.new("TextBox")
 SearchBar.Name = "SearchBar"
 SearchBar.Parent = Header -- Adicionada ao Header
 SearchBar.BackgroundColor3 = themes.Header
 SearchBar.BorderSizePixel = 0
-SearchBar.Position = UDim2.new(0.01, 0, 0.75, 0) -- Ajustada para um pouco mais à esquerda
-SearchBar.Size = UDim2.new(0.24, 0, 0, 25) -- Ajustada para alinhar com a largura das abas
+SearchBar.Position = UDim2.new(0, 0, 0.758620679, 0) -- Coloca a barra de pesquisa logo abaixo do Header
+SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
 SearchBar.Font = Enum.Font.SourceSansSemibold
 SearchBar.Text = ""
 SearchBar.PlaceholderText = "🔍 Search"
