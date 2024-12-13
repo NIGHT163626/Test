@@ -603,7 +603,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.80, 0)  -- Ajustado para ficar abaixo da barra de pesquisa
+TabFrame.Position = UDim2.new(0.01, 0, 0.88, 0)  -- Ajustado para ficar um pouco mais abaixo
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
