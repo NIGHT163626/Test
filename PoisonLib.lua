@@ -1,3 +1,4 @@
+
 local CFAHub = {}
 
 warn("Preparing UI...")
@@ -140,8 +141,8 @@ function CFAHub:CreateWindow(title, gameName, intro)
     end
 
     local themes = {
-    SchemaColor = Color3.fromRGB(255, 255, 0), -- Alterado de azul para amarelo
-    TextColor = Color3.fromRGB(255, 255, 255), -- Mantido como branco
+    SchemaColor = Color3.fromRGB(255, 255, 0), -- Alterado de 
+    TextColor = Color3.fromRGB(255, 255, 255), -- Mantido como
     Header = Color3.fromRGB(22, 22, 22),
     Container = Color3.fromRGB(34, 34, 34),
     Background = Color3.fromRGB(22, 22, 22),
@@ -149,7 +150,7 @@ function CFAHub:CreateWindow(title, gameName, intro)
     Drop = Color3.fromRGB(28, 28, 28),
     ScrollBar = Color3.fromRGB(149, 149, 149),
     NotiBackground = Color3.fromRGB(0, 0, 0),
-    Glow = Color3.fromRGB(255, 255, 0), -- Alterado de azul para amarelo
+    Glow = Color3.fromRGB(255, 255, 0), -- Alterado de azul 
     Logo = "rbxassetid://74557301998632"
 }
 
@@ -554,35 +555,29 @@ function CFAHub:CreateWindow(title, gameName, intro)
     HeaderCorner.Name = "HeaderCorner"
     HeaderCorner.Parent = Header
 
-   -- Coverup no Header
-local coverup = Instance.new("Frame")
-coverup.Name = "coverup"
+    coverup.Name = "coverup"
 coverup.Parent = Header
 coverup.BackgroundColor3 = themes.Header
 coverup.BorderSizePixel = 0
 coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
 coverup.Size = UDim2.new(1, 0, 0, 7)
 
--- Logo no Header
-local logo = Instance.new("ImageLabel")
 logo.Name = "logo"
 logo.Parent = Header
 logo.AnchorPoint = Vector2.new(0.5, 0.5)
 logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 logo.BackgroundTransparency = 1.000
-logo.Position = UDim2.new(0.03, 0, 0.5, 0)
+logo.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
 logo.Size = UDim2.new(0, 25, 0, 25)
 logo.ZIndex = 2
 logo.Image = themes.Logo
 Objects[logo] = "Logo"
 
--- Título no Header
-local Title = Instance.new("TextLabel")
 Title.Name = "Title"
 Title.Parent = Header
 Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.058, 0, 0, 0)
+Title.Position = UDim2.new(0.0579494797, 0, 0, 0)
 Title.Size = UDim2.new(0, 625, 0, 29)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSansSemibold
@@ -594,51 +589,19 @@ Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- Barra de Pesquisa no Header
-local SearchBar = Instance.new("TextBox")
-SearchBar.Name = "SearchBar"
-SearchBar.Parent = Header
-SearchBar.BackgroundColor3 = themes.Header
-SearchBar.BorderSizePixel = 0
-SearchBar.Position = UDim2.new(0, 0, 0.758, 0) -- Barra de pesquisa acima das abas
-SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
-SearchBar.Font = Enum.Font.SourceSansSemibold
-SearchBar.Text = ""
-SearchBar.PlaceholderText = "🔍 Search"
-SearchBar.TextSize = 18
-SearchBar.TextColor3 = themes.TextColor
-SearchBar.ClearTextOnFocus = true
-
-Objects[SearchBar] = "TextColor"
-
--- Função para filtrar abas
-SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
-    local searchText = string.lower(SearchBar.Text) -- Texto digitado em minúsculas
-    for _, tabButton in pairs(TabScroll:GetChildren()) do
-        if tabButton:IsA("TextButton") then
-            local tabName = string.lower(tabButton.Name) -- Nome da aba em minúsculas
-            tabButton.Visible = string.find(tabName, searchText) ~= nil
-        end
-    end
-end)
-
--- TabFrame (Posição ajustada das abas/tabs mais próxima da barra de pesquisa)
-local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
 TabFrame.Parent = Container
 TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.795, 15)  -- Ajustei para ficar logo abaixo da barra de pesquisa
+TabFrame.Position = UDim2.new(0.00999999978, 0, 0.49751243, 45)  -- Ajustado para dar espaço para a barra de pesquisa
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
-local TabCorner = Instance.new("UICorner")
 TabCorner.CornerRadius = UDim.new(0, 4)
 TabCorner.Name = "TabCorner"
 TabCorner.Parent = TabFrame
 
-local TabScroll = Instance.new("ScrollingFrame")
 TabScroll.Name = "TabScroll"
 TabScroll.Parent = TabFrame
 TabScroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -651,7 +614,6 @@ TabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 TabScroll.ScrollBarImageColor3 = themes.ScrollBar
 TabScroll.ScrollBarThickness = 6
 
-local TabGridLayout = Instance.new("UIGridLayout")
 TabGridLayout.Name = "TabGridLayout"
 TabGridLayout.Parent = TabScroll
 TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -660,8 +622,58 @@ TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
 
 TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     local absoluteSize = TabGridLayout.AbsoluteContentSize
-    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
+    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y+6)
 end)
+
+local Tabs = {}
+
+-- Barra de pesquisa
+if WindowConfig.SearchBar then
+    local SearchBox = Create("TextBox", {
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        PlaceholderColor3 = Color3.fromRGB(210, 210, 210),
+        PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
+        Font = Enum.Font.GothamBold,
+        TextWrapped = true,
+        Text = '',
+        TextXAlignment = Enum.TextXAlignment.Center,
+        TextSize = 14,
+        ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+    })
+
+    local TextboxActual = AddThemeObject(SearchBox, "Text")
+
+    -- Criando a barra de pesquisa acima das abas
+    local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
+        Parent = WindowStuff,
+        Size = UDim2.new(0, 130, 0, 24),
+        Position = UDim2.new(1.013, -12, 0.075, 0), -- Ajuste a posição conforme necessário
+        AnchorPoint = Vector2.new(1, 0.5)
+    }), {
+        AddThemeObject(MakeElement("Stroke"), "Stroke"),
+        TextboxActual
+    }), "Main")
+
+    -- Função para filtrar as abas conforme a pesquisa
+    local function SearchHandle()
+        local Text = string.lower(SearchBox.Text)
+
+        for i, v in pairs(Tabs) do
+            if v:IsA('TextButton') then
+                if string.find(string.lower(i), Text) then
+                    v.Visible = true
+                else
+                    v.Visible = false
+                end
+            end
+        end
+    end
+
+    -- Conectando a função de pesquisa ao evento de mudança do texto na caixa de pesquisa
+    AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle)
+end
 
     ShadowBlue.Name = "Glow"
     ShadowBlue.Parent = Container
