@@ -595,7 +595,7 @@ Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- TabFrame
+-- TabFrame (Ajustado)
 local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
 TabFrame.Parent = Container
@@ -603,7 +603,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.49751243, 15)
+TabFrame.Position = UDim2.new(0.01, 0, 0.56, 15) -- Movido para baixo da barra de pesquisa
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
