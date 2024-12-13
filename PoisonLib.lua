@@ -595,7 +595,7 @@ Title.TextSize = 22.000
 Title.TextWrapped = true
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- TabFrame
+-- TabFrame (Agora ajustado para ficar bem abaixo da barra de pesquisa)
 local TabFrame = Instance.new("Frame")
 TabFrame.Name = "TabFrame"
 TabFrame.Parent = Container
@@ -603,7 +603,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.88, 0)  -- Ajustado para ficar um pouco mais abaixo
+TabFrame.Position = UDim2.new(0.01, 0, 0.95, 0)  -- Ajustado para estar bem abaixo da barra de pesquisa
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
@@ -636,7 +636,7 @@ TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
 end)
 
--- Barra de Pesquisa no Header (Com borda amarela arredondada)
+-- Barra de Pesquisa no Header (Agora sem a borda amarela)
 local SearchBar = Instance.new("TextBox")
 SearchBar.Name = "SearchBar"
 SearchBar.Parent = Header -- Adicionada ao Header
@@ -652,18 +652,6 @@ SearchBar.TextColor3 = themes.TextColor
 SearchBar.ClearTextOnFocus = true
 
 Objects[SearchBar] = "TextColor"
-
--- Adicionar contorno amarelo arredondado à barra de pesquisa
-local SearchBarStroke = Instance.new("UIStroke")
-SearchBarStroke.Parent = SearchBar
-SearchBarStroke.Color = Color3.fromRGB(255, 223, 0) -- Amarelo
-SearchBarStroke.Thickness = 2 -- Espessura da borda
-SearchBarStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-
--- Arredondar bordas da barra de pesquisa (e borda amarela)
-local SearchBarCorner = Instance.new("UICorner")
-SearchBarCorner.CornerRadius = UDim.new(0, 4)
-SearchBarCorner.Parent = SearchBar
 
 -- Função para filtrar abas
 SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
