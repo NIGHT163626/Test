@@ -598,10 +598,10 @@ Title.TextXAlignment = Enum.TextXAlignment.Left
 -- Barra de Pesquisa no Header
 local SearchBar = Instance.new("TextBox")
 SearchBar.Name = "SearchBar"
-SearchBar.Parent = Header -- Adicionada ao Header
+SearchBar.Parent = Header
 SearchBar.BackgroundColor3 = themes.Header
 SearchBar.BorderSizePixel = 0
-SearchBar.Position = UDim2.new(0, 0, 0.75, 0) -- Barra de pesquisa acima das abas
+SearchBar.Position = UDim2.new(0, 0, 0.758, 0) -- Barra de pesquisa acima das abas
 SearchBar.Size = UDim2.new(1, 0, 0, 25) -- Largura total
 SearchBar.Font = Enum.Font.SourceSansSemibold
 SearchBar.Text = ""
@@ -631,7 +631,7 @@ TabFrame.AnchorPoint = Vector2.new(0, 0.5)
 TabFrame.BackgroundColor3 = themes.Background
 Objects[TabFrame] = "Background"
 TabFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TabFrame.Position = UDim2.new(0.01, 0, 0.49751243, 15)  -- Posição original das abas
+TabFrame.Position = UDim2.new(0.01, 0, 0.85, 15)  -- Voltar para a posição original das abas
 TabFrame.Size = UDim2.new(0.249628529, 0, 0.0298507456, 348)
 
 local TabCorner = Instance.new("UICorner")
