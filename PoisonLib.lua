@@ -636,6 +636,45 @@ TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
 end)
 
+-- Barra de Pesquisa no Header (Modificada)
+local SearchBar = Instance.new("TextBox")
+SearchBar.Name = "SearchBar"
+SearchBar.Parent = Header -- Adicionada ao Header
+SearchBar.BackgroundColor3 = themes.Header
+SearchBar.BorderSizePixel = 0
+SearchBar.Position = UDim2.new(0.01, 0, 0.85, 0) -- Movida mais à esquerda (0.01 para alinhar com as abas)
+SearchBar.Size = UDim2.new(0.3, 0, 0, 25) -- Reduzida para ocupar apenas 30% da largura do Header
+SearchBar.Font = Enum.Font.SourceSansSemibold
+SearchBar.Text = ""
+SearchBar.PlaceholderText = "🔍 Search"
+SearchBar.TextSize = 18
+SearchBar.TextColor3 = themes.TextColor
+SearchBar.ClearTextOnFocus = true
+
+Objects[SearchBar] = "TextColor"
+
+-- Função para filtrar abas
+SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
+    local searchText = string.lower(SearchBar.Text) -- Texto digitado em minúsculas
+    for _, tabButton in pairs(TabScroll:GetChildren()) do
+        if tabButton:IsA("TextButton") then
+            local tabName = string.lower(tabButton.Name) -- Nome da aba em minúsculas
+            tabButton.Visible = string.find(tabName, searchText) ~= nil
+        end
+    end
+end)
+local TabGridLayout = Instance.new("UIGridLayout")
+TabGridLayout.Name = "TabGridLayout"
+TabGridLayout.Parent = TabScroll
+TabGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+TabGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+TabGridLayout.CellSize = UDim2.new(0, 150, 0, 35)
+
+TabGridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    local absoluteSize = TabGridLayout.AbsoluteContentSize
+    TabScroll.CanvasSize = UDim2.new(0, 0, 0, absoluteSize.Y + 6)
+end)
+
 -- Barra de Pesquisa no Header
 local SearchBar = Instance.new("TextBox")
 SearchBar.Name = "SearchBar"
