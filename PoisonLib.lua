@@ -81,21 +81,12 @@ end
 local DarkraiX = {}
 
 function DarkraiX:ToggleUi()
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-local button = Instance.new("ImageButton")
-button.Position = UDim2.new(0.25, 0, 0.1, 0)
-button.Size = UDim2.new(0, 32, 0, 33)
-button.BackgroundTransparency = 1
-button.Image = "rbxassetid://74557301998632"
-button.Parent = screenGui
-
-local function onButtonClicked()
-    print("Botão clicado!")
+if game.CoreGui:FindFirstChild("Darkrai").Enabled == true then -- oh am dumb
+game.CoreGui:FindFirstChild("Darkrai").Enabled = false
+else
+game.CoreGui:FindFirstChild("Darkrai").Enabled = true
 end
-
-button.MouseButton1Click:Connect(onButtonClicked)
+end
 
 function DarkraiX:Window(text, gamenme, logo, keybind)
     local hubname = text
