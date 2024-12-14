@@ -88,17 +88,17 @@ game.CoreGui:FindFirstChild("Darkrai").Enabled = true
 end
 end
 
-function DarkraiX:Window(text,gamenme,logo,keybind)
+function DarkraiX:Window(text, gamenme, logo, keybind)
     local hubname = text
-    local gamename = gamenme
-	local uihide = false
-	local abc = false
-	local logo = logo or 0
-	local currentpage = ""
-	local keybind = keybind or Enum.KeyCode.RightControl
-	local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
-	if gamename == "" then 
-	    gamename = ""..PlaceName.Name
+    local gamename = "Hub"  -- Alterado para "Hub"
+    local uihide = false
+    local abc = false
+    local logo = logo or 0
+    local currentpage = ""
+    local keybind = keybind or Enum.KeyCode.RightControl
+    local yoo = string.gsub(tostring(keybind), "Enum.KeyCode.", "")
+    if gamename == "" then 
+        gamename = ""..PlaceName.Name
     end
 	
 	local Darkrai = Instance.new("ScreenGui") -- guess i am using hubname wrong
