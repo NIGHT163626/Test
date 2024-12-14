@@ -81,33 +81,34 @@ end
 local DarkraiX = {}
 
 function DarkraiX:ToggleUi()
--- Criar a ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Criar o botão com imagem
 local button = Instance.new("ImageButton")
-button.Position = UDim2.new(0.25, 0, 0.1, 0)  -- Definindo a posição do botão
-button.Size = UDim2.new(0, 32, 0, 33)  -- Definindo o tamanho do botão
-button.BackgroundTransparency = 1  -- Remover o fundo do botão
-button.Image = "rbxassetid://74557301998632"  -- ID da imagem
+button.Position = UDim2.new(0.25, 0, 0.1, 0)
+button.Size = UDim2.new(0, 32, 0, 33)
+button.BackgroundTransparency = 1
+button.Image = "rbxassetid://74557301998632"
 button.Parent = screenGui
 
--- Função de callback que será chamada quando o botão for clicado
 local function onButtonClicked()
-    -- Verifica se o "Darkrai" está ativado no CoreGui
-    local darkrai = game.CoreGui:FindFirstChild("Darkrai")
-    if darkrai then
-        if darkrai.Enabled == true then
-            darkrai.Enabled = false  -- Desabilita
-        else
-            darkrai.Enabled = true   -- Habilita
-        end
-    end
+    print("Botão clicado!")
 end
 
--- Conectar a função de callback ao evento MouseButton1Click
 button.MouseButton1Click:Connect(onButtonClicked)
+
+function DarkraiX:Window(text, gamenme, logo, keybind)
+    local hubname = text
+    local gamename = "Hub"  -- Alterado para "Hub"
+    local uihide = true
+    local abc = false
+    local logo = logo or 0
+    local currentpage = ""
+    local keybind = keybind or Enum.KeyCode.RightControl
+    local yoo = string.gsub(tostring(keybind), "Enum.KeyCode.", "")
+    if gamename == "" then 
+        gamename = ""..PlaceName.Name
+    end
 	
 	local Darkrai = Instance.new("ScreenGui") -- guess i am using hubname wrong
 	Darkrai.Name = "Darkrai" -- wait
