@@ -36,26 +36,22 @@ function library:CreateWindow(name, version, icon)
 	MyGui.Parent = cloneref(game:GetService("CoreGui"))
 	MyGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-	-- Definindo configurações para a janela
-Window.Name = "Window"
+	Window.Name = "Window"
 Window.Parent = MyGui
 Window.BackgroundColor3 = Color3.fromRGB(49, 49, 59)
 Window.Position = UDim2.new(0.5, -300, 0.600000024, -200)
 Window.Size = UDim2.new(0, 0, 0, 0)
 Window.ClipsDescendants = true
 
--- Definindo cantos arredondados para a janela
 UICorner.CornerRadius = UDim.new(0, 4)
 UICorner.Parent = Window
 
--- Definindo a barra de título
 TitleBar.Name = "TitleBar"
 TitleBar.Parent = Window
 TitleBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TitleBar.BackgroundTransparency = 1.000
 TitleBar.Size = UDim2.new(1, 0, 0, 30)
 
--- Definindo o ícone da barra de título
 Icon.Name = "Icon"
 Icon.Parent = TitleBar
 Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -65,7 +61,6 @@ Icon.Size = UDim2.new(0, 18, 0, 18)
 Icon.Image = "rbxassetid://"..icon
 Icon.ImageColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo puro
 
--- Definindo o título da janela
 MainTitle.Name = "Title"
 MainTitle.Parent = TitleBar
 MainTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -78,7 +73,6 @@ MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 MainTitle.TextSize = 12.000
 MainTitle.TextXAlignment = Enum.TextXAlignment.Left
 
--- Definindo o sublinhado do título
 TitleUnderline.Name = "TitleUnderline"
 TitleUnderline.Parent = TitleBar
 TitleUnderline.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo puro
@@ -86,10 +80,8 @@ TitleUnderline.BorderSizePixel = 0
 TitleUnderline.Position = UDim2.new(0, 0, 1, 0)
 TitleUnderline.Size = UDim2.new(1, 0, 0, 1)
 
--- Definindo o gradiente do sublinhado
 UIGradient.Parent = TitleUnderline
 
--- Barra à esquerda do sublinhado
 Bar.Name = "Bar"
 Bar.Parent = TitleUnderline
 Bar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -98,7 +90,6 @@ Bar.BorderSizePixel = 0
 Bar.Position = UDim2.new(0, 6, 0, 0)
 Bar.Size = UDim2.new(0, 18, 1, 0)
 
--- Barra à direita do sublinhado
 Bar_2.Name = "Bar"
 Bar_2.Parent = TitleUnderline
 Bar_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -107,7 +98,6 @@ Bar_2.BorderSizePixel = 0
 Bar_2.Position = UDim2.new(1, -24, 0, 0)
 Bar_2.Size = UDim2.new(0, 18, 1, 0)
 
--- Botão de fechar
 Close.Name = "Close"
 Close.Parent = TitleBar
 Close.BackgroundTransparency = 1.000
@@ -117,35 +107,6 @@ Close.ZIndex = 2
 Close.Image = "rbxassetid://3926305904"
 Close.ImageRectOffset = Vector2.new(284, 4)
 Close.ImageRectSize = Vector2.new(24, 24)
-
--- Controle de plataforma e ícone para dispositivos móveis
-local _currentKey = Enum.KeyCode.RightShift
-local isMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
-local MobileIcon = SetChildren(SetProps(MakeElement("ImageButton", "http://www.roblox.com/asset/?id=17570737246"), {
-    Position = UDim2.new(0.25, 0, 0.1, 0),
-    Size = UDim2.new(0, 32, 0, 33),
-    Parent = Orion,
-    Visible = false,
-}), { MakeElement("Corner", 1, 0) })
-
--- Tornando o ícone móvel arrastável
-MakeDraggable(MobileIcon, MobileIcon)
-
--- Mostrando a janela principal ao clicar no ícone móvel
-AddConnection(MobileIcon.MouseButton1Click, function()
-    MainWindow.Visible = true
-    MobileIcon.Visible = false
-end)
-
--- Fechando a janela ao clicar no botão de fechar
-AddConnection(Close.MouseButton1Up, function()
-    MainWindow.Visible = false
-    UIHidden = true
-    
-    if UserInputService.TouchEnabled then
-        MobileIcon.Visible = true
-    end
-end)
 
 Minimize.Name = "Minimize"
 Minimize.Parent = TitleBar
