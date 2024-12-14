@@ -215,119 +215,111 @@ TS:Create(Window, TweenInfo.new(0.5), {Size = UDim2.new(0, 600, 0, 400)}):Play()
 local tabs = {}
 
 function tabs:CreateTab(name)
-    name = name or "Section 1"
-    
-    -- Create the Search Bar
-    local SearchBar = Instance.new("Frame")
-    local UICorner_4 = Instance.new("UICorner")
-    local SearchIcon = Instance.new("ImageLabel")
-    local Bar_3 = Instance.new("Frame")
-    local SearchBox = Instance.new("TextBox")
+	name = name or "Section 1"
+	--Create Tab
+	local Tabs = Instance.new("Frame")
+	local UICorner_2 = Instance.new("UICorner")
+	local SectionLabel = Instance.new("TextLabel")
+	local UIListLayout = Instance.new("UIListLayout")
+	--local PageButton = Instance.new("TextButton") --LATER
+	local Indicator = Instance.new("Frame")
 
-    SearchBar.Name = "SearchBar"
-    SearchBar.Parent = Window
-    SearchBar.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
-    SearchBar.Position = UDim2.new(0, 5, 0, 5)  -- Posição acima das abas
-    SearchBar.Size = UDim2.new(0, 140, 0, 30)  -- Tamanho da barra de pesquisa
+	Tabs.Name = "Tabs"
+	Tabs.Parent = Window
+	Tabs.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+	Tabs.Position = UDim2.new(0, 5, 0, 36)
+	Tabs.Size = UDim2.new(0, 140, 1, -41)
 
-    UICorner_4.CornerRadius = UDim.new(0, 5)
-    UICorner_4.Parent = SearchBar
+	UICorner_2.CornerRadius = UDim.new(0, 4)
+	UICorner_2.Parent = Tabs
 
-    -- Criar a caixa de pesquisa
-    SearchBox.Name = "SearchBox"
-    SearchBox.Parent = SearchBar
-    SearchBox.Size = UDim2.new(1, -10, 1, -10)
-    SearchBox.Position = UDim2.new(0, 5, 0, 5)
-    SearchBox.BackgroundTransparency = 1
-    SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-    SearchBox.PlaceholderText = "🔍 Search"
-    SearchBox.Font = Enum.Font.GothamBold
-    SearchBox.TextSize = 14
-    SearchBox.TextWrapped = true
-    SearchBox.TextXAlignment = Enum.TextXAlignment.Left
+	SectionLabel.Name = "SectionLabel"
+	SectionLabel.Parent = Tabs
+	SectionLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SectionLabel.BackgroundTransparency = 1.000
+	SectionLabel.Position = UDim2.new(0, 7, 0, 0)
+	SectionLabel.Size = UDim2.new(1, -7, 0, 30)
+	SectionLabel.Font = Enum.Font.GothamBlack
+	SectionLabel.Text = name --"Section 1"
+	SectionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	SectionLabel.TextSize = 12.000
+	SectionLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-    -- Create Tab
-    local Tabs = Instance.new("Frame")
-    local UICorner_2 = Instance.new("UICorner")
-    local SectionLabel = Instance.new("TextLabel")
-    local UIListLayout = Instance.new("UIListLayout")
-    local Indicator = Instance.new("Frame")
+	UIListLayout.Parent = Tabs
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    Tabs.Name = "Tabs"
-    Tabs.Parent = Window
-    Tabs.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
-    Tabs.Position = UDim2.new(0, 5, 0, 40)  -- Posição das Tabs abaixo da barra de pesquisa
-    Tabs.Size = UDim2.new(0, 140, 1, -45)  -- Tamanho das Tabs
+	--LATER
+	--[[PageButton.Name = "PageButton"
+	PageButton.Parent = Tabs
+	PageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	PageButton.BackgroundTransparency = 1.000
+	PageButton.Size = UDim2.new(1, -14, 0, 20)
+	PageButton.Font = Enum.Font.Gotham
+	PageButton.Text = "Page 1"
+	PageButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	PageButton.TextSize = 12.000
+	PageButton.TextXAlignment = Enum.TextXAlignment.Left]]
 
-    UICorner_2.CornerRadius = UDim.new(0, 4)
-    UICorner_2.Parent = Tabs
+	Indicator.Name = "Indicator"
+	Indicator.Parent = Tabs
+	Indicator.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo
+	Indicator.BorderSizePixel = 0
+	Indicator.BackgroundTransparency = 1
+	Indicator.Position = UDim2.new(0, -14, 0, 4)
+	Indicator.Size = UDim2.new(0, 2, 1, -8)
+	Indicator.Visible = false
+	--end
+	local mytabbuttons = {}
+	function mytabbuttons:CreateFrame(name)
+		name = name or "Page 1"
+		--Creating Page
 
-    SectionLabel.Name = "SectionLabel"
-    SectionLabel.Parent = Tabs
-    SectionLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SectionLabel.BackgroundTransparency = 1.000
-    SectionLabel.Position = UDim2.new(0, 7, 0, 0)
-    SectionLabel.Size = UDim2.new(1, -7, 0, 30)
-    SectionLabel.Font = Enum.Font.GothamBlack
-    SectionLabel.Text = name -- "Section 1"
-    SectionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SectionLabel.TextSize = 12.000
-    SectionLabel.TextXAlignment = Enum.TextXAlignment.Left
+			local Page = Instance.new("ScrollingFrame")
+			local UICorner_3 = Instance.new("UICorner")
+			local UIListLayout_2 = Instance.new("UIListLayout")
+			local UIPadding = Instance.new("UIPadding")
+			local SearchBar = Instance.new("Frame")
+			local UICorner_4 = Instance.new("UICorner")
+			local SearchIcon = Instance.new("ImageLabel")
+			local Bar_3 = Instance.new("Frame")
+			local SearchBox = Instance.new("TextBox")
+			local Section = Instance.new("Frame")
+			local UICorner_5 = Instance.new("UICorner")
+			local SectionContainer = Instance.new("Frame")
 
-    UIListLayout.Parent = Tabs
-    UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			local Header = Instance.new("Frame")
+			local UICorner_23 = Instance.new("UICorner")
+			local UIGradient_2 = Instance.new("UIGradient")
+			local _4pxShadow2px_2 = Instance.new("ImageLabel")
 
-    -- Indicator (optional visual for the active tab)
-    Indicator.Name = "Indicator"
-    Indicator.Parent = Tabs
-    Indicator.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo
-    Indicator.BorderSizePixel = 0
-    Indicator.BackgroundTransparency = 1
-    Indicator.Position = UDim2.new(0, -14, 0, 4)
-    Indicator.Size = UDim2.new(0, 2, 1, -8)
-    Indicator.Visible = false
 
-    -- Create Page Content Frame
-    local Page = Instance.new("ScrollingFrame")
-    local UICorner_3 = Instance.new("UICorner")
-    local UIListLayout_2 = Instance.new("UIListLayout")
-    local UIPadding = Instance.new("UIPadding")
-    local Section = Instance.new("Frame")
-    local UICorner_5 = Instance.new("UICorner")
-    local SectionContainer = Instance.new("Frame")
+			Page.Name = "Page"
+Page.Parent = Window
+Page.Active = true
+Page.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+Page.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Page.BorderSizePixel = 0
+Page.Position = UDim2.new(0, 150, 0, 36)
+Page.Size = UDim2.new(1, -155, 1, -41)
+Page.ScrollBarThickness = 5
+Page.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo
+Page.AutomaticCanvasSize = "Y"
+Page.Visible = false
 
-    Page.Name = "Page"
-    Page.Parent = Window
-    Page.Active = true
-    Page.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
-    Page.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    Page.BorderSizePixel = 0
-    Page.Position = UDim2.new(0, 150, 0, 36)
-    Page.Size = UDim2.new(1, -155, 1, -41)
-    Page.ScrollBarThickness = 5
-    Page.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo
-    Page.AutomaticCanvasSize = "Y"
-    Page.Visible = false
+UICorner_3.CornerRadius = UDim.new(0, 4)
+UICorner_3.Parent = Page
 
-    UICorner_3.CornerRadius = UDim.new(0, 4)
-    UICorner_3.Parent = Page
+UIListLayout_2.Parent = Page
+UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_2.Padding = UDim.new(0, 4)
 
-    UIListLayout_2.Parent = Page
-    UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-    UIListLayout_2.Padding = UDim.new(0, 4)
-
-    UIPadding.Parent = Page
-    UIPadding.PaddingBottom = UDim.new(0, 4)
-    UIPadding.PaddingLeft = UDim.new(0, 4)
-    UIPadding.PaddingRight = UDim.new(0, 4)
-    UIPadding.PaddingTop = UDim.new(0, 4)
-
-    -- Add your page content and buttons here if needed...
-
-end
+UIPadding.Parent = Page
+UIPadding.PaddingBottom = UDim.new(0, 4)
+UIPadding.PaddingLeft = UDim.new(0, 4)
+UIPadding.PaddingRight = UDim.new(0, 4)
+UIPadding.PaddingTop = UDim.new(0, 4)
 
 			SearchBar.Name = "SearchBar"
 SearchBar.Parent = Page
