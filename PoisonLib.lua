@@ -91,7 +91,7 @@ end
 function DarkraiX:Window(text, gamenme, logo, keybind)
     local hubname = text
     local gamename = "Hub"  -- Alterado para "Hub"
-    local uihide = false
+    local uihide = true
     local abc = false
     local logo = logo or 0
     local currentpage = ""
