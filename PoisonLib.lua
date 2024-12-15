@@ -72,7 +72,7 @@ local function MakeDraggable(topbarobject, object)
                     input.UserInputType == Enum.UserInputType.Touch
              then
                 DragInput = input
-            end 
+            end
         end
     )
 
@@ -96,7 +96,7 @@ function lib:Window(text, preset, closebind)
     local TabFolder = Instance.new("Folder")
     local DragFrame = Instance.new("Frame")
 
-    Main.Name = "Main"
+   Main.Name = "Main"
 Main.Parent = ui
 Main.AnchorPoint = Vector2.new(0.5, 0.5)
 Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
