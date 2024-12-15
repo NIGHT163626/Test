@@ -351,8 +351,10 @@ function uitab:Tab(text)
             currentpage = string.gsub(TabButton.Name, "Server", "") .. "_Page"
             if v.Name == currentpage then
                 UIPageLayout:JumpTo(v)
-            end)
-        end)
+            end
+        end
+    end)
+end
 		
 		local main = {}
 		function main:Button(text,callback)
