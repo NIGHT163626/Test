@@ -128,7 +128,7 @@ Title.Font = Enum.Font.GothamSemibold
 Title.Text = text
 Title.TextColor3 = Color3.fromRGB(255, 255, 255) -- Cor branca
 Title.TextTransparency = 0 -- Sem transparência
-Title.TextSize = 20 -- Aumenta o tamanho do texto
+Title.TextSize = 26 -- Aumenta o tamanho do texto
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
 DragFrame.Name = "DragFrame"
