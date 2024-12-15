@@ -263,8 +263,6 @@ end)
 local uitab = {}
 
 function uitab:Tab(text)
-    function uitab:Tab(text)
-    -- Criar o Botão da Aba
     local TabButton = Instance.new("TextButton")
     TabButton.Parent = ScrollTab
     TabButton.Name = text .. "Server"
@@ -278,7 +276,6 @@ function uitab:Tab(text)
     TabButton.TextSize = 15.000
     TabButton.TextTransparency = 0.500
 
-    -- Criar MainFramePage
     local MainFramePage = Instance.new("ScrollingFrame")
     MainFramePage.Name = text .. "_Page"
     MainFramePage.Parent = PageList
@@ -301,7 +298,6 @@ function uitab:Tab(text)
     UIListLayout.Parent = MainFramePage
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    -- Ação de Clique no TabButton
     TabButton.MouseButton1Click:Connect(function()
         for i, v in next, ScrollTab:GetChildren() do
             if v:IsA("TextButton") then
@@ -325,7 +321,6 @@ function uitab:Tab(text)
         end
     end)
 
-    -- Configuração inicial da visibilidade das abas
     if abc == false then
         for i, v in next, ScrollTab:GetChildren() do
             if v:IsA("TextButton") then
@@ -344,65 +339,13 @@ function uitab:Tab(text)
         UIPageLayout:JumpToIndex(1)
         abc = true
     end
-
-    -- Barra de Pesquisa (Adição sem alterar o código original)
-    if WindowConfig.SearchBar then
-        -- Criar o campo de texto da barra de pesquisa
-        local SearchBox = Instance.new("TextBox")
-        SearchBox.Size = UDim2.new(1, 0, 1, 0)
-        SearchBox.BackgroundTransparency = 1
-        SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-        SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-        SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Pesquisar"
-        SearchBox.Font = Enum.Font.GothamBold
-        SearchBox.TextWrapped = true
-        SearchBox.Text = ""
-        SearchBox.TextXAlignment = Enum.TextXAlignment.Center
-        SearchBox.TextSize = 14
-        SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
-
-        -- Adiciona a barra de pesquisa à interface
-        local SearchBar = Instance.new("Frame")
-        SearchBar.Size = UDim2.new(0, 130, 0, 24)
-        SearchBar.Position = UDim2.new(1.013, -12, 0.075, 0)
-        SearchBar.AnchorPoint = Vector2.new(1, 0.5)
-        SearchBar.BackgroundColor3 = Color3.fromRGB(169, 169, 169)  -- Cor de fundo cinza
-        SearchBar.BorderSizePixel = 0
-        SearchBar.Parent = WindowStuff
-
-        local Stroke = Instance.new("UIStroke")
-        Stroke.Parent = SearchBar
-
-        -- Configura a caixa de texto
-        SearchBox.Parent = SearchBar
-
-        -- Função para filtrar as abas com base no texto da pesquisa
-        local function SearchHandle()
-            local Text = string.lower(SearchBox.Text)
-
-            for i, v in pairs(ScrollTab:GetChildren()) do
-                if v:IsA('TextButton') then
-                    -- Filtra abas com base no texto
-                    if string.find(string.lower(v.Text), Text) then
-                        v.Visible = true
-                    else
-                        v.Visible = false
-                    end
-                end
-            end
-        end
-
-        -- Conectar a mudança do texto na caixa de pesquisa à função de filtro
-        SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
-    end
-
-    -- Atualizar o tamanho do Canvas (DEVE VIR NO FINAL)
-    game:GetService("RunService").Stepped:Connect(function()
-        pcall(function()
-            MainFramePage.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
-            ScrollTab.CanvasSize = UDim2.new(0,0,0,PLL.AbsoluteContentSize.Y + 20)
-        end)
-    end)
+		
+		game:GetService("RunService").Stepped:Connect(function()
+			pcall(function()
+				MainFramePage.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
+				ScrollTab.CanvasSize = UDim2.new(0,0,0,PLL.AbsoluteContentSize.Y + 20)
+			end)
+		end)
 		
 		local main = {}
 		function main:Button(text,callback)
