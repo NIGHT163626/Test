@@ -107,40 +107,40 @@ function DarkraiX:Window(text, gamenme, logo, keybind)
 	Darkrai.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	local Main = Instance.new("Frame")
-Main.Name = "Main"
-Main.Parent = Darkrai
-Main.ClipsDescendants = true
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main.Size = UDim2.new(0, 0, 0, 0)
+	Main.Name = "Main"
+	Main.Parent = Darkrai
+	Main.ClipsDescendants = true
+	Main.AnchorPoint = Vector2.new(0.5,0.5)
+	Main.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main.Size = UDim2.new(0, 0, 0, 0)
+	
+	Main:TweenSize(UDim2.new(0, 656, 0, 400),"Out","Quad",0.4,true)
 
-Main:TweenSize(UDim2.new(0, 656, 0, 400), "Out", "Quad", 0.4, true)
+	local MCNR = Instance.new("UICorner")
+	MCNR.Name = "MCNR"
+	MCNR.Parent = Main
 
-local MCNR = Instance.new("UICorner")
-MCNR.Name = "MCNR"
-MCNR.Parent = Main
+	local Top = Instance.new("Frame")
+	Top.Name = "Top"
+	Top.Parent = Main
+	Top.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Top.Size = UDim2.new(0, 656, 0, 27)
 
-local Top = Instance.new("Frame")
-Top.Name = "Top"
-Top.Parent = Main
-Top.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Top.Size = UDim2.new(0, 656, 0, 27)
+	local TCNR = Instance.new("UICorner")
+	TCNR.Name = "TCNR"
+	TCNR.Parent = Top
 
-local TCNR = Instance.new("UICorner")
-TCNR.Name = "TCNR"
-TCNR.Parent = Top
+	local Logo = Instance.new("ImageLabel")
+	Logo.Name = "Logo"
+	Logo.Parent = Top
+	Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Logo.BackgroundTransparency = 1.000
+	Logo.Position = UDim2.new(0, 10, 0, 1)
+	Logo.Size = UDim2.new(0, 25, 0, 25)
+	Logo.Image = ""
 
-local Logo = Instance.new("ImageLabel")
-Logo.Name = "Logo"
-Logo.Parent = Top
-Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Logo.BackgroundTransparency = 1.000
-Logo.Position = UDim2.new(0, 10, 0, 1)
-Logo.Size = UDim2.new(0, 25, 0, 25)
-Logo.Image = ""
-
-local Name = Instance.new("TextLabel")
+	local Name = Instance.new("TextLabel")
 Name.Name = "Name"
 Name.Parent = Top
 Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -149,8 +149,21 @@ Name.Position = UDim2.new(0.0609756112, 0, 0, 0)
 Name.Size = UDim2.new(0, 61, 0, 27)
 Name.Font = Enum.Font.GothamSemibold
 Name.Text = hubname
-Name.TextColor3 = Color3.fromRGB(255, 255, 0)
+Name.TextColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo
 Name.TextSize = 17.000
+
+local Hub = Instance.new("TextLabel")
+Hub.Name = "Hub"
+Hub.Parent = Top
+Hub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Hub.BackgroundTransparency = 1.000
+Hub.Position = UDim2.new(0, 110, 0, 0)
+Hub.Size = UDim2.new(0, 81, 0, 27)
+Hub.Font = Enum.Font.GothamSemibold
+Hub.Text = "    "..gamename
+Hub.TextColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo
+Hub.TextSize = 17.000
+Hub.TextXAlignment = Enum.TextXAlignment.Left
 
 local BindButton = Instance.new("TextButton")
 BindButton.Name = "BindButton"
@@ -161,63 +174,12 @@ BindButton.Position = UDim2.new(0.847561002, 0, 0, 0)
 BindButton.Size = UDim2.new(0, 100, 0, 27)
 BindButton.Font = Enum.Font.GothamSemibold
 BindButton.Text = "[RightControl]"
-BindButton.TextColor3 = Color3.fromRGB(255, 255, 0)
+BindButton.TextColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo
 BindButton.TextSize = 13.000
 
--- Barra de Pesquisa
-if WindowConfig.SearchBar then
-    local SearchBar = Instance.new("Frame")
-    SearchBar.Name = "SearchBar"
-    SearchBar.Parent = Top
-    SearchBar.Size = UDim2.new(0, 130, 0, 24)
-    SearchBar.Position = UDim2.new(0.87, -12, 0.5, 0)
-    SearchBar.AnchorPoint = Vector2.new(1, 0.5)
-    SearchBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-
-    local SearchStroke = Instance.new("UIStroke")
-    SearchStroke.Parent = SearchBar
-    SearchStroke.Color = Color3.fromRGB(255, 255, 255)
-
-    local UICorner = Instance.new("UICorner")
-    UICorner.CornerRadius = UDim.new(0, 6)
-    UICorner.Parent = SearchBar
-
-    local SearchBox = Instance.new("TextBox")
-    SearchBox.Name = "SearchBox"
-    SearchBox.Parent = SearchBar
-    SearchBox.Size = UDim2.new(1, 0, 1, 0)
-    SearchBox.BackgroundTransparency = 1
-    SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-    SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search"
-    SearchBox.Font = Enum.Font.GothamBold
-    SearchBox.TextWrapped = true
-    SearchBox.Text = ""
-    SearchBox.TextXAlignment = Enum.TextXAlignment.Center
-    SearchBox.TextSize = 14
-    SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
-
-    local function SearchHandle()
-        local Text = string.lower(SearchBox.Text)
-
-        for i, v in pairs(Tabs) do
-            if v:IsA("TextButton") then
-                if string.find(string.lower(i), Text) then
-                    v.Visible = true
-                else
-                    v.Visible = false
-                end
-            end
-        end
-    end
-
-    SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
-end
-
--- Conteúdo restante
-local Tab = Instance.new("Frame")
+	local Tab = Instance.new("Frame")
 Tab.Name = "Tab"
-Tab.Parent = Main
+Tab.Parent = Main  -- Certifique-se de que o "Main" já está definido corretamente em seu código.
 Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 Tab.Position = UDim2.new(0, 5, 0, 30)
 Tab.Size = UDim2.new(0, 150, 0, 365)
@@ -248,9 +210,10 @@ PPD.Parent = ScrollTab
 PPD.PaddingLeft = UDim.new(0, 10)
 PPD.PaddingTop = UDim.new(0, 10)
 
+-- Criando o Page
 local Page = Instance.new("Frame")
 Page.Name = "Page"
-Page.Parent = Main
+Page.Parent = Main  -- Certifique-se de que "Main" esteja referenciando o Frame principal correto.
 Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
 Page.Size = UDim2.new(0, 490, 0, 365)
@@ -283,33 +246,67 @@ UIPageLayout.GamepadInputEnabled = false
 UIPageLayout.ScrollWheelInputEnabled = false
 UIPageLayout.TouchInputEnabled = false
 
+-- Função para tornar o frame arrastável
 MakeDraggable(Top, Main)
 
-UserInputService.InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode[yoo] then
-        if uihide == false then
-            uihide = true
-            Main:TweenSize(UDim2.new(0, 0, 0, 0), "In", "Quad", 0.4, true)
-        else
-            uihide = false
-            Main:TweenSize(UDim2.new(0, 656, 0, 400), "Out", "Quad", 0.4, true)
+-- Barra de Pesquisa
+if WindowConfig.SearchBar then
+    local SearchBox = Create("TextBox", {
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        PlaceholderColor3 = Color3.fromRGB(210,210,210),
+        PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
+        Font = Enum.Font.GothamBold,
+        TextWrapped = true,
+        Text = '',
+        TextXAlignment = Enum.TextXAlignment.Center,
+        TextSize = 14,
+        ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+    })
+
+    local TextboxActual = AddThemeObject(SearchBox, "Text")
+
+    local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
+        Parent = WindowStuff,
+        Size = UDim2.new(0, 130, 0, 24),
+        Position = UDim2.new(1.013, -12, 0.075, 0),
+        AnchorPoint = Vector2.new(1, 0.5)
+    }), {
+        AddThemeObject(MakeElement("Stroke"), "Stroke"),
+        TextboxActual
+    }), "Main")
+
+    -- Função de busca
+    local function SearchHandle()
+        local Text = string.lower(SearchBox.Text)
+
+        for _, v in ipairs(ScrollTab:GetChildren()) do
+            if v:IsA('TextButton') then
+                if string.find(string.lower(v.Name), Text) then
+                    v.Visible = true
+                else
+                    v.Visible = false
+                end
+            end
         end
     end
-end)
 
-local uitab = {}
+    AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle)
+end
 
+-- Função para criar novas abas
 function uitab:Tab(text)
     local TabButton = Instance.new("TextButton")
     TabButton.Parent = ScrollTab
     TabButton.Name = text .. "Server"
     TabButton.Text = text
-    TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    TabButton.BorderColor3 = Color3.fromRGB(255, 255, 0)
+    TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35) -- Mantém preto
+    TabButton.BorderColor3 = Color3.fromRGB(255, 255, 0) -- Alterado para amarelo
     TabButton.BorderSizePixel = 3
     TabButton.Size = UDim2.new(0, 130, 0, 23)
     TabButton.Font = Enum.Font.GothamSemibold
-    TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
+    TabButton.TextColor3 = Color3.fromRGB(225, 225, 225) -- Mantém branco
     TabButton.TextSize = 15.000
     TabButton.TextTransparency = 0.500
 
@@ -317,7 +314,7 @@ function uitab:Tab(text)
     MainFramePage.Name = text .. "_Page"
     MainFramePage.Parent = PageList
     MainFramePage.Active = true
-    MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Mantém branco
     MainFramePage.BackgroundTransparency = 1.000
     MainFramePage.BorderSizePixel = 0
     MainFramePage.Size = UDim2.new(0, 490, 0, 365)
@@ -354,36 +351,8 @@ function uitab:Tab(text)
             currentpage = string.gsub(TabButton.Name, "Server", "") .. "_Page"
             if v.Name == currentpage then
                 UIPageLayout:JumpTo(v)
-            end
-        end
-    end)
-
-    if abc == false then
-        for i, v in next, ScrollTab:GetChildren() do
-            if v:IsA("TextButton") then
-                TweenService:Create(
-                    v,
-                    TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                    { TextTransparency = 0.5 }
-                ):Play()
-            end
-            TweenService:Create(
-                TabButton,
-                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                { TextTransparency = 0 }
-            ):Play()
-        end
-        UIPageLayout:JumpToIndex(1)
-        abc = true
-    end
-
-    game:GetService("RunService").Stepped:Connect(function()
-        pcall(function()
-            MainFramePage.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 20)
-            ScrollTab.CanvasSize = UDim2.new(0, 0, 0, PLL.AbsoluteContentSize.Y + 20)
+            end)
         end)
-    end)
-end
 		
 		local main = {}
 		function main:Button(text,callback)
