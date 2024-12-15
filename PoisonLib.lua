@@ -178,64 +178,64 @@ BindButton.TextColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo
 BindButton.TextSize = 13.000
 
 	local Tab = Instance.new("Frame")
-Tab.Name = "Tab"
-Tab.Parent = Main  -- Certifique-se de que o "Main" já está definido corretamente em seu código.
-Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Tab.Position = UDim2.new(0, 5, 0, 30)
-Tab.Size = UDim2.new(0, 150, 0, 365)
+	Tab.Name = "Tab"
+	Tab.Parent = Main
+	Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Tab.Position = UDim2.new(0, 5, 0, 30)
+	Tab.Size = UDim2.new(0, 150, 0, 365)
 
-local TCNR = Instance.new("UICorner")
-TCNR.Name = "TCNR"
-TCNR.Parent = Tab
+	local TCNR = Instance.new("UICorner")
+	TCNR.Name = "TCNR"
+	TCNR.Parent = Tab
 
-local ScrollTab = Instance.new("ScrollingFrame")
-ScrollTab.Name = "ScrollTab"
-ScrollTab.Parent = Tab
-ScrollTab.Active = true
-ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollTab.BackgroundTransparency = 1.000
-ScrollTab.Size = UDim2.new(0, 150, 0, 365)
-ScrollTab.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollTab.ScrollBarThickness = 0
+	local ScrollTab = Instance.new("ScrollingFrame")
+	ScrollTab.Name = "ScrollTab"
+	ScrollTab.Parent = Tab
+	ScrollTab.Active = true
+	ScrollTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ScrollTab.BackgroundTransparency = 1.000
+	ScrollTab.Size = UDim2.new(0, 150, 0, 365)
+	ScrollTab.CanvasSize = UDim2.new(0, 0, 0, 0)
+	ScrollTab.ScrollBarThickness = 0
 
-local PLL = Instance.new("UIListLayout")
-PLL.Name = "PLL"
-PLL.Parent = ScrollTab
-PLL.SortOrder = Enum.SortOrder.LayoutOrder
-PLL.Padding = UDim.new(0, 15)
+	local PLL = Instance.new("UIListLayout")
+	PLL.Name = "PLL"
+	PLL.Parent = ScrollTab
+	PLL.SortOrder = Enum.SortOrder.LayoutOrder
+	PLL.Padding = UDim.new(0, 15)
 
-local PPD = Instance.new("UIPadding")
-PPD.Name = "PPD"
-PPD.Parent = ScrollTab
-PPD.PaddingLeft = UDim.new(0, 10)
-PPD.PaddingTop = UDim.new(0, 10)
+	local PPD = Instance.new("UIPadding")
+	PPD.Name = "PPD"
+	PPD.Parent = ScrollTab
+	PPD.PaddingLeft = UDim.new(0, 10)
+	PPD.PaddingTop = UDim.new(0, 10)
 
--- Criando o Page
-local Page = Instance.new("Frame")
-Page.Name = "Page"
-Page.Parent = Main  -- Certifique-se de que "Main" esteja referenciando o Frame principal correto.
-Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
-Page.Size = UDim2.new(0, 490, 0, 365)
+	local Page = Instance.new("Frame")
+	Page.Name = "Page"
+	Page.Parent = Main
+	Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
+	Page.Size = UDim2.new(0, 490, 0, 365)
 
-local PCNR = Instance.new("UICorner")
-PCNR.Name = "PCNR"
-PCNR.Parent = Page
+	local PCNR = Instance.new("UICorner")
+	PCNR.Name = "PCNR"
+	PCNR.Parent = Page
 
-local MainPage = Instance.new("Frame")
-MainPage.Name = "MainPage"
-MainPage.Parent = Page
-MainPage.ClipsDescendants = true
-MainPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MainPage.BackgroundTransparency = 1.000
-MainPage.Size = UDim2.new(0, 490, 0, 365)
+	local MainPage = Instance.new("Frame")
+	MainPage.Name = "MainPage"
+	MainPage.Parent = Page
+	MainPage.ClipsDescendants = true
+	MainPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MainPage.BackgroundTransparency = 1.000
+	MainPage.Size = UDim2.new(0, 490, 0, 365)
 
-local PageList = Instance.new("Folder")
-PageList.Name = "PageList"
-PageList.Parent = MainPage
+	local PageList = Instance.new("Folder")
+	PageList.Name = "PageList"
+	PageList.Parent = MainPage
 
-local UIPageLayout = Instance.new("UIPageLayout")
-UIPageLayout.Parent = PageList
+	local UIPageLayout = Instance.new("UIPageLayout")
+
+	UIPageLayout.Parent = PageList
 UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIPageLayout.EasingDirection = Enum.EasingDirection.InOut
 UIPageLayout.EasingStyle = Enum.EasingStyle.Quad
@@ -246,57 +246,25 @@ UIPageLayout.GamepadInputEnabled = false
 UIPageLayout.ScrollWheelInputEnabled = false
 UIPageLayout.TouchInputEnabled = false
 
--- Função para tornar o frame arrastável
 MakeDraggable(Top, Main)
 
--- Barra de Pesquisa
-if WindowConfig.SearchBar then
-    local SearchBox = Create("TextBox", {
-        Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(255, 255, 255),
-        PlaceholderColor3 = Color3.fromRGB(210,210,210),
-        PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
-        Font = Enum.Font.GothamBold,
-        TextWrapped = true,
-        Text = '',
-        TextXAlignment = Enum.TextXAlignment.Center,
-        TextSize = 14,
-        ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
-    })
-
-    local TextboxActual = AddThemeObject(SearchBox, "Text")
-
-    local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
-        Parent = WindowStuff,
-        Size = UDim2.new(0, 130, 0, 24),
-        Position = UDim2.new(1.013, -12, 0.075, 0),
-        AnchorPoint = Vector2.new(1, 0.5)
-    }), {
-        AddThemeObject(MakeElement("Stroke"), "Stroke"),
-        TextboxActual
-    }), "Main")
-
-    -- Função de busca
-    local function SearchHandle()
-        local Text = string.lower(SearchBox.Text)
-
-        for _, v in ipairs(ScrollTab:GetChildren()) do
-            if v:IsA('TextButton') then
-                if string.find(string.lower(v.Name), Text) then
-                    v.Visible = true
-                else
-                    v.Visible = false
-                end
-            end
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode[yoo] then
+        if uihide == false then
+            uihide = true
+            Main:TweenSize(UDim2.new(0, 0, 0, 0), "In", "Quad", 0.4, true)
+        else
+            uihide = false
+            Main:TweenSize(UDim2.new(0, 656, 0, 400), "Out", "Quad", 0.4, true)
         end
     end
+end)
 
-    AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle)
-end
+local uitab = {}
 
--- Função para criar novas abas
 function uitab:Tab(text)
+    function uitab:Tab(text)
+    -- Criar o Botão da Aba
     local TabButton = Instance.new("TextButton")
     TabButton.Parent = ScrollTab
     TabButton.Name = text .. "Server"
@@ -310,6 +278,7 @@ function uitab:Tab(text)
     TabButton.TextSize = 15.000
     TabButton.TextTransparency = 0.500
 
+    -- Criar MainFramePage
     local MainFramePage = Instance.new("ScrollingFrame")
     MainFramePage.Name = text .. "_Page"
     MainFramePage.Parent = PageList
@@ -332,6 +301,7 @@ function uitab:Tab(text)
     UIListLayout.Parent = MainFramePage
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
+    -- Ação de Clique no TabButton
     TabButton.MouseButton1Click:Connect(function()
         for i, v in next, ScrollTab:GetChildren() do
             if v:IsA("TextButton") then
@@ -354,7 +324,85 @@ function uitab:Tab(text)
             end
         end
     end)
-end
+
+    -- Configuração inicial da visibilidade das abas
+    if abc == false then
+        for i, v in next, ScrollTab:GetChildren() do
+            if v:IsA("TextButton") then
+                TweenService:Create(
+                    v,
+                    TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                    { TextTransparency = 0.5 }
+                ):Play()
+            end
+            TweenService:Create(
+                TabButton,
+                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                { TextTransparency = 0 }
+            ):Play()
+        end
+        UIPageLayout:JumpToIndex(1)
+        abc = true
+    end
+
+    -- Barra de Pesquisa (Adição sem alterar o código original)
+    if WindowConfig.SearchBar then
+        -- Criar o campo de texto da barra de pesquisa
+        local SearchBox = Instance.new("TextBox")
+        SearchBox.Size = UDim2.new(1, 0, 1, 0)
+        SearchBox.BackgroundTransparency = 1
+        SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+        SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Pesquisar"
+        SearchBox.Font = Enum.Font.GothamBold
+        SearchBox.TextWrapped = true
+        SearchBox.Text = ""
+        SearchBox.TextXAlignment = Enum.TextXAlignment.Center
+        SearchBox.TextSize = 14
+        SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+
+        -- Adiciona a barra de pesquisa à interface
+        local SearchBar = Instance.new("Frame")
+        SearchBar.Size = UDim2.new(0, 130, 0, 24)
+        SearchBar.Position = UDim2.new(1.013, -12, 0.075, 0)
+        SearchBar.AnchorPoint = Vector2.new(1, 0.5)
+        SearchBar.BackgroundColor3 = Color3.fromRGB(169, 169, 169)  -- Cor de fundo cinza
+        SearchBar.BorderSizePixel = 0
+        SearchBar.Parent = WindowStuff
+
+        local Stroke = Instance.new("UIStroke")
+        Stroke.Parent = SearchBar
+
+        -- Configura a caixa de texto
+        SearchBox.Parent = SearchBar
+
+        -- Função para filtrar as abas com base no texto da pesquisa
+        local function SearchHandle()
+            local Text = string.lower(SearchBox.Text)
+
+            for i, v in pairs(ScrollTab:GetChildren()) do
+                if v:IsA('TextButton') then
+                    -- Filtra abas com base no texto
+                    if string.find(string.lower(v.Text), Text) then
+                        v.Visible = true
+                    else
+                        v.Visible = false
+                    end
+                end
+            end
+        end
+
+        -- Conectar a mudança do texto na caixa de pesquisa à função de filtro
+        SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
+    end
+
+    -- Atualizar o tamanho do Canvas (DEVE VIR NO FINAL)
+    game:GetService("RunService").Stepped:Connect(function()
+        pcall(function()
+            MainFramePage.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
+            ScrollTab.CanvasSize = UDim2.new(0,0,0,PLL.AbsoluteContentSize.Y + 20)
+        end)
+    end)
 		
 		local main = {}
 		function main:Button(text,callback)
