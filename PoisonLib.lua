@@ -122,24 +122,14 @@ Title.Name = "Title"
 Title.Parent = Main
 Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.0339285731, 0, 0.030, 0) -- Subiu o texto
+Title.Position = UDim2.new(0.0339285731, 0, 0.010, 0) -- Subiu mais o texto
 Title.Size = UDim2.new(0, 200, 0, 23)
 Title.Font = Enum.Font.GothamSemibold
 Title.Text = text
 Title.TextColor3 = Color3.fromRGB(255, 255, 255) -- Cor branca
 Title.TextTransparency = 0 -- Sem transparência
-Title.TextSize = 23 -- Tamanho do texto aumentado
+Title.TextSize = 23 -- Tamanho do texto
 Title.TextXAlignment = Enum.TextXAlignment.Left
-
-DragFrame.Name = "DragFrame"
-DragFrame.Parent = Main
-DragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DragFrame.BackgroundTransparency = 1.000
-DragFrame.Size = UDim2.new(0, 560, 0, 41)
-
-Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-
-MakeDraggable(DragFrame, Main)
 
 DragFrame.Name = "DragFrame"
 DragFrame.Parent = Main
