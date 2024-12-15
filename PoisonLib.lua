@@ -324,150 +324,116 @@ MakeDraggable(DragFrame, Main)
         )
     end
     local tabhold = {}
+    function tabhold:Tab(text)
+        local TabBtn = Instance.new("TextButton")
+        local TabTitle = Instance.new("TextLabel")
+        local TabBtnIndicator = Instance.new("Frame")
+        local TabBtnIndicatorCorner = Instance.new("UICorner")
 
-function tabhold:Tab(text)
-    local TabBtn = Instance.new("TextButton")
-    local TabTitle = Instance.new("TextLabel")
-    local TabBtnIndicator = Instance.new("Frame")
-    local TabBtnIndicatorCorner = Instance.new("UICorner")
+        TabBtn.Name = "TabBtn"
+        TabBtn.Parent = TabHold
+        TabBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TabBtn.BackgroundTransparency = 1.000
+        TabBtn.Size = UDim2.new(0, 107, 0, 21)
+        TabBtn.Font = Enum.Font.SourceSans
+        TabBtn.Text = ""
+        TabBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+        TabBtn.TextSize = 14.000
 
-    -- Criação do botão da aba
-    TabBtn.Name = "TabBtn"
-    TabBtn.Parent = TabHold
-    TabBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TabBtn.BackgroundTransparency = 1.000
-    TabBtn.Size = UDim2.new(0, 107, 0, 21)
-    TabBtn.Font = Enum.Font.SourceSans
-    TabBtn.Text = ""
-    TabBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-    TabBtn.TextSize = 14.000
+        TabTitle.Name = "TabTitle"
+        TabTitle.Parent = TabBtn
+        TabTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TabTitle.BackgroundTransparency = 1.000
+        TabTitle.Size = UDim2.new(0, 107, 0, 21)
+        TabTitle.Font = Enum.Font.Gotham
+        TabTitle.Text = text
+        TabTitle.TextColor3 = Color3.fromRGB(150, 150, 150)
+        TabTitle.TextSize = 14.000
+        TabTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-    -- Criação do título da aba
-    TabTitle.Name = "TabTitle"
-    TabTitle.Parent = TabBtn
-    TabTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TabTitle.BackgroundTransparency = 1.000
-    TabTitle.Size = UDim2.new(0, 107, 0, 21)
-    TabTitle.Font = Enum.Font.Gotham
-    TabTitle.Text = text
-    TabTitle.TextColor3 = Color3.fromRGB(150, 150, 150)
-    TabTitle.TextSize = 14.000
-    TabTitle.TextXAlignment = Enum.TextXAlignment.Left
+        TabBtnIndicator.Name = "TabBtnIndicator"
+        TabBtnIndicator.Parent = TabBtn
+        TabBtnIndicator.BackgroundColor3 = PresetColor
+        TabBtnIndicator.BorderSizePixel = 0
+        TabBtnIndicator.Position = UDim2.new(0, 0, 1, 0)
+        TabBtnIndicator.Size = UDim2.new(0, 0, 0, 2)
 
-    -- Criação do indicador de abas
-    TabBtnIndicator.Name = "TabBtnIndicator"
-    TabBtnIndicator.Parent = TabBtn
-    TabBtnIndicator.BackgroundColor3 = PresetColor
-    TabBtnIndicator.BorderSizePixel = 0
-    TabBtnIndicator.Position = UDim2.new(0, 0, 1, 0)
-    TabBtnIndicator.Size = UDim2.new(0, 0, 0, 2)
+        TabBtnIndicatorCorner.Name = "TabBtnIndicatorCorner"
+        TabBtnIndicatorCorner.Parent = TabBtnIndicator
 
-    TabBtnIndicatorCorner.Name = "TabBtnIndicatorCorner"
-    TabBtnIndicatorCorner.Parent = TabBtnIndicator
-
-    coroutine.wrap(function()
-        while wait() do
-            TabBtnIndicator.BackgroundColor3 = PresetColor
-        end
-    end)()
-
-    -- Criação da aba
-    local Tab = Instance.new("ScrollingFrame")
-    local TabLayout = Instance.new("UIListLayout")
-
-    Tab.Name = "Tab"
-    Tab.Parent = TabFolder
-    Tab.Active = true
-    Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Tab.BackgroundTransparency = 1.000
-    Tab.BorderSizePixel = 0
-    Tab.Position = UDim2.new(0.31400001, 0, 0.147, 0)
-    Tab.Size = UDim2.new(0, 373, 0, 254)
-    Tab.CanvasSize = UDim2.new(0, 0, 0, 0)
-    Tab.ScrollBarThickness = 3
-    Tab.Visible = false
-
-    TabLayout.Name = "TabLayout"
-    TabLayout.Parent = Tab
-    TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    TabLayout.Padding = UDim.new(0, 6)
-
-    -- Ativa a primeira aba
-    if fs == false then
-        fs = true
-        TabBtnIndicator.Size = UDim2.new(0, 13, 0, 2)
-        TabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Tab.Visible = true
-    end
-
-    -- Funcionalidade ao clicar na aba
-    TabBtn.MouseButton1Click:Connect(function()
-        for i, v in next, TabFolder:GetChildren() do
-            if v.Name == "Tab" then
-                v.Visible = false
-            end
-            Tab.Visible = true
-        end
-        for i, v in next, TabHold:GetChildren() do
-            if v.Name == "TabBtn" then
-                v.TabBtnIndicator:TweenSize(UDim2.new(0, 0, 0, 2), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-                TabBtnIndicator:TweenSize(UDim2.new(0, 13, 0, 2), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-                TweenService:Create(v.TabTitle, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(150, 150, 150)}):Play()
-                TweenService:Create(TabTitle, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
-            end
-        end
-    end)
-end
-
--- Se a SearchBar for habilitada
-if WindowConfig.SearchBar then
-    -- Criação da caixa de texto para a pesquisa
-    local SearchBox = Create("TextBox", {
-        Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(255, 255, 255),
-        PlaceholderColor3 = Color3.fromRGB(210, 210, 210),
-        PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
-        Font = Enum.Font.GothamBold,
-        TextWrapped = true,
-        Text = '',
-        TextXAlignment = Enum.TextXAlignment.Center,
-        TextSize = 14,
-        ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
-    })
-
-    local TextboxActual = AddThemeObject(SearchBox, "Text")
-
-    -- Criação da SearchBar
-    local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
-        Parent = WindowStuff,
-        Size = UDim2.new(0, 130, 0, 24),
-        Position = UDim2.new(1.013, -12, 0.075, 0),
-        AnchorPoint = Vector2.new(1, 0.5)
-    }), {
-        AddThemeObject(MakeElement("Stroke"), "Stroke"),
-        TextboxActual
-    }), "Main")
-
-    -- Função para lidar com a pesquisa
-    local function SearchHandle()
-        local Text = string.lower(SearchBox.Text)
-
-        -- Itera sobre as abas e verifica se o nome da aba contém o texto da pesquisa
-        for i, v in pairs(TabHold:GetChildren()) do
-            if v:IsA('TextButton') then
-                if string.find(string.lower(v.TabTitle.Text), Text) then
-                    v.Visible = true
-                else
-                    v.Visible = false
+        coroutine.wrap(
+            function()
+                while wait() do
+                    TabBtnIndicator.BackgroundColor3 = PresetColor
                 end
             end
-        end
-    end
+        )()
 
-    -- Conecta a função SearchHandle ao evento de alteração de texto
-    AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle)
-end
+        local Tab = Instance.new("ScrollingFrame")
+        local TabLayout = Instance.new("UIListLayout")
+
+        Tab.Name = "Tab"
+        Tab.Parent = TabFolder
+        Tab.Active = true
+        Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Tab.BackgroundTransparency = 1.000
+        Tab.BorderSizePixel = 0
+        Tab.Position = UDim2.new(0.31400001, 0, 0.147, 0)
+        Tab.Size = UDim2.new(0, 373, 0, 254)
+        Tab.CanvasSize = UDim2.new(0, 0, 0, 0)
+        Tab.ScrollBarThickness = 3
+        Tab.Visible = false
+
+        TabLayout.Name = "TabLayout"
+        TabLayout.Parent = Tab
+        TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        TabLayout.Padding = UDim.new(0, 6)
+
+        if fs == false then
+            fs = true
+            TabBtnIndicator.Size = UDim2.new(0, 13, 0, 2)
+            TabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Tab.Visible = true
+        end
+
+        TabBtn.MouseButton1Click:Connect(
+            function()
+                for i, v in next, TabFolder:GetChildren() do
+                    if v.Name == "Tab" then
+                        v.Visible = false
+                    end
+                    Tab.Visible = true
+                end
+                for i, v in next, TabHold:GetChildren() do
+                    if v.Name == "TabBtn" then
+                        v.TabBtnIndicator:TweenSize(
+                            UDim2.new(0, 0, 0, 2),
+                            Enum.EasingDirection.Out,
+                            Enum.EasingStyle.Quart,
+                            .2,
+                            true
+                        )
+                        TabBtnIndicator:TweenSize(
+                            UDim2.new(0, 13, 0, 2),
+                            Enum.EasingDirection.Out,
+                            Enum.EasingStyle.Quart,
+                            .2,
+                            true
+                        )
+                        TweenService:Create(
+                            v.TabTitle,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {TextColor3 = Color3.fromRGB(150, 150, 150)}
+                        ):Play()
+                        TweenService:Create(
+                            TabTitle,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {TextColor3 = Color3.fromRGB(255, 255, 255)}
+                        ):Play()
+                    end
+                end
+            end
+        )
         local tabcontent = {}
         function tabcontent:Button(text, callback)
             local Button = Instance.new("TextButton")
