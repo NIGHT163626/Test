@@ -76,19 +76,74 @@ local function MakeDraggable(topbarobject, object)
         end
     )
 
-    UserInputService.InputChanged:Connect(
-        function(input)
-            if input == DragInput and Dragging then
-                Update(input)
-            end
-        end
-    )
-end
-
-function lib:Window(text, preset, closebind)
+    function lib:Window(text, preset, closebind)
     CloseBind = closebind or Enum.KeyCode.RightControl
     PresetColor = preset or Color3.fromRGB(44, 120, 224)
     fs = false
+
+    -- INÍCIO: Código da Barra de Pesquisa
+    local WindowConfig = {
+       SearchBar = {
+            Default = "🔍 Search",
+            ClearTextOnFocus = true
+        }
+    }
+    if WindowConfig.SearchBar then
+        -- Cria a TextBox para a busca
+        local SearchBox = Instance.new("TextBox")
+        SearchBox.Size = UDim2.new(1, 0, 1, 0)
+        SearchBox.BackgroundTransparency = 1
+        SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+        SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search"
+        SearchBox.Font = Enum.Font.GothamBold
+        SearchBox.TextWrapped = true
+        SearchBox.Text = ''
+        SearchBox.TextXAlignment = Enum.TextXAlignment.Center
+        SearchBox.TextSize = 14
+        SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+
+        local TextboxActual = SearchBox
+
+        -- Cria a SearchBar (caixa de pesquisa)
+        local SearchBar = Instance.new("Frame")
+        SearchBar.Parent = Main
+        SearchBar.Size = UDim2.new(0, 130, 0, 24)
+        SearchBar.Position = UDim2.new(1.013, -12, 0.075, 0)
+        SearchBar.AnchorPoint = Vector2.new(1, 0.5)
+        SearchBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SearchBar.BackgroundTransparency = 1.000
+
+        local SearchBarStroke = Instance.new("UIStroke")
+        SearchBarStroke.Parent = SearchBar
+
+        local SearchBarCorner = Instance.new("UICorner")
+        SearchBarCorner.Parent = SearchBar
+        SearchBarCorner.CornerRadius = UDim.new(0, 6)
+
+        TextboxActual.Parent = SearchBar
+        
+        -- Função para lidar com a pesquisa
+        local function SearchHandle()
+            local Text = string.lower(SearchBox.Text)
+
+            -- Itera sobre as abas e verifica se o nome da aba contém o texto da pesquisa
+            for i, v in pairs(TabHold:GetChildren()) do
+                if v:IsA('TextButton') then
+                    if string.find(string.lower(v.TabTitle.Text), Text) then
+                        v.Visible = true
+                    else
+                        v.Visible = false
+                    end
+                end
+            end
+        end
+
+        -- Conecta a função SearchHandle ao evento de alteração de texto
+        TextboxActual:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
+    end
+   -- FIM: Código da Barra de Pesquisa
+
     local Main = Instance.new("Frame")
     local TabHold = Instance.new("Frame")
     local TabHoldLayout = Instance.new("UIListLayout")
