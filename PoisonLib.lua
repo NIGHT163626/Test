@@ -34,17 +34,20 @@ local function MakeDraggable(topbarobject, object)
     local DragInput = nil
     local DragStart = nil
     local StartPosition = nil
+    local Connection = nil
 
-    local function Update(input)
-        local Delta = input.Position - DragStart
-        local pos =
-            UDim2.new(
-            StartPosition.X.Scale,
-            StartPosition.X.Offset + Delta.X,
-            StartPosition.Y.Scale,
-            StartPosition.Y.Offset + Delta.Y
-        )
-        object.Position = pos
+    local function Update()
+        if Dragging and DragInput then
+            local Delta = DragInput.Position - DragStart
+            local pos =
+                UDim2.new(
+                StartPosition.X.Scale,
+                StartPosition.X.Offset + Delta.X,
+                StartPosition.Y.Scale,
+                StartPosition.Y.Offset + Delta.Y
+            )
+            object.Position = pos
+        end
     end
 
     topbarobject.InputBegan:Connect(
@@ -53,11 +56,13 @@ local function MakeDraggable(topbarobject, object)
                 Dragging = true
                 DragStart = input.Position
                 StartPosition = object.Position
+                Connection = RunService.RenderStepped:Connect(Update)
 
                 input.Changed:Connect(
                     function()
                         if input.UserInputState == Enum.UserInputState.End then
                             Dragging = false
+                            Connection:Disconnect()
                         end
                     end
                 )
@@ -75,126 +80,137 @@ local function MakeDraggable(topbarobject, object)
             end
         end
     )
+end
 
-    function lib:Window(text, preset, closebind)
-    CloseBind = closebind or Enum.KeyCode.RightControl
-    PresetColor = preset or Color3.fromRGB(44, 120, 224)
-    fs = false
+local function AnimateWindow(Main, Open, callback)
+       local TargetSize = Open and UDim2.new(0, 560, 0, 319) or UDim2.new(0,1,0,1)
+       Main:TweenSize(
+              TargetSize, 
+              Enum.EasingDirection.Out, 
+              Enum.EasingStyle.Quart, 
+              .6, 
+              true, 
+              callback
+       )
+end
 
-    -- INÍCIO: Código da Barra de Pesquisa
-    local WindowConfig = {
-       SearchBar = {
-            Default = "🔍 Search",
-            ClearTextOnFocus = true
-        }
-    }
-    if WindowConfig.SearchBar then
-        -- Cria a TextBox para a busca
-        local SearchBox = Instance.new("TextBox")
-        SearchBox.Size = UDim2.new(1, 0, 1, 0)
-        SearchBox.BackgroundTransparency = 1
-        SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-        SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-        SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search"
-        SearchBox.Font = Enum.Font.GothamBold
-        SearchBox.TextWrapped = true
-        SearchBox.Text = ''
-        SearchBox.TextXAlignment = Enum.TextXAlignment.Center
-        SearchBox.TextSize = 14
-        SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+function lib:Window(text, preset, closebind)
+  local CloseBind = closebind or Enum.KeyCode.RightControl
+  local PresetColor = preset or Color3.fromRGB(44, 120, 224)
+  
+  -- INÍCIO: Código da Barra de Pesquisa
+  local WindowConfig = {
+      SearchBar = {
+          Default = "🔍 Search",
+          ClearTextOnFocus = true
+      }
+  }
 
-        local TextboxActual = SearchBox
+  local function SearchHandle(SearchBox, TabHold)
+        local Text = string.lower(SearchBox.Text)
+        for i, v in pairs(TabHold:GetChildren()) do
+            if v:IsA('TextButton') then
+               if string.match(string.lower(v.TabTitle.Text), Text) then
+                    v.Visible = true
+                else
+                    v.Visible = false
+               end
+           end
+      end
+  end
 
-        -- Cria a SearchBar (caixa de pesquisa)
-        local SearchBar = Instance.new("Frame")
-        SearchBar.Parent = Main
-        SearchBar.Size = UDim2.new(0, 130, 0, 24)
-        SearchBar.Position = UDim2.new(1.013, -12, 0.075, 0)
-        SearchBar.AnchorPoint = Vector2.new(1, 0.5)
-        SearchBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        SearchBar.BackgroundTransparency = 1.000
+  local Main = Instance.new("Frame")
+  local TabHold = Instance.new("Frame")
+  local TabHoldLayout = Instance.new("UIListLayout")
+  local Title = Instance.new("TextLabel")
+  local TabFolder = Instance.new("Folder")
+  local DragFrame = Instance.new("Frame")
 
-        local SearchBarStroke = Instance.new("UIStroke")
-        SearchBarStroke.Parent = SearchBar
+  Main.Name = "Main"
+  Main.Parent = ui
+  Main.AnchorPoint = Vector2.new(0.5, 0.5)
+  Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+  Main.BorderSizePixel = 0
+  Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+  Main.Size = UDim2.new(0, 0, 0, 0)
+  Main.ClipsDescendants = true
+  Main.Visible = true
 
-        local SearchBarCorner = Instance.new("UICorner")
-        SearchBarCorner.Parent = SearchBar
-        SearchBarCorner.CornerRadius = UDim.new(0, 6)
+  TabHold.Name = "TabHold"
+  TabHold.Parent = Main
+  TabHold.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  TabHold.BackgroundTransparency = 1.000
+  TabHold.Position = UDim2.new(0.0339285731, 0, 0.147335425, 0)
+  TabHold.Size = UDim2.new(0, 107, 0, 254)
 
-        TextboxActual.Parent = SearchBar
-        
-        -- Função para lidar com a pesquisa
-        local function SearchHandle()
-            local Text = string.lower(SearchBox.Text)
+  TabHoldLayout.Name = "TabHoldLayout"
+  TabHoldLayout.Parent = TabHold
+  TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
+  TabHoldLayout.Padding = UDim.new(0, 11)
 
-            -- Itera sobre as abas e verifica se o nome da aba contém o texto da pesquisa
-            for i, v in pairs(TabHold:GetChildren()) do
-                if v:IsA('TextButton') then
-                    if string.find(string.lower(v.TabTitle.Text), Text) then
-                        v.Visible = true
-                    else
-                        v.Visible = false
-                    end
-                end
-            end
-        end
+  Title.Name = "Title"
+  Title.Parent = Main
+  Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  Title.BackgroundTransparency = 1.000
+  Title.Position = UDim2.new(0.0339285731, 0, 0.010, 0) -- Subiu mais o texto
+  Title.Size = UDim2.new(0, 200, 0, 23)
+  Title.Font = Enum.Font.GothamSemibold
+  Title.Text = text
+  Title.TextColor3 = Color3.fromRGB(255, 255, 255) -- Cor branca
+  Title.TextTransparency = 0 -- Sem transparência
+  Title.TextSize = 23 -- Tamanho do texto
+  Title.TextXAlignment = Enum.TextXAlignment.Left
+
+  DragFrame.Name = "DragFrame"
+  DragFrame.Parent = Main
+  DragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  DragFrame.BackgroundTransparency = 1.000
+  DragFrame.Size = UDim2.new(0, 560, 0, 41)
+
+  Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+
+  MakeDraggable(DragFrame, Main)
+
+  if WindowConfig.SearchBar then
+      -- Cria a TextBox para a busca
+      local SearchBox = Instance.new("TextBox")
+      SearchBox.Size = UDim2.new(1, 0, 1, 0)
+      SearchBox.BackgroundTransparency = 1
+      SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+      SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+      SearchBox.PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search"
+      SearchBox.Font = Enum.Font.GothamBold
+      SearchBox.TextWrapped = true
+      SearchBox.Text = ''
+      SearchBox.TextXAlignment = Enum.TextXAlignment.Center
+      SearchBox.TextSize = 14
+      SearchBox.ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+  
+      -- Cria a SearchBar (caixa de pesquisa)
+      local SearchBar = Instance.new("Frame")
+      SearchBar.Parent = Main
+      SearchBar.Size = UDim2.new(0, 130, 0, 24)
+      SearchBar.Position = UDim2.new(1.013, -12, 0.075, 0)
+      SearchBar.AnchorPoint = Vector2.new(1, 0.5)
+      SearchBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      SearchBar.BackgroundTransparency = 1.000
+  
+      local SearchBarStroke = Instance.new("UIStroke")
+      SearchBarStroke.Parent = SearchBar
+  
+      local SearchBarCorner = Instance.new("UICorner")
+      SearchBarCorner.Parent = SearchBar
+      SearchBarCorner.CornerRadius = UDim.new(0, 6)
+  
+      SearchBox.Parent = SearchBar
 
         -- Conecta a função SearchHandle ao evento de alteração de texto
-        TextboxActual:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
-    end
-   -- FIM: Código da Barra de Pesquisa
+        SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+            SearchHandle(SearchBox, TabHold)
+          end)
+  end
+ -- FIM: Código da Barra de Pesquisa
 
-    local Main = Instance.new("Frame")
-    local TabHold = Instance.new("Frame")
-    local TabHoldLayout = Instance.new("UIListLayout")
-    local Title = Instance.new("TextLabel")
-    local TabFolder = Instance.new("Folder")
-    local DragFrame = Instance.new("Frame")
-
-   Main.Name = "Main"
-Main.Parent = ui
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main.Size = UDim2.new(0, 0, 0, 0)
-Main.ClipsDescendants = true
-Main.Visible = true
-
-TabHold.Name = "TabHold"
-TabHold.Parent = Main
-TabHold.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TabHold.BackgroundTransparency = 1.000
-TabHold.Position = UDim2.new(0.0339285731, 0, 0.147335425, 0)
-TabHold.Size = UDim2.new(0, 107, 0, 254)
-
-TabHoldLayout.Name = "TabHoldLayout"
-TabHoldLayout.Parent = TabHold
-TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
-TabHoldLayout.Padding = UDim.new(0, 11)
-
-Title.Name = "Title"
-Title.Parent = Main
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.0339285731, 0, 0.010, 0) -- Subiu mais o texto
-Title.Size = UDim2.new(0, 200, 0, 23)
-Title.Font = Enum.Font.GothamSemibold
-Title.Text = text
-Title.TextColor3 = Color3.fromRGB(255, 255, 255) -- Cor branca
-Title.TextTransparency = 0 -- Sem transparência
-Title.TextSize = 23 -- Tamanho do texto
-Title.TextXAlignment = Enum.TextXAlignment.Left
-
-DragFrame.Name = "DragFrame"
-DragFrame.Parent = Main
-DragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DragFrame.BackgroundTransparency = 1.000
-DragFrame.Size = UDim2.new(0, 560, 0, 41)
-
-Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-
-MakeDraggable(DragFrame, Main)
 
     local uitoggled = false
     UserInputService.InputBegan:Connect(
@@ -202,29 +218,15 @@ MakeDraggable(DragFrame, Main)
             if io.KeyCode == CloseBind then
                 if uitoggled == false then
                     uitoggled = true
-                
-                    Main:TweenSize(
-                        UDim2.new(0, 0, 0, 0), 
-                        Enum.EasingDirection.Out, 
-                        Enum.EasingStyle.Quart, 
-                        .6, 
-                        true, 
-                        function()
-                            ui.Enabled = false
-                        end
-                    )
+                    
+                    AnimateWindow(Main, false, function()
+                       ui.Enabled = false
+                    end)
                     
                 else
                     uitoggled = false
                     ui.Enabled = true
-                
-                    Main:TweenSize(
-                        UDim2.new(0, 560, 0, 319),
-                        Enum.EasingDirection.Out,
-                        Enum.EasingStyle.Quart,
-                        .6,
-                        true
-                    )
+                    AnimateWindow(Main, true)
                 end
             end
         end
@@ -438,55 +440,55 @@ MakeDraggable(DragFrame, Main)
         Tab.CanvasSize = UDim2.new(0, 0, 0, 0)
         Tab.ScrollBarThickness = 3
         Tab.Visible = false
-
+        
         TabLayout.Name = "TabLayout"
         TabLayout.Parent = Tab
         TabLayout.SortOrder = Enum.SortOrder.LayoutOrder
         TabLayout.Padding = UDim.new(0, 6)
 
-        if fs == false then
-            fs = true
+        local firstTab = not TabFolder:FindFirstChildOfClass('ScrollingFrame')
+        if firstTab then
             TabBtnIndicator.Size = UDim2.new(0, 13, 0, 2)
             TabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
             Tab.Visible = true
         end
 
         TabBtn.MouseButton1Click:Connect(
-            function()
-                for i, v in next, TabFolder:GetChildren() do
-                    if v.Name == "Tab" then
-                        v.Visible = false
-                    end
-                    Tab.Visible = true
+        function()
+            for i, v in next, TabFolder:GetChildren() do
+                if v.Name == "Tab" then
+                    v.Visible = false
                 end
-                for i, v in next, TabHold:GetChildren() do
-                    if v.Name == "TabBtn" then
-                        v.TabBtnIndicator:TweenSize(
-                            UDim2.new(0, 0, 0, 2),
-                            Enum.EasingDirection.Out,
-                            Enum.EasingStyle.Quart,
-                            .2,
-                            true
-                        )
-                        TabBtnIndicator:TweenSize(
-                            UDim2.new(0, 13, 0, 2),
-                            Enum.EasingDirection.Out,
-                            Enum.EasingStyle.Quart,
-                            .2,
-                            true
-                        )
-                        TweenService:Create(
-                            v.TabTitle,
-                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                            {TextColor3 = Color3.fromRGB(150, 150, 150)}
-                        ):Play()
-                        TweenService:Create(
-                            TabTitle,
-                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                            {TextColor3 = Color3.fromRGB(255, 255, 255)}
-                        ):Play()
-                    end
+            end
+            Tab.Visible = true
+            for i, v in next, TabHold:GetChildren() do
+                if v:IsA('TextButton') then
+                    v.TabBtnIndicator:TweenSize(
+                        UDim2.new(0, 0, 0, 2),
+                        Enum.EasingDirection.Out,
+                        Enum.EasingStyle.Quart,
+                        .2,
+                        true
+                    )
+                    TweenService:Create(
+                        v.TabTitle,
+                        TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                        {TextColor3 = Color3.fromRGB(150, 150, 150)}
+                    ):Play()
                 end
+            end
+            TabBtnIndicator:TweenSize(
+                    UDim2.new(0, 13, 0, 2),
+                    Enum.EasingDirection.Out,
+                    Enum.EasingStyle.Quart,
+                    .2,
+                    true
+                )
+            TweenService:Create(
+                    TabTitle,
+                    TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                    {TextColor3 = Color3.fromRGB(255, 255, 255)}
+                ):Play()
             end
         )
         local tabcontent = {}
@@ -650,6 +652,78 @@ MakeDraggable(DragFrame, Main)
                         ):Play()
                         TweenService:Create(
                             FrameToggle2,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundTransparency = 1}
+                        ):Play()
+                        TweenService:Create(
+                            FrameToggle3,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundTransparency = 0}
+                        ):Play()
+                        TweenService:Create(
+                            FrameToggleCircle,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}
+                        ):Play()
+                        FrameToggleCircle:TweenPosition(
+                            UDim2.new(0.587, 0, 0.222000003, 0),
+                            Enum.EasingDirection.Out,
+                            Enum.EasingStyle.Quart,
+                            .2,
+                            true
+                        )
+                    else
+                        TweenService:Create(
+                            Toggle,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundColor3 = Color3.fromRGB(34, 34, 34)}
+                        ):Play()
+                        TweenService:Create(
+                            FrameToggle1,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundTransparency = 0}
+                        ):Play()
+                        TweenService:Create(
+                            FrameToggle2,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundTransparency = 0}
+                        ):Play()
+                        TweenService:Create(
+                            FrameToggle3,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundTransparency = 1}
+                        ):Play()
+                        TweenService:Create(
+                            FrameToggleCircle,
+                            TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                            {BackgroundColor3 = Color3.fromRGB(50, 50, 50)}
+                        ):Play()
+                        FrameToggleCircle:TweenPosition(
+                            UDim2.new(0.127000004, 0, 0.222000003, 0),
+                            Enum.EasingDirection.Out,
+                            Enum.EasingStyle.Quart,
+                            .2,
+                            true
+                        )
+                    end
+                    toggled = not toggled
+                    pcall(callback, toggled)
+                end
+            )
+
+            if default == true then
+                TweenService:Create(
+                    Toggle,
+                    TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                    {BackgroundColor3 = Color3.fromRGB(37, 37, 37)}
+                ):Play()
+                TweenService:Create(
+                    FrameToggle1,
+                    TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                    {BackgroundTransparency = 1}
+                ):Play()
+                TweenService:Create(
+                    FrameToggle2,
                             TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                             {BackgroundTransparency = 1}
                         ):Play()
