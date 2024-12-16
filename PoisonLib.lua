@@ -52,7 +52,7 @@ function Library:Drag(obj)
     end)
 end
 
-function Library:Create(xHubName,xGameName, theme)
+function Library:Create(xHubName,xGameName, theme, WindowConfig)
     local xHubName = xHubName or "UI Library"
     local xGameName = xGameName or "By Mapple#3045"
     local theme = theme or {
@@ -83,12 +83,71 @@ function Library:Create(xHubName,xGameName, theme)
     local GameName = Instance.new("TextLabel")
     local TabHolder = Instance.new("Frame")
     local Tabs = Instance.new("Folder")
-
+	local WindowStuff = Instance.new("Folder")
+	WindowStuff.Name = "WindowStuff"
+	WindowStuff.Parent = Main
+	
     function ScrollSize()
         ActualSide.CanvasSize = UDim2.new(0, 0, 0, ActualSideListLayout.AbsoluteContentSize.Y)
     end
 
-    ScreenGui.Parent = game.CoreGui
+	function SetProps(obj, props)
+		for i, v in pairs(props) do
+			obj[i] = v
+		end
+		return obj
+	end
+	
+	function SetChildren(obj, children)
+		for i, v in pairs(children) do
+			v.Parent = obj
+		end
+		return obj
+	end
+	
+	function MakeElement(elementType, backgroundColor, backgroundTransparency, cornerRadius)
+		local obj = Instance.new("Frame")
+		obj.BackgroundColor3 = backgroundColor
+		obj.BackgroundTransparency = backgroundTransparency
+		if cornerRadius then
+			local corner = Instance.new("UICorner")
+			corner.CornerRadius = UDim.new(0, cornerRadius)
+			corner.Parent = obj
+		end
+		return obj
+	end
+	
+	function Create(type, props)
+		local obj = Instance.new(type)
+		for i, v in pairs(props) do
+			obj[i] = v
+		end
+		return obj
+	end
+
+	function AddThemeObject(object, themeType)
+		local obj = object;
+		if themeType == "Stroke" then
+			obj = Instance.new("UIStroke")
+			obj.Color = theme.UIStrokeColor;
+			obj.Thickness = 1
+			obj.Parent = object;
+		end
+		if themeType == "Main" then 
+			obj.BackgroundColor3 = theme.BackgroundColor
+			obj.BorderColor3 = theme.UIStrokeColor
+		end
+		if themeType == "Text" then
+			obj.TextColor3 = theme.PrimaryTextColor
+		end
+		return obj;
+	end
+	
+	function AddConnection(object, connection)
+		object:Connect(connection);
+	end
+	
+	ScreenGui.Parent = game.CoreGui
     ScreenGui.ResetOnSpawn = false 
     ScreenGui.Name = LibraryName
 
@@ -182,6 +241,53 @@ function Library:Create(xHubName,xGameName, theme)
     Tabs.Parent = TabHolder
 
     Library:Drag(Main)
+	
+    if WindowConfig and WindowConfig.SearchBar then
+		local SearchBox = Create("TextBox", {
+			Size = UDim2.new(1, 0, 1, 0),
+			BackgroundTransparency = 1,
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			PlaceholderColor3 = Color3.fromRGB(210,210,210),
+			PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
+			Font = Enum.Font.GothamBold,
+			TextWrapped = true,
+			Text = '',
+			TextXAlignment = Enum.TextXAlignment.Center,
+			TextSize = 14,
+			ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+		})
+
+		local TextboxActual = AddThemeObject(SearchBox, "Text")
+
+		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
+			Parent = WindowStuff,
+			Size = UDim2.new(0, 130, 0, 24),
+			Position = UDim2.new(1.013, -12, 0.075, 0),
+			AnchorPoint = Vector2.new(1, 0.5)
+		}), {
+			AddThemeObject(MakeElement("Stroke"), "Stroke"),
+			TextboxActual
+		}), "Main")
+		SearchBar.Position = UDim2.new(0.5,0,0.01,0)
+		SearchBar.AnchorPoint = Vector2.new(0.5,0)
+
+		local function SearchHandle()
+			local Text = string.lower(SearchBox.Text);
+
+			for i,v in pairs(ActualSide:GetChildren()) do
+				if v:IsA('TextButton') then
+					if string.find(string.lower(v.Text), Text) then
+						v.Visible = true
+					else
+						v.Visible = false
+					end
+				end
+			end
+		end
+
+		AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle);
+	end
+
 
     local xTabs = {}
     
