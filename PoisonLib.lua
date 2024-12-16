@@ -133,10 +133,11 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 			obj.Thickness = 1
 			obj.Parent = object;
 		end
-		if themeType == "Main" then 
-			obj.BackgroundColor3 = theme.BackgroundColor
-			obj.BorderColor3 = theme.UIStrokeColor
-		end
+    if themeType == "Main" then
+        obj = Instance.new("Frame")
+        obj.BackgroundColor3 = theme.BackgroundColor
+        obj.BorderColor3 = theme.UIStrokeColor
+    end
 		if themeType == "Text" then
 			obj.TextColor3 = theme.PrimaryTextColor
 		end
