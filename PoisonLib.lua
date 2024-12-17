@@ -166,17 +166,18 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 
 			local TextboxActual = AddThemeObject(SearchBox, "Text")
 
-			local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
+			local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("Frame", Color3.fromRGB(255, 255, 255), 1, 6), {
 				Parent = WindowStuff,
 				Size = UDim2.new(0, 130, 0, 24),
-				Position = UDim2.new(1.013, -12, 0.075, 0),
-				AnchorPoint = Vector2.new(1, 0.5)
+				Position = UDim2.new(0.5, 0, 0.01, 0),
+				AnchorPoint = Vector2.new(0.5, 0)
 			}), {
-				AddThemeObject(MakeElement("Stroke"), "Stroke"),
+				AddThemeObject(MakeElement("Frame"), "Stroke"),
 				TextboxActual
 			}), "Main")
 			SearchBar.Position = UDim2.new(0.5,0,0.01,0)
 			SearchBar.AnchorPoint = Vector2.new(0.5,0)
+
 
 			local function SearchHandle()
 				local Text = string.lower(SearchBox.Text);
