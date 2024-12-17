@@ -147,6 +147,54 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 	function AddConnection(object, connection)
 		object:Connect(connection);
 	end
+
+	local function createSearchBar()
+		if WindowConfig and WindowConfig.SearchBar then
+			local SearchBox = Create("TextBox", {
+				Size = UDim2.new(1, 0, 1, 0),
+				BackgroundTransparency = 1,
+				TextColor3 = Color3.fromRGB(255, 255, 255),
+				PlaceholderColor3 = Color3.fromRGB(210,210,210),
+				PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
+				Font = Enum.Font.GothamBold,
+				TextWrapped = true,
+				Text = '',
+				TextXAlignment = Enum.TextXAlignment.Center,
+				TextSize = 14,
+				ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+			})
+
+			local TextboxActual = AddThemeObject(SearchBox, "Text")
+
+			local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
+				Parent = WindowStuff,
+				Size = UDim2.new(0, 130, 0, 24),
+				Position = UDim2.new(1.013, -12, 0.075, 0),
+				AnchorPoint = Vector2.new(1, 0.5)
+			}), {
+				AddThemeObject(MakeElement("Stroke"), "Stroke"),
+				TextboxActual
+			}), "Main")
+			SearchBar.Position = UDim2.new(0.5,0,0.01,0)
+			SearchBar.AnchorPoint = Vector2.new(0.5,0)
+
+			local function SearchHandle()
+				local Text = string.lower(SearchBox.Text);
+
+				for i,v in pairs(ActualSide:GetChildren()) do
+					if v:IsA('TextButton') then
+						if string.find(string.lower(v.Text), Text) then
+							v.Visible = true
+						else
+							v.Visible = false
+						end
+					end
+				end
+			end
+
+			AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle);
+		end
+	end
 	
 	ScreenGui.Parent = game.CoreGui
     ScreenGui.ResetOnSpawn = false 
@@ -242,53 +290,8 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
     Tabs.Parent = TabHolder
 
     Library:Drag(Main)
-	
-    if WindowConfig and WindowConfig.SearchBar then
-		local SearchBox = Create("TextBox", {
-			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = 1,
-			TextColor3 = Color3.fromRGB(255, 255, 255),
-			PlaceholderColor3 = Color3.fromRGB(210,210,210),
-			PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
-			Font = Enum.Font.GothamBold,
-			TextWrapped = true,
-			Text = '',
-			TextXAlignment = Enum.TextXAlignment.Center,
-			TextSize = 14,
-			ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
-		})
 
-		local TextboxActual = AddThemeObject(SearchBox, "Text")
-
-		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 1, 6), {
-			Parent = WindowStuff,
-			Size = UDim2.new(0, 130, 0, 24),
-			Position = UDim2.new(1.013, -12, 0.075, 0),
-			AnchorPoint = Vector2.new(1, 0.5)
-		}), {
-			AddThemeObject(MakeElement("Stroke"), "Stroke"),
-			TextboxActual
-		}), "Main")
-		SearchBar.Position = UDim2.new(0.5,0,0.01,0)
-		SearchBar.AnchorPoint = Vector2.new(0.5,0)
-
-		local function SearchHandle()
-			local Text = string.lower(SearchBox.Text);
-
-			for i,v in pairs(ActualSide:GetChildren()) do
-				if v:IsA('TextButton') then
-					if string.find(string.lower(v.Text), Text) then
-						v.Visible = true
-					else
-						v.Visible = false
-					end
-				end
-			end
-		end
-
-		AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle);
-	end
-
+	createSearchBar()
 
     local xTabs = {}
     
