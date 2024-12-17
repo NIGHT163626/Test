@@ -106,8 +106,10 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 	end
 	
 	function MakeElement(elementType, backgroundColor, backgroundTransparency, cornerRadius)
-		local obj = Instance.new("Frame")
-		obj.BackgroundColor3 = backgroundColor
+		local obj = Instance.new(elementType)
+        if backgroundColor then
+		    obj.BackgroundColor3 = backgroundColor
+        end
 		obj.BackgroundTransparency = backgroundTransparency
 		if cornerRadius then
 			local corner = Instance.new("UICorner")
@@ -134,8 +136,7 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 			obj.Parent = object;
 		end
         if themeType == "Main" then
-            obj = Instance.new("Frame")
-            obj.BackgroundColor3 = theme.BackgroundColor
+            obj = MakeElement("Frame", theme.BackgroundColor, 0)
             obj.BorderColor3 = theme.UIStrokeColor
         end
 		if themeType == "Text" then
@@ -148,7 +149,7 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 		object:Connect(connection);
 	end
 
-	local function createSearchBar()
+    local function createSearchBar()
 		if WindowConfig and WindowConfig.SearchBar then
 			local SearchBox = Create("TextBox", {
 				Size = UDim2.new(1, 0, 1, 0),
@@ -177,8 +178,7 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 			}), "Main")
 			SearchBar.Position = UDim2.new(0.5,0,0.01,0)
 			SearchBar.AnchorPoint = Vector2.new(0.5,0)
-
-
+			
 			local function SearchHandle()
 				local Text = string.lower(SearchBox.Text);
 
