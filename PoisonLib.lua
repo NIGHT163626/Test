@@ -170,15 +170,16 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("Frame", Color3.fromRGB(255, 255, 255), 1, 6), {
 			Parent = WindowStuff,
 			Size = UDim2.new(0, 130, 0, 24),
-			Position = UDim2.new(0.35, 0, 0.01, 0), -- Move ainda mais para a esquerda
-			AnchorPoint = Vector2.new(0.5, 0)
+			Position = UDim2.new(0.02, 0, 0.024324324, 0),
+			AnchorPoint = Vector2.new(0, 0)
 		}), {
 			AddThemeObject(MakeElement("Frame"), "Stroke"),
 			TextboxActual
 		}), "Main")
 
-		SearchBar.Position = UDim2.new(0.35, 0, 0.01, 0) -- Posição ajustada para mais à e
-		SearchBar.AnchorPoint = Vector2.new(0.5, 0)
+		SearchBar.Position = UDim2.new(0.02, 0, 0.024324324, 0)
+		SearchBar.AnchorPoint = Vector2.new(0, 0)
+
 
 		local function SearchHandle()
 			local Text = string.lower(SearchBox.Text)
@@ -285,9 +286,9 @@ end
     TabHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TabHolder.BackgroundTransparency = 1.000
     TabHolder.BorderSizePixel = 0
-    TabHolder.Position = UDim2.new(0.244827583, 0, 0.024324324, 0)
+	TabHolder.Position = UDim2.new(0.244827583, 0, 0.0950543261, 0)
     TabHolder.Size = UDim2.new(0, 438, 0, 352)
-
+	
     Tabs.Name = "Tabs"
     Tabs.Parent = TabHolder
 
