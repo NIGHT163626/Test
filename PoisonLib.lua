@@ -170,14 +170,14 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("Frame", Color3.fromRGB(255, 255, 255), 1, 6), {
 			Parent = WindowStuff,
 			Size = UDim2.new(0, 130, 0, 24),
-			Position = UDim2.new(0.45, 0, 0.01, 0), -- Move a barra para a esquerda
+			Position = UDim2.new(0.4, 0, 0.01, 0), -- Move ainda mais para a esquerda
 			AnchorPoint = Vector2.new(0.5, 0)
 		}), {
 			AddThemeObject(MakeElement("Frame"), "Stroke"),
 			TextboxActual
 		}), "Main")
 
-		SearchBar.Position = UDim2.new(0.45, 0, 0.01, 0) -- Posição ajustada
+		SearchBar.Position = UDim2.new(0.4, 0, 0.01, 0) -- Posição ajustada para mais
 		SearchBar.AnchorPoint = Vector2.new(0.5, 0)
 
 		local function SearchHandle()
