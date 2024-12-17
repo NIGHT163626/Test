@@ -56,18 +56,18 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
     local xHubName = xHubName or "UI Library"
     local xGameName = xGameName or "By Mapple#3045"
     local theme = theme or {
-        BackgroundColor = Color3.fromRGB(35, 35, 35),
-        SidebarColor = Color3.fromRGB(30, 30, 30),
-        PrimaryTextColor = Color3.fromRGB(255, 255, 255),
-        SecondaryTextColor = Color3.fromRGB(135, 135, 135),
-        UIStrokeColor = Color3.fromRGB(255, 170, 60),
-        PrimaryElementColor = Color3.fromRGB(30, 30, 30),
-        SecondaryElementColor = Color3.fromRGB(50, 50, 50),
-        OtherElementColor = Color3.fromRGB(25, 25, 25),
-        ScrollBarColor = Color3.fromRGB(125, 125, 125),
-        PromptColor = Color3.fromRGB(40, 40, 40),
-        NotificationColor = Color3.fromRGB(25, 25, 25),
-        NotificationUIStrokeColor = Color3.fromRGB(255, 170, 60)
+        BackgroundColor = Color3.fromRGB(30, 30, 30),
+        SidebarColor = Color3.fromRGB(35, 35, 35),
+        PrimaryTextColor = Color3.fromRGB(255, 255, 0), -- Changed to Yellow
+        SecondaryTextColor = Color3.fromRGB(255, 255, 255),
+        UIStrokeColor = Color3.fromRGB(50, 50, 50),
+        PrimaryElementColor = Color3.fromRGB(35, 35, 35),
+        SecondaryElementColor = Color3.fromRGB(45, 45, 45),
+        OtherElementColor = Color3.fromRGB(30, 30, 30),
+        ScrollBarColor = Color3.fromRGB(50, 50, 50),
+        PromptColor = Color3.fromRGB(50, 50, 50),
+        NotificationColor = Color3.fromRGB(30, 30, 30),
+        NotificationUIStrokeColor = Color3.fromRGB(50, 50, 50)
     }
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
@@ -133,11 +133,11 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 			obj.Thickness = 1
 			obj.Parent = object;
 		end
-    if themeType == "Main" then
-        obj = Instance.new("Frame")
-        obj.BackgroundColor3 = theme.BackgroundColor
-        obj.BorderColor3 = theme.UIStrokeColor
-    end
+        if themeType == "Main" then
+            obj = Instance.new("Frame")
+            obj.BackgroundColor3 = theme.BackgroundColor
+            obj.BorderColor3 = theme.UIStrokeColor
+        end
 		if themeType == "Text" then
 			obj.TextColor3 = theme.PrimaryTextColor
 		end
