@@ -149,8 +149,56 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 		object:Connect(connection);
 	end
 
-    -- Move createSearchBar to be called earlier, after Main is created
-    ScreenGui.Parent = game.CoreGui
+    local function createSearchBar()
+	if WindowConfig and WindowConfig.SearchBar then
+		local SearchBox = Create("TextBox", {
+			Size = UDim2.new(1, 0, 1, 0),
+			BackgroundTransparency = 1,
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			PlaceholderColor3 = Color3.fromRGB(210, 210, 210),
+			PlaceholderText = WindowConfig.SearchBar.Default or "🔍 Search",
+			Font = Enum.Font.GothamBold,
+			TextWrapped = true,
+			Text = '',
+			TextXAlignment = Enum.TextXAlignment.Center,
+			TextSize = 14,
+			ClearTextOnFocus = WindowConfig.SearchBar.ClearTextOnFocus or true
+		})
+
+		local TextboxActual = AddThemeObject(SearchBox, "Text")
+
+		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("Frame", Color3.fromRGB(255, 255, 255), 1, 6), {
+			Parent = WindowStuff,
+			Size = UDim2.new(0, 130, 0, 24),
+			Position = UDim2.new(0.45, 0, 0.01, 0), -- Move a barra para a esquerda
+			AnchorPoint = Vector2.new(0.5, 0)
+		}), {
+			AddThemeObject(MakeElement("Frame"), "Stroke"),
+			TextboxActual
+		}), "Main")
+
+		SearchBar.Position = UDim2.new(0.45, 0, 0.01, 0) -- Posição ajustada
+		SearchBar.AnchorPoint = Vector2.new(0.5, 0)
+
+		local function SearchHandle()
+			local Text = string.lower(SearchBox.Text)
+
+			for i, v in pairs(ActualSide:GetChildren()) do
+				if v:IsA('TextButton') then
+					if string.find(string.lower(v.Text), Text) then
+						v.Visible = true
+					else
+						v.Visible = false
+					end
+				end
+			end
+		end
+
+		AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), SearchHandle)
+	end
+end
+	
+	ScreenGui.Parent = game.CoreGui
     ScreenGui.ResetOnSpawn = false 
     ScreenGui.Name = LibraryName
 
@@ -159,8 +207,6 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
     Main.BackgroundColor3 = theme.BackgroundColor
     Main.Position = UDim2.new(0.278277636, 0, 0.281287253, 0)
     Main.Size = UDim2.new(0, 580, 0, 370)
-
-	createSearchBar()
 
     MainCorner.CornerRadius = UDim.new(0, 12)
     MainCorner.Name = "MainCorner"
@@ -247,6 +293,7 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 
     Library:Drag(Main)
 
+	createSearchBar()
 
     local xTabs = {}
     
