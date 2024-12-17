@@ -149,7 +149,7 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 		object:Connect(connection);
 	end
 
-    local function createSearchBar()
+   local function createSearchBar()
 	if WindowConfig and WindowConfig.SearchBar then
 		local SearchBox = Create("TextBox", {
 			Size = UDim2.new(1, 0, 1, 0),
@@ -170,14 +170,14 @@ function Library:Create(xHubName,xGameName, theme, WindowConfig)
 		local SearchBar = AddThemeObject(SetChildren(SetProps(MakeElement("Frame", Color3.fromRGB(255, 255, 255), 1, 6), {
 			Parent = WindowStuff,
 			Size = UDim2.new(0, 130, 0, 24),
-			Position = UDim2.new(0.4, 0, 0.01, 0), -- Move ainda mais para a esquerda
+			Position = UDim2.new(0.35, 0, 0.01, 0), -- Move ainda mais para a esquerda
 			AnchorPoint = Vector2.new(0.5, 0)
 		}), {
 			AddThemeObject(MakeElement("Frame"), "Stroke"),
 			TextboxActual
 		}), "Main")
 
-		SearchBar.Position = UDim2.new(0.4, 0, 0.01, 0) -- Posição ajustada para mais
+		SearchBar.Position = UDim2.new(0.35, 0, 0.01, 0) -- Posição ajustada para mais à e
 		SearchBar.AnchorPoint = Vector2.new(0.5, 0)
 
 		local function SearchHandle()
