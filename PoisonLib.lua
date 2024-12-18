@@ -120,96 +120,97 @@ function UILibrary.Main(PrjName, HideKey)
 	ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
 
     -- Adicionando o frame para barra de pesquisa
-    local SearchBarFrame = Instance.new("Frame")
-    SearchBarFrame.Name = "SearchBarFrame"
-    SearchBarFrame.Parent = ButtonsTab
-    SearchBarFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SearchBarFrame.BackgroundTransparency = 1
-	SearchBarFrame.BorderSizePixel = 0
-    SearchBarFrame.Size = UDim2.new(0.9, 0, 0, 30)
-    SearchBarFrame.Position = UDim2.new(0.05, 0, 0, 0)
+local SearchBarFrame = Instance.new("Frame")
+SearchBarFrame.Name = "SearchBarFrame"
+SearchBarFrame.Parent = ButtonsTab
+SearchBarFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SearchBarFrame.BackgroundTransparency = 1
+SearchBarFrame.BorderSizePixel = 0
+SearchBarFrame.Size = UDim2.new(0.9, 0, 0, 30)
+SearchBarFrame.Position = UDim2.new(0.05, 0, 0, 0)
 
-	local SearchBar = Instance.new("TextBox")
-    SearchBar.Name = "SearchBar"
-	SearchBar.Parent = SearchBarFrame
-	SearchBar.Size = UDim2.new(1, 0, 1, 0)
-    SearchBar.BackgroundTransparency = 0
-	SearchBar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    SearchBar.PlaceholderText = "Search..."
-    SearchBar.Font = Enum.Font.Gotham
-	SearchBar.TextSize = 14
-	SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
-	SearchBar.ClearTextOnFocus = false
+local SearchBar = Instance.new("TextBox")
+SearchBar.Name = "SearchBar"
+SearchBar.Parent = SearchBarFrame
+SearchBar.Size = UDim2.new(1, 0, 1, 0)
+SearchBar.BackgroundTransparency = 0
+SearchBar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+SearchBar.PlaceholderText = "Search..."
+SearchBar.Font = Enum.Font.Gotham
+SearchBar.TextSize = 14
+SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBar.ClearTextOnFocus = false
 
-	local SearchBarCorner = Instance.new("UICorner")
-	SearchBarCorner.Parent = SearchBar
-	SearchBarCorner.CornerRadius = UDim.new(0, 5)
+local SearchBarCorner = Instance.new("UICorner")
+SearchBarCorner.Parent = SearchBar
+SearchBarCorner.CornerRadius = UDim.new(0, 5)  -- Mantém o arredondamento, se desejado
 
-	List.Name = "List"
-	List.Parent = ButtonsTab
-	List.Active = true
-	List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	List.BackgroundTransparency = 1.000
-	List.BorderSizePixel = 0
-	List.Size = UDim2.new(0.998000026, 0, 1, -30)
-	List.AutomaticCanvasSize = Enum.AutomaticSize.Y
-	List.ScrollBarThickness = 2
-	List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
-	List.ScrollBarImageTransparency = 0.5
-    List.Position = UDim2.new(0, 0, 0, 30)
-	List.CanvasSize = UDim2.new(0, 0, 0, 0)
+-- Ajustar o conteúdo da lista
+List.Name = "List"
+List.Parent = ButtonsTab
+List.Active = true
+List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+List.BackgroundTransparency = 1.000
+List.BorderSizePixel = 0
+List.Size = UDim2.new(0.998000026, 0, 1, -30)
+List.AutomaticCanvasSize = Enum.AutomaticSize.Y
+List.ScrollBarThickness = 2
+List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
+List.ScrollBarImageTransparency = 0.5
+List.Position = UDim2.new(0, 0, 0, 30) -- Corrige a posição da lista para iniciar abaixo da barra de pesquisa
+List.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-	UIListLayout.Parent = List
-	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.Parent = List
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 5)
 
-	Ignore.Name = "Ignore"
-	Ignore.Parent = List
-	Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Ignore.BackgroundTransparency = 1.000
-	Ignore.BorderSizePixel = 0
-	Ignore.LayoutOrder = -999
+Ignore.Name = "Ignore"
+Ignore.Parent = List
+Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ignore.BackgroundTransparency = 1.000
+Ignore.BorderSizePixel = 0
+Ignore.LayoutOrder = -999
 
-	UICorner_3.Parent = ButtonsTab
+UICorner_3.Parent = ButtonsTab
 
-	local IsMenuOpened = true
-	local LastPos = Main.Position
-	local TabsList = {}
+local IsMenuOpened = true
+local LastPos = Main.Position
+local TabsList = {}
 
-    -- Função de filtragem da barra de pesquisa
-    local function updateTabVisibility(searchText)
-        searchText = string.lower(searchText)
-        for tabName, tabButton in pairs(TabsList) do
-            if string.find(string.lower(tabName), searchText) then
-                tabButton.Visible = true
-            else
-                tabButton.Visible = false
-            end
+-- Função de filtragem da barra de pesquisa
+local function updateTabVisibility(searchText)
+    searchText = string.lower(searchText)
+    for tabName, tabButton in pairs(TabsList) do
+        -- Verifica se o nome do tab contém o texto da pesquisa
+        if string.find(string.lower(tabName), searchText) then
+            tabButton.Visible = true
+        else
+            tabButton.Visible = false
         end
     end
+end
 
-    -- Conectando a função de filtragem ao evento de texto alterado na barra de pesquisa
-    SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
-        updateTabVisibility(SearchBar.Text)
-    end)
+-- Conectando a função de filtragem ao evento de texto alterado na barra de pesquisa
+SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
+    updateTabVisibility(SearchBar.Text)
+end)
 
-
-	InputService.InputBegan:Connect(function(Input, IsTyping)
-		if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
-			IsMenuOpened = not IsMenuOpened
-			if IsMenuOpened then
-				LastPos = Main.Position
-				wait()
-				Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
-				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
-			else
-				Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
-				wait(0.25)
-				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
-			end
-		end
-	end)
+InputService.InputBegan:Connect(function(Input, IsTyping)
+    if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
+        IsMenuOpened = not IsMenuOpened
+        if IsMenuOpened then
+            LastPos = Main.Position
+            wait()
+            Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
+            TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
+        else
+            Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
+            wait(0.25)
+            TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
+        end
+    end
+end)
 
 	local dragging
 	local dragInput
