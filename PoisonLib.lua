@@ -50,7 +50,7 @@ function UILibrary.Main(PrjName,HideKey)
 
 	HideMain.Name = "Main"
 	HideMain.Parent = Main
-	HideMain.BackgroundColor3 = Color3.fromRGB(255, 215, 0) -- Changed to Yellow
+	HideMain.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Changed to Yellow
 	HideMain.BorderSizePixel = 0
 	HideMain.ClipsDescendants = true
 	HideMain.Position = UDim2.new(0, 0, 0, 0)
@@ -130,7 +130,7 @@ function UILibrary.Main(PrjName,HideKey)
 	List.Size = UDim2.new(0.998000026, 0, 1, 0)
 	List.AutomaticCanvasSize = Enum.AutomaticSize.Y
 	List.ScrollBarThickness = 2
-	List.ScrollBarImageColor3 = Color3.fromRGB(255, 215, 0) -- Changed to Yellow
+	List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Changed to Yellow
 	List.ScrollBarImageTransparency = 0.5
 	List.CanvasSize = UDim2.new(0,0,0,0)
 
@@ -255,7 +255,7 @@ function UILibrary.Main(PrjName,HideKey)
 			Circle.Name = "Circle"
 			Circle.Parent = Circles
 			Circle.AnchorPoint = Vector2.new(0, 0.5)
-			Circle.BackgroundColor3 = Color3.fromRGB(255, 215, 0) -- Changed to Yellow
+			Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Changed to Yellow
 			Circle.BorderSizePixel = 0
 			Circle.Position = UDim2.new(0, (i - 1) * 13, 0.5, 0)
 			Circle.Size = UDim2.new(0, 12, 0, 12)
@@ -337,7 +337,7 @@ function UILibrary.Main(PrjName,HideKey)
 		Elements.CanvasSize = UDim2.new(0,0,0,0)
 		Elements.AutomaticCanvasSize = Enum.AutomaticSize.Y
 		Elements.ScrollBarThickness = 2
-		Elements.ScrollBarImageColor3 = Color3.fromRGB(255, 215, 0) -- Changed to Yellow
+		Elements.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Changed to Yellow
 		Elements.ScrollBarImageTransparency = 0.5
 
 		FadeFrame.Name = "FadeFrame"
@@ -359,7 +359,7 @@ function UILibrary.Main(PrjName,HideKey)
 			if page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index == 2) then
 				IsTabOpened.Value = true
 				TweenService:Create(FadeFrame,TweenInfo.new(1.3),{BackgroundTransparency = 1}):Play()
-				TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 215, 0)}):Play()	-- Changed to Yellow
+				TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()	-- Changed to Yellow
 			elseif page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index ~= 2) then
 				IsTabOpened.Value = false
 			end
@@ -415,7 +415,7 @@ function UILibrary.Main(PrjName,HideKey)
 		TabButton.MouseButton1Click:Connect(function()
 			IsTabOpened.Value = true
 			UIPageLayout:JumpTo(Frame)
-			TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 215, 0)}):Play() -- Changed to Yellow
+			TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play() -- Changed to Yellow
 			TweenService:Create(FadeFrame,TweenInfo.new(0.5),{BackgroundTransparency = 1}):Play()
 			ReColorOtherBtns()
 		end)
@@ -611,7 +611,7 @@ function UILibrary.Main(PrjName,HideKey)
 				end)
 
 				Button.MouseButton1Down:Connect(function()
-					TweenService:Create(Button,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 215, 0)}):Play() -- Changed to Yellow
+					TweenService:Create(Button,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play() -- Changed to Yellow
 				end)
 
 				Button.MouseEnter:Connect(function()
