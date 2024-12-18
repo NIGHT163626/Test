@@ -650,4 +650,4 @@ function UILibrary.Main(PrjName,HideKey)
 	end
 	return Tabs;
 end
-return UILibrary
+return UILibrary;
