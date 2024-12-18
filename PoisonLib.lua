@@ -2,19 +2,19 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local InputService = game:GetService("UserInputService")
 
-local UILibrary ={
+local UILibrary = {
 	["Options"] = {
-		["Size"] = 0.6
+		["Size"] = 0.9
 	}
 }
 
-for i,v in next,game.CoreGui:GetChildren() do
+for i, v in next, game.CoreGui:GetChildren() do
 	if v.Name == "Library" then
 		v:Destroy()
 	end
 end
 
-function UILibrary.Main(PrjName,HideKey)
+function UILibrary.Main(PrjName, HideKey)
 	local Library = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local HideMain = Instance.new("Frame")
@@ -33,332 +33,376 @@ function UILibrary.Main(PrjName,HideKey)
 	local Pages = Instance.new("Frame")
 	local UIPageLayout = Instance.new("UIPageLayout")
 
-	--Properties:
-
+	-- Properties:
 	Library.Name = "Library"
-Library.Parent = game.CoreGui
-Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	Library.Parent = game.CoreGui
+	Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Main.Name = "Main"
-Main.Parent = Library
-Main.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-Main.BorderSizePixel = 0
-Main.ClipsDescendants = true
-Main.Position = UDim2.new(0.25, 0, 0.25, 0)
-Main.Size = UDim2.new(0, 725, 0, 450)
-Main.Visible = false
+	Main.Name = "Main"
+	Main.Parent = Library
+	Main.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+	Main.BorderSizePixel = 0
+	Main.ClipsDescendants = true
+	Main.Position = UDim2.new(0.25, 0, 0.25, 0)
+	Main.Size = UDim2.new(0, 725, 0, 450)
+	Main.Visible = false
 
-HideMain.Name = "Main"
-HideMain.Parent = Main
-HideMain.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
-HideMain.BorderSizePixel = 0
-HideMain.ClipsDescendants = true
-HideMain.Position = UDim2.new(0, 0, 0, 0)
-HideMain.Size = UDim2.new(1, 0, 1, 0)
-HideMain.ZIndex = 100
-TweenService:Create(HideMain, TweenInfo.new(0.5), {BackgroundTransparency = 0}):Play()
-wait(0.5)
-TweenService:Create(HideMain, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-Main.Visible = true
-UICorner.Parent = Main
-UICorner.CornerRadius = UDim.new(0, 8)
+	HideMain.Name = "Main"
+	HideMain.Parent = Main
+	HideMain.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
+	HideMain.BorderSizePixel = 0
+	HideMain.ClipsDescendants = true
+	HideMain.Position = UDim2.new(0, 0, 0, 0)
+	HideMain.Size = UDim2.new(1, 0, 1, 0)
+	HideMain.ZIndex = 100
+	TweenService:Create(HideMain, TweenInfo.new(0.5), { BackgroundTransparency = 0 }):Play()
+	wait(0.5)
+	TweenService:Create(HideMain, TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
+	Main.Visible = true
+	UICorner.Parent = Main
+	UICorner.CornerRadius = UDim.new(0, 8)
 
-local FadeBackgroundFrame = Instance.new("Frame")
+	local FadeBackgroundFrame = Instance.new("Frame")
+	FadeBackgroundFrame.Name = "FadeBackgroundFrame"
+	FadeBackgroundFrame.Parent = Main
+	FadeBackgroundFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+	FadeBackgroundFrame.BackgroundTransparency = 1.000
+	FadeBackgroundFrame.BorderSizePixel = 0
+	FadeBackgroundFrame.Size = UDim2.new(1, 0, 1, 0)
+	FadeBackgroundFrame.ZIndex = 3
 
-FadeBackgroundFrame.Name = "FadeBackgroundFrame"
-FadeBackgroundFrame.Parent = Main
-FadeBackgroundFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-FadeBackgroundFrame.BackgroundTransparency = 1.000
-FadeBackgroundFrame.BorderSizePixel = 0
-FadeBackgroundFrame.Size = UDim2.new(1, 0, 1, 0)
-FadeBackgroundFrame.ZIndex = 3
+	LeftPart.Name = "LeftPart"
+	LeftPart.Parent = Main
+	LeftPart.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+	LeftPart.BorderSizePixel = 0
+	LeftPart.Size = UDim2.new(0, 218, 0, 451)
 
-LeftPart.Name = "LeftPart"
-LeftPart.Parent = Main
-LeftPart.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-LeftPart.BorderSizePixel = 0
-LeftPart.Size = UDim2.new(0, 218, 0, 451)
+	UICorner_2.Parent = LeftPart
+	UICorner_2.CornerRadius = UDim.new(0, 8)
 
-UICorner_2.Parent = LeftPart
-UICorner_2.CornerRadius = UDim.new(0, 8)
+	ProjectName.Name = "ProjectName"
+	ProjectName.Parent = LeftPart
+	ProjectName.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	ProjectName.BackgroundTransparency = 1
+	ProjectName.BorderSizePixel = 0
+	ProjectName.Size = UDim2.new(0, 218, 0, 40)
+	ProjectName.Font = Enum.Font.GothamBold
+	ProjectName.Text = PrjName
+	ProjectName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	ProjectName.TextSize = 20.000
 
-ProjectName.Name = "ProjectName"
-ProjectName.Parent = LeftPart
-ProjectName.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
-ProjectName.BackgroundTransparency = 1
-ProjectName.BorderSizePixel = 0
-ProjectName.Size = UDim2.new(0, 218, 0, 40)
-ProjectName.Font = Enum.Font.GothamBold
-ProjectName.Text = PrjName
-ProjectName.TextColor3 = Color3.fromRGB(255, 255, 255)
-ProjectName.TextSize = 20.000
-
-Line.Name = "Line"
-Line.Parent = ProjectName
-Line.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-Line.BorderSizePixel = 0
-Line.Position = UDim2.new(0, 0, 1, 0)
-Line.Size = UDim2.new(1, 0, 0, 1)
+	Line.Name = "Line"
+	Line.Parent = ProjectName
+	Line.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+	Line.BorderSizePixel = 0
+	Line.Position = UDim2.new(0, 0, 1, 0)
+	Line.Size = UDim2.new(1, 0, 0, 1)
 
 	Line_2.Name = "Line"
-Line_2.Parent = LeftPart
-Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-Line_2.BorderSizePixel = 0
-Line_2.Position = UDim2.new(0, 0, 0.182, 0)
-Line_2.Size = UDim2.new(1, 0, 0, 1)
+	Line_2.Parent = LeftPart
+	Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+	Line_2.BorderSizePixel = 0
+	Line_2.Position = UDim2.new(0, 0, 0.182, 0)
+	Line_2.Size = UDim2.new(1, 0, 0, 1)
 
-Line_3.Name = "Line"
-Line_3.Parent = LeftPart
-Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-Line_3.BorderSizePixel = 0
-Line_3.Position = UDim2.new(1, 0, 0, 0)
-Line_3.Size = UDim2.new(0, 1, 1, 0)
+	Line_3.Name = "Line"
+	Line_3.Parent = LeftPart
+	Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+	Line_3.BorderSizePixel = 0
+	Line_3.Position = UDim2.new(1, 0, 0, 0)
+	Line_3.Size = UDim2.new(0, 1, 1, 0)
 
-ButtonsTab.Name = "ButtonsTab"
-ButtonsTab.Parent = LeftPart
-ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
-ButtonsTab.BorderSizePixel = 0
-ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
-ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
+	ButtonsTab.Name = "ButtonsTab"
+	ButtonsTab.Parent = LeftPart
+	ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	ButtonsTab.BorderSizePixel = 0
+	ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
+	ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
 
-List.Name = "List"
-List.Parent = ButtonsTab
-List.Active = true
-List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-List.BackgroundTransparency = 1.000
-List.BorderSizePixel = 0
-List.Size = UDim2.new(0.998000026, 0, 1, 0)
-List.AutomaticCanvasSize = Enum.AutomaticSize.Y
-List.ScrollBarThickness = 2
-List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
-List.ScrollBarImageTransparency = 0.5
-List.CanvasSize = UDim2.new(0, 0, 0, 0)
+    -- Adicionando o frame para barra de pesquisa
+    local SearchBarFrame = Instance.new("Frame")
+    SearchBarFrame.Name = "SearchBarFrame"
+    SearchBarFrame.Parent = ButtonsTab
+    SearchBarFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SearchBarFrame.BackgroundTransparency = 1
+	SearchBarFrame.BorderSizePixel = 0
+    SearchBarFrame.Size = UDim2.new(0.9, 0, 0, 30)
+    SearchBarFrame.Position = UDim2.new(0.05, 0, 0, 0)
 
-UIListLayout.Parent = List
-UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 5)
+	local SearchBar = Instance.new("TextBox")
+    SearchBar.Name = "SearchBar"
+	SearchBar.Parent = SearchBarFrame
+	SearchBar.Size = UDim2.new(1, 0, 1, 0)
+    SearchBar.BackgroundTransparency = 0
+	SearchBar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    SearchBar.PlaceholderText = "Search..."
+    SearchBar.Font = Enum.Font.Gotham
+	SearchBar.TextSize = 14
+	SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+	SearchBar.ClearTextOnFocus = false
 
-Ignore.Name = "Ignore"
-Ignore.Parent = List
-Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Ignore.BackgroundTransparency = 1.000
-Ignore.BorderSizePixel = 0
-Ignore.LayoutOrder = -999
+	local SearchBarCorner = Instance.new("UICorner")
+	SearchBarCorner.Parent = SearchBar
+	SearchBarCorner.CornerRadius = UDim.new(0, 5)
 
-UICorner_3.Parent = ButtonsTab
+	List.Name = "List"
+	List.Parent = ButtonsTab
+	List.Active = true
+	List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	List.BackgroundTransparency = 1.000
+	List.BorderSizePixel = 0
+	List.Size = UDim2.new(0.998000026, 0, 1, -30)
+	List.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	List.ScrollBarThickness = 2
+	List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
+	List.ScrollBarImageTransparency = 0.5
+    List.Position = UDim2.new(0, 0, 0, 30)
+	List.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+	UIListLayout.Parent = List
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 5)
+
+	Ignore.Name = "Ignore"
+	Ignore.Parent = List
+	Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Ignore.BackgroundTransparency = 1.000
+	Ignore.BorderSizePixel = 0
+	Ignore.LayoutOrder = -999
+
+	UICorner_3.Parent = ButtonsTab
 
 	local IsMenuOpened = true
+	local LastPos = Main.Position
+	local TabsList = {}
 
-local LastPos = Main.Position
+    -- Função de filtragem da barra de pesquisa
+    local function updateTabVisibility(searchText)
+        searchText = string.lower(searchText)
+        for tabName, tabButton in pairs(TabsList) do
+            if string.find(string.lower(tabName), searchText) then
+                tabButton.Visible = true
+            else
+                tabButton.Visible = false
+            end
+        end
+    end
 
-InputService.InputBegan:Connect(function(Input, IsTyping)
-	if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
-		IsMenuOpened = not IsMenuOpened
-		if IsMenuOpened then
-			LastPos = Main.Position
-			wait()
-			Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
-			TweenService:Create(HideMain, TweenInfo.new(0.15), {BackgroundTransparency = 0}):Play()
-		else
-			Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
-			wait(0.25)
-			TweenService:Create(HideMain, TweenInfo.new(0.15), {BackgroundTransparency = 1}):Play()
+    -- Conectando a função de filtragem ao evento de texto alterado na barra de pesquisa
+    SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
+        updateTabVisibility(SearchBar.Text)
+    end)
+
+
+	InputService.InputBegan:Connect(function(Input, IsTyping)
+		if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
+			IsMenuOpened = not IsMenuOpened
+			if IsMenuOpened then
+				LastPos = Main.Position
+				wait()
+				Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
+				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
+			else
+				Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
+				wait(0.25)
+				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
+			end
 		end
-	end
-end)
-
-local dragging
-local dragInput
-local dragStart
-local startPos
-local off = Vector3.new(0, 0, 0)
-
-local function update(input)
-	local delta = input.Position - dragStart
-	pcall(function()
-		Main:TweenPosition(UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y), "Out", "Quad", 0.1, true, nil)
 	end)
-end
 
-Main.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPos = Main.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	local off = Vector3.new(0, 0, 0)
+
+	local function update(input)
+		local delta = input.Position - dragStart
+		pcall(function()
+			Main:TweenPosition(UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y), "Out", "Quad", 0.1, true, nil)
+		end)
+	end
+
+	Main.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = Main.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	Main.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	InputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+
+	Pages.Name = "Pages"
+	Pages.Parent = Main
+	Pages.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Pages.BackgroundTransparency = 1.000
+	Pages.BorderSizePixel = 0
+	Pages.Position = UDim2.new(0.307838351, -4, 0, 10)
+	Pages.Size = UDim2.new(0, 506, 1, -10)
+	Pages.ClipsDescendants = true
+
+	UIPageLayout.Parent = Pages
+	UIPageLayout.FillDirection = Enum.FillDirection.Vertical
+	UIPageLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIPageLayout.EasingDirection = Enum.EasingDirection.Out
+	UIPageLayout.EasingStyle = Enum.EasingStyle.Quint
+	UIPageLayout.Padding = UDim.new(0, 25)
+	UIPageLayout.TweenTime = 0
+	UIPageLayout.ScrollWheelInputEnabled = false
+	UIPageLayout.Animated = false
+
+	local UISizer = Instance.new("UIScale")
+	UISizer.Parent = Library
+	UISizer.Scale = UILibrary["Options"]["Size"]
+
+	local Tabs = {}
+	function Tabs.Loader()
+		local Circles = Instance.new("Frame")
+		local obj = {}
+
+		Circles.Name = "Circles"
+		Circles.Parent = Main
+		Circles.AnchorPoint = Vector2.new(0.5, 0.5)
+		Circles.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+		Circles.BackgroundTransparency = 1
+		Circles.BorderSizePixel = 0
+		Circles.ClipsDescendants = false
+		Circles.Position = UDim2.new(0.5, 0, 0.5, 0)
+		Circles.Size = UDim2.new(0, 50, 0, 50)
+		Circles.ZIndex = 4
+		TweenService:Create(FadeBackgroundFrame, TweenInfo.new(0.1), { BackgroundTransparency = 0 }):Play()
+
+		for i = 1, 4 do
+			local Circle = Instance.new("Frame")
+			local CircleCorner = Instance.new("UICorner")
+
+			Circle.Name = "Circle"
+			Circle.Parent = Circles
+			Circle.AnchorPoint = Vector2.new(0, 0.5)
+			Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
+			Circle.BorderSizePixel = 0
+			Circle.Position = UDim2.new(0, (i - 1) * 13, 0.5, 0)
+			Circle.Size = UDim2.new(0, 12, 0, 12)
+
+			CircleCorner.CornerRadius = UDim.new(0, 100)
+			CircleCorner.Name = "CircleCorner"
+			CircleCorner.Parent = Circle
+
+			table.insert(obj, Circle)
+		end
+
+		spawn(function()
+			for _ = 1, 5 do
+				wait(0.7)
+				local el = table.remove(obj)
+				table.insert(obj, 1, el)
+				for i, v in pairs(obj) do
+					if i == 1 then
+						v:TweenSize(UDim2.new(0, 12, 0, 12), "Out", "Linear", 0.15, true)
+					elseif i == 4 then
+						v:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.15, true)
+						wait(0.15)
+						v:TweenPosition(UDim2.new(0, 0, 0.5, 0), "Out", "Quad", 0)
+					end
+					v:TweenPosition(UDim2.new(0, i * 13, 0.5, 0), "Out", "Quad", 0.35)
+					if _ == 5 then
+						TweenService:Create(FadeBackgroundFrame, TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
+						TweenService:Create(v, TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
+					end
+				end
 			end
 		end)
 	end
-end)
 
-Main.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		dragInput = input
-	end
-end)
-
-InputService.InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		update(input)
-	end
-end)
-
-	Pages.Name = "Pages"
-Pages.Parent = Main
-Pages.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Pages.BackgroundTransparency = 1.000
-Pages.BorderSizePixel = 0
-Pages.Position = UDim2.new(0.307838351, -4, 0, 10)
-Pages.Size = UDim2.new(0, 506, 1, -10)
-Pages.ClipsDescendants = true
-
-UIPageLayout.Parent = Pages
-UIPageLayout.FillDirection = Enum.FillDirection.Vertical
-UIPageLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIPageLayout.EasingDirection = Enum.EasingDirection.Out
-UIPageLayout.EasingStyle = Enum.EasingStyle.Quint
-UIPageLayout.Padding = UDim.new(0, 25)
-UIPageLayout.TweenTime = 0
-UIPageLayout.ScrollWheelInputEnabled = false
-UIPageLayout.Animated = false
-
-local UISizer = Instance.new("UIScale")
-UISizer.Parent = Library
-UISizer.Scale = UILibrary["Options"]["Size"]
-
-local Tabs = {}
-function Tabs.Loader()
-	local Circles = Instance.new("Frame")
-	local obj = {}
-
-	Circles.Name = "Circles"
-	Circles.Parent = Main
-	Circles.AnchorPoint = Vector2.new(0.5, 0.5)
-	Circles.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
-	Circles.BackgroundTransparency = 1
-	Circles.BorderSizePixel = 0
-	Circles.ClipsDescendants = false
-	Circles.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Circles.Size = UDim2.new(0, 50, 0, 50)
-	Circles.ZIndex = 4
-	TweenService:Create(FadeBackgroundFrame, TweenInfo.new(0.1), {BackgroundTransparency = 0}):Play()
-
-	for i = 1, 4 do
-		local Circle = Instance.new("Frame")
-		local CircleCorner = Instance.new("UICorner")
-
-		Circle.Name = "Circle"
-		Circle.Parent = Circles
-		Circle.AnchorPoint = Vector2.new(0, 0.5)
-		Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
-		Circle.BorderSizePixel = 0
-		Circle.Position = UDim2.new(0, (i - 1) * 13, 0.5, 0)
-		Circle.Size = UDim2.new(0, 12, 0, 12)
-
-		CircleCorner.CornerRadius = UDim.new(0, 100)
-		CircleCorner.Name = "CircleCorner"
-		CircleCorner.Parent = Circle
-
-		table.insert(obj, Circle)
-	end
-
-	spawn(function()
-		for _ = 1, 5 do wait(0.7)
-			local el = table.remove(obj)
-			table.insert(obj, 1, el)
-			for i, v in pairs(obj) do
-				if i == 1 then
-					v:TweenSize(UDim2.new(0, 12, 0, 12), "Out", "Linear", 0.15, true)
-				elseif i == 4 then
-					v:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.15, true)
-					wait(0.15)
-					v:TweenPosition(UDim2.new(0, 0, 0.5, 0), "Out", "Quad", 0)
-				end
-				v:TweenPosition(UDim2.new(0, i * 13, 0.5, 0), "Out", "Quad", 0.35)
-				if _ == 5 then
-					TweenService:Create(FadeBackgroundFrame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-					TweenService:Create(v, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-				end
-			end
-		end
-	end)
-end
-	
 	function Tabs.Nofitication(Text)
-	--Removendo a tela de notificacao
-	return
-end
+		--Removendo a tela de notificacao
+		return
+	end
+   
+	function Tabs.NewTab(TabName)
 
-function Tabs.NewTab(TabName)
-
-	local Frame = Instance.new("Frame")
-	local TabLabel = Instance.new("TextLabel")
-	local Elements = Instance.new("ScrollingFrame")
-	local FadeFrame = Instance.new("Frame")
-	local UIListLayout = Instance.new("UIListLayout")
-
-	UIListLayout.Name = "ff"
-	UIListLayout.Parent = Elements
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.Padding = UDim.new(0, 10)
-
-	Frame.Parent = Pages
-	Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Frame.BackgroundTransparency = 1
-	Frame.BorderSizePixel = 0
-	Frame.Size = UDim2.new(1, 0, 1, 0)
-	Frame.Name = TabName
-
-	TabLabel.Name = "SectionLabel"
-	TabLabel.Parent = Frame
-	TabLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	TabLabel.BackgroundTransparency = 1.000
-	TabLabel.BorderSizePixel = 0
-	TabLabel.Position = UDim2.new(0, 7, 0, 7)
-	TabLabel.Size = UDim2.new(0, 127, 0, 18)
-	TabLabel.Font = Enum.Font.GothamBold
-	TabLabel.Text = TabName
-	TabLabel.TextColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
-	TabLabel.TextSize = 21
-	TabLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-		Elements.Name = "Elements"
-Elements.Parent = Frame
-Elements.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Elements.BackgroundTransparency = 1
-Elements.BorderSizePixel = 0
-Elements.Position = UDim2.new(0.0178926438, 0, 0, 37)
-Elements.Size = UDim2.new(1, -20, 0, 385)
-Elements.CanvasSize = UDim2.new(0,0,0,0)
-Elements.AutomaticCanvasSize = Enum.AutomaticSize.Y
-Elements.ScrollBarThickness = 2
-Elements.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
-Elements.ScrollBarImageTransparency = 0.5
-
-FadeFrame.Name = "FadeFrame"
-FadeFrame.Parent = Frame
-FadeFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-FadeFrame.BackgroundTransparency = 0
-FadeFrame.BorderSizePixel = 0
-FadeFrame.Position = UDim2.new(0, 0, 0, 0)
-FadeFrame.Size = UDim2.new(1, 0, 1, 0)
-FadeFrame.ZIndex = 19
-
-local TabButton = Instance.new("TextButton")
-local TabButtonText = Instance.new("TextLabel")
-local TabCorner = Instance.new("UICorner")
-local IsTabOpened = Instance.new("BoolValue")
-
-IsTabOpened.Parent = TabButton
-for index,page in next, Pages:GetChildren() do
-    if page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index == 2) then
-        IsTabOpened.Value = true
-        TweenService:Create(FadeFrame, TweenInfo.new(1.3), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(TabButton, TweenInfo.new(0.25), {BackgroundTransparency = 0.3, BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()  -- Cor alterada para amarelo
+        local Frame = Instance.new("Frame")
+        local TabLabel = Instance.new("TextLabel")
+        local Elements = Instance.new("ScrollingFrame")
+        local FadeFrame = Instance.new("Frame")
+        local UIListLayout = Instance.new("UIListLayout")
+    
+        UIListLayout.Name = "ff"
+        UIListLayout.Parent = Elements
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 10)
+    
+        Frame.Parent = Pages
+        Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Frame.BackgroundTransparency = 1
+        Frame.BorderSizePixel = 0
+        Frame.Size = UDim2.new(1, 0, 1, 0)
+        Frame.Name = TabName
+    
+        TabLabel.Name = "SectionLabel"
+        TabLabel.Parent = Frame
+        TabLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TabLabel.BackgroundTransparency = 1.000
+        TabLabel.BorderSizePixel = 0
+        TabLabel.Position = UDim2.new(0, 7, 0, 7)
+        TabLabel.Size = UDim2.new(0, 127, 0, 18)
+        TabLabel.Font = Enum.Font.GothamBold
+        TabLabel.Text = TabName
+        TabLabel.TextColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
+        TabLabel.TextSize = 21
+        TabLabel.TextXAlignment = Enum.TextXAlignment.Left
+    
+            Elements.Name = "Elements"
+        Elements.Parent = Frame
+        Elements.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Elements.BackgroundTransparency = 1
+        Elements.BorderSizePixel = 0
+        Elements.Position = UDim2.new(0.0178926438, 0, 0, 37)
+        Elements.Size = UDim2.new(1, -20, 0, 385)
+        Elements.CanvasSize = UDim2.new(0,0,0,0)
+        Elements.AutomaticCanvasSize = Enum.AutomaticSize.Y
+        Elements.ScrollBarThickness = 2
+        Elements.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
+        Elements.ScrollBarImageTransparency = 0.5
+    
+        FadeFrame.Name = "FadeFrame"
+        FadeFrame.Parent = Frame
+        FadeFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+        FadeFrame.BackgroundTransparency = 0
+        FadeFrame.BorderSizePixel = 0
+        FadeFrame.Position = UDim2.new(0, 0, 0, 0)
+        FadeFrame.Size = UDim2.new(1, 0, 1, 0)
+        FadeFrame.ZIndex = 19
+    
+        local TabButton = Instance.new("TextButton")
+        local TabButtonText = Instance.new("TextLabel")
+        local TabCorner = Instance.new("UICorner")
+        local IsTabOpened = Instance.new("BoolValue")
+    
+        IsTabOpened.Parent = TabButton
+        for index,page in next, Pages:GetChildren() do
+            if page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index == 2) then
+                IsTabOpened.Value = true
+                TweenService:Create(FadeFrame, TweenInfo.new(1.3), {BackgroundTransparency = 1}):Play()
+                TweenService:Create(TabButton, TweenInfo.new(0.25), {BackgroundTransparency = 0.3, BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()  -- Cor alterada para amarelo
     elseif page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index ~= 2) then
         IsTabOpened.Value = false
     end
