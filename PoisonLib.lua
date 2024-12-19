@@ -99,72 +99,70 @@ function UILibrary.Main(PrjName, HideKey)
 	Line.Size = UDim2.new(1, 0, 0, 1)
 
 	Line_2.Name = "Line"
-	Line_2.Parent = LeftPart
-	Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-	Line_2.BorderSizePixel = 0
-	Line_2.Position = UDim2.new(0, 0, 0.182, 0)
-	Line_2.Size = UDim2.new(1, 0, 0, 1)
+Line_2.Parent = LeftPart
+Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Line_2.BorderSizePixel = 0
+Line_2.Position = UDim2.new(0, 0, 0.182, 0)
+Line_2.Size = UDim2.new(1, 0, 0, 1)
 
-	Line_3.Name = "Line"
-	Line_3.Parent = LeftPart
-	Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-	Line_3.BorderSizePixel = 0
-	Line_3.Position = UDim2.new(1, 0, 0, 0)
-	Line_3.Size = UDim2.new(0, 1, 1, 0)
+Line_3.Name = "Line"
+Line_3.Parent = LeftPart
+Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Line_3.BorderSizePixel = 0
+Line_3.Position = UDim2.new(1, 0, 0, 0)
+Line_3.Size = UDim2.new(0, 1, 1, 0)
 
-	ButtonsTab.Name = "ButtonsTab"
-	ButtonsTab.Parent = LeftPart
-	ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
-	ButtonsTab.BorderSizePixel = 0
-	ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
-	ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
+ButtonsTab.Name = "ButtonsTab"
+ButtonsTab.Parent = LeftPart
+ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+ButtonsTab.BorderSizePixel = 0
+ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
+ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
 
-    -- Adicionando o frame para barra de pesquisa
-local SearchBarFrame = Instance.new("Frame")
-SearchBarFrame.Name = "SearchBarFrame"
-SearchBarFrame.Parent = ButtonsTab
-SearchBarFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SearchBarFrame.BackgroundTransparency = 1
-SearchBarFrame.BorderSizePixel = 0
-SearchBarFrame.Size = UDim2.new(0.9, 0, 0, 30)
-SearchBarFrame.Position = UDim2.new(0.05, 0, 0, 0)
+-- Barra de Pesquisa
+local SearchBox = Instance.new("TextBox")
+SearchBox.Name = "SearchBox"
+SearchBox.Parent = ButtonsTab
+SearchBox.Size = UDim2.new(0.9, 0, 0, 30)
+SearchBox.Position = UDim2.new(0.05, 0, 0, 0)
+SearchBox.BackgroundTransparency = 0
+SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+SearchBox.PlaceholderText = "🔍 Search"
+SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+SearchBox.Font = Enum.Font.GothamBold
+SearchBox.TextWrapped = true
+SearchBox.Text = ''
+SearchBox.TextXAlignment = Enum.TextXAlignment.Center
+SearchBox.TextSize = 14
+SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBox.ClearTextOnFocus = true
 
-local SearchBar = Instance.new("TextBox")
-SearchBar.Name = "SearchBar"
-SearchBar.Parent = SearchBarFrame
-SearchBar.Size = UDim2.new(1, 0, 1, 0)
-SearchBar.BackgroundTransparency = 0
-SearchBar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-SearchBar.PlaceholderText = "Search..."
-SearchBar.Font = Enum.Font.Gotham
-SearchBar.TextSize = 14
-SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
-SearchBar.ClearTextOnFocus = false
+local SearchBoxCorner = Instance.new("UICorner")
+SearchBoxCorner.Parent = SearchBox
+SearchBoxCorner.CornerRadius = UDim.new(0, 6)
 
-local SearchBarCorner = Instance.new("UICorner")
-SearchBarCorner.Parent = SearchBar
-SearchBarCorner.CornerRadius = UDim.new(0, 5)  -- Mantém o arredondamento, se desejado
-
--- Ajustar o conteúdo da lista
+-- Lista de Elementos
 List.Name = "List"
 List.Parent = ButtonsTab
 List.Active = true
 List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 List.BackgroundTransparency = 1.000
 List.BorderSizePixel = 0
-List.Size = UDim2.new(0.998000026, 0, 1, -30)
+List.Size = UDim2.new(0.998, 0, 1, -35)
+List.Position = UDim2.new(0, 0, 0, 35) -- Ajustado para baixo da barra de pesquisa
 List.AutomaticCanvasSize = Enum.AutomaticSize.Y
 List.ScrollBarThickness = 2
-List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Substituído por amarelo
+List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo translúcido
 List.ScrollBarImageTransparency = 0.5
-List.Position = UDim2.new(0, 0, 0, 30) -- Corrige a posição da lista para iniciar abaixo da barra de pesquisa
 List.CanvasSize = UDim2.new(0, 0, 0, 0)
 
+local UIListLayout = Instance.new("UIListLayout")
 UIListLayout.Parent = List
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 5)
 
+local Ignore = Instance.new("Frame")
 Ignore.Name = "Ignore"
 Ignore.Parent = List
 Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -172,29 +170,30 @@ Ignore.BackgroundTransparency = 1.000
 Ignore.BorderSizePixel = 0
 Ignore.LayoutOrder = -999
 
-UICorner_3.Parent = ButtonsTab
+local TabsList = {} -- Estrutura para armazenar abas e seus botões
 
-local IsMenuOpened = true
-local LastPos = Main.Position
-local TabsList = {}
-
--- Função de filtragem da barra de pesquisa
-local function updateTabVisibility(searchText)
-    searchText = string.lower(searchText)
+-- Função de busca
+local function SearchHandle()
+    local Text = string.lower(SearchBox.Text)
     for tabName, tabButton in pairs(TabsList) do
-        -- Verifica se o nome do tab contém o texto da pesquisa
-        if string.find(string.lower(tabName), searchText) then
-            tabButton.Visible = true
-        else
-            tabButton.Visible = false
+        if tabButton:IsA('TextButton') then
+            if string.find(string.lower(tabName), Text) then
+                tabButton.Visible = true
+            else
+                tabButton.Visible = false
+            end
         end
     end
 end
 
--- Conectando a função de filtragem ao evento de texto alterado na barra de pesquisa
-SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
-    updateTabVisibility(SearchBar.Text)
-end)
+-- Conectando a barra de pesquisa ao evento de texto alterado
+SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
+
+-- Sistema para abrir e fechar o menu
+local IsMenuOpened = true
+local LastPos = Main.Position
+local InputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 
 InputService.InputBegan:Connect(function(Input, IsTyping)
     if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
