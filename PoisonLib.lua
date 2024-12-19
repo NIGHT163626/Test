@@ -98,7 +98,8 @@ function UILibrary.Main(PrjName, HideKey)
 	Line.Position = UDim2.new(0, 0, 1, 0)
 	Line.Size = UDim2.new(1, 0, 0, 1)
 
-	Line_2.Name = "Line"
+	-- Linha 2 e Linha 3
+Line_2.Name = "Line"
 Line_2.Parent = LeftPart
 Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
 Line_2.BorderSizePixel = 0
@@ -112,6 +113,7 @@ Line_3.BorderSizePixel = 0
 Line_3.Position = UDim2.new(1, 0, 0, 0)
 Line_3.Size = UDim2.new(0, 1, 1, 0)
 
+-- Abas e Botões
 ButtonsTab.Name = "ButtonsTab"
 ButtonsTab.Parent = LeftPart
 ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
@@ -142,6 +144,7 @@ SearchBoxCorner.Parent = SearchBox
 SearchBoxCorner.CornerRadius = UDim.new(0, 6)
 
 -- Lista de Elementos
+local List = Instance.new("ScrollingFrame")
 List.Name = "List"
 List.Parent = ButtonsTab
 List.Active = true
@@ -694,4 +697,4 @@ end
 	end
 	return Tabs;
 end
-return UILibrary;
+return UILibrary
