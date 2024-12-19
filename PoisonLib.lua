@@ -4,7 +4,7 @@ local InputService = game:GetService("UserInputService")
 
 local UILibrary = {
 	["Options"] = {
-		["Size"] = 0.8
+		["Size"] = 0.9
 	}
 }
 
@@ -99,81 +99,81 @@ function UILibrary.Main(PrjName, HideKey)
 	Line.Size = UDim2.new(1, 0, 0, 1)
 
 	-- Linha 2 e Linha 3
-	Line_2.Name = "Line"
-	Line_2.Parent = LeftPart
-	Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-	Line_2.BorderSizePixel = 0
-	Line_2.Position = UDim2.new(0, 0, 0.182, 0)
-	Line_2.Size = UDim2.new(1, 0, 0, 1)
+Line_2.Name = "Line"
+Line_2.Parent = LeftPart
+Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Line_2.BorderSizePixel = 0
+Line_2.Position = UDim2.new(0, 0, 0.182, 0)
+Line_2.Size = UDim2.new(1, 0, 0, 1)
 
-	Line_3.Name = "Line"
-	Line_3.Parent = LeftPart
-	Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-	Line_3.BorderSizePixel = 0
-	Line_3.Position = UDim2.new(1, 0, 0, 0)
-	Line_3.Size = UDim2.new(0, 1, 1, 0)
+Line_3.Name = "Line"
+Line_3.Parent = LeftPart
+Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Line_3.BorderSizePixel = 0
+Line_3.Position = UDim2.new(1, 0, 0, 0)
+Line_3.Size = UDim2.new(0, 1, 1, 0)
 
-	-- Abas e Botões
-	ButtonsTab.Name = "ButtonsTab"
-	ButtonsTab.Parent = LeftPart
-	ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
-	ButtonsTab.BorderSizePixel = 0
-	ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
-	ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
+-- Abas e Botões
+ButtonsTab.Name = "ButtonsTab"
+ButtonsTab.Parent = LeftPart
+ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+ButtonsTab.BorderSizePixel = 0
+ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
+ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
 
-	-- Barra de Pesquisa
-	local SearchBox = Instance.new("TextBox")
-	SearchBox.Name = "SearchBox"
-	SearchBox.Parent = ButtonsTab
-	SearchBox.Size = UDim2.new(0.9, 0, 0, 30)
-	SearchBox.Position = UDim2.new(0.05, 0, 0, 0)
-	SearchBox.BackgroundTransparency = 0
-	SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-	SearchBox.PlaceholderText = "🔍 Search"
-	SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-	SearchBox.Font = Enum.Font.GothamBold
-	SearchBox.TextWrapped = true
-	SearchBox.Text = ''
-	SearchBox.TextXAlignment = Enum.TextXAlignment.Center
-	SearchBox.TextSize = 14
-	SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-	SearchBox.ClearTextOnFocus = true
+-- Barra de Pesquisa
+local SearchBox = Instance.new("TextBox")
+SearchBox.Name = "SearchBox"
+SearchBox.Parent = ButtonsTab
+SearchBox.Size = UDim2.new(0.9, 0, 0, 30)
+SearchBox.Position = UDim2.new(0.05, 0, 0, -10)  -- Ajustado para mover mais para cima
+SearchBox.BackgroundTransparency = 0
+SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+SearchBox.PlaceholderText = "🔍 Search"
+SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+SearchBox.Font = Enum.Font.GothamBold
+SearchBox.TextWrapped = true
+SearchBox.Text = ''
+SearchBox.TextXAlignment = Enum.TextXAlignment.Center
+SearchBox.TextSize = 14
+SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBox.ClearTextOnFocus = true
 
-	local SearchBoxCorner = Instance.new("UICorner")
-	SearchBoxCorner.Parent = SearchBox
-	SearchBoxCorner.CornerRadius = UDim.new(0, 6)
+local SearchBoxCorner = Instance.new("UICorner")
+SearchBoxCorner.Parent = SearchBox
+SearchBoxCorner.CornerRadius = UDim.new(0, 6)
 
-	-- Lista de Elementos
-	local List = Instance.new("ScrollingFrame")
-	List.Name = "List"
-	List.Parent = ButtonsTab
-	List.Active = true
-	List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	List.BackgroundTransparency = 1.000
-	List.BorderSizePixel = 0
-	List.Size = UDim2.new(0.998, 0, 1, -35)
-	List.Position = UDim2.new(0, 0, 0, 35) -- Ajustado para baixo da barra de pesquisa
-	List.AutomaticCanvasSize = Enum.AutomaticSize.Y
-	List.ScrollBarThickness = 2
-	List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo translúcido
-	List.ScrollBarImageTransparency = 0.5
-	List.CanvasSize = UDim2.new(0, 0, 0, 0)
+-- Lista de Elementos
+local List = Instance.new("ScrollingFrame")
+List.Name = "List"
+List.Parent = ButtonsTab
+List.Active = true
+List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+List.BackgroundTransparency = 1.000
+List.BorderSizePixel = 0
+List.Size = UDim2.new(0.998, 0, 1, -35)
+List.Position = UDim2.new(0, 0, 0, 35) -- Ajustado para baixo da barra de pesquisa
+List.AutomaticCanvasSize = Enum.AutomaticSize.Y
+List.ScrollBarThickness = 2
+List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo translúcido
+List.ScrollBarImageTransparency = 0.5
+List.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-	local UIListLayout = Instance.new("UIListLayout")
-	UIListLayout.Parent = List
-	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.Padding = UDim.new(0, 5)
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.Parent = List
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 5)
 
-	local Ignore = Instance.new("Frame")
-	Ignore.Name = "Ignore"
-	Ignore.Parent = List
-	Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Ignore.BackgroundTransparency = 1.000
-	Ignore.BorderSizePixel = 0
-	Ignore.LayoutOrder = -999
+local Ignore = Instance.new("Frame")
+Ignore.Name = "Ignore"
+Ignore.Parent = List
+Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ignore.BackgroundTransparency = 1.000
+Ignore.BorderSizePixel = 0
+Ignore.LayoutOrder = -999
 
-	local TabsList = {} -- Estrutura para armazenar abas e seus botões
+local TabsList = {} -- Estrutura para armazenar abas e seus botões
 
 -- Função de busca (modificada para a estrutura da UILibrary)
 local function SearchHandle()
@@ -193,27 +193,27 @@ end
 -- Conectando a barra de pesquisa ao evento de texto alterado
 SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
 
-	-- Sistema para abrir e fechar o menu
-	local IsMenuOpened = true
-	local LastPos = Main.Position
-	local InputService = game:GetService("UserInputService")
-	local TweenService = game:GetService("TweenService")
+-- Sistema para abrir e fechar o menu
+local IsMenuOpened = true
+local LastPos = Main.Position
+local InputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 
-	InputService.InputBegan:Connect(function(Input, IsTyping)
-		if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
-			IsMenuOpened = not IsMenuOpened
-			if IsMenuOpened then
-				LastPos = Main.Position
-				wait()
-				Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
-				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
-			else
-				Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
-				wait(0.25)
-				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
-			end
-		end
-	end)
+InputService.InputBegan:Connect(function(Input, IsTyping)
+    if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
+        IsMenuOpened = not IsMenuOpened
+        if IsMenuOpened then
+            LastPos = Main.Position
+            wait()
+            Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
+            TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
+        else
+            Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
+            wait(0.25)
+            TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
+        end
+    end
+end)
 
 	local dragging
 	local dragInput
