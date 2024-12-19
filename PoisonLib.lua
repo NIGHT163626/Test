@@ -99,87 +99,88 @@ function UILibrary.Main(PrjName, HideKey)
 	Line.Size = UDim2.new(1, 0, 0, 1)
 
 	-- Linha 2 e Linha 3
-Line_2.Name = "Line"
-Line_2.Parent = LeftPart
-Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-Line_2.BorderSizePixel = 0
-Line_2.Position = UDim2.new(0, 0, 0.182, 0)
-Line_2.Size = UDim2.new(1, 0, 0, 1)
+	Line_2.Name = "Line"
+	Line_2.Parent = LeftPart
+	Line_2.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+	Line_2.BorderSizePixel = 0
+	Line_2.Position = UDim2.new(0, 0, 0.182, 0)
+	Line_2.Size = UDim2.new(1, 0, 0, 1)
 
-Line_3.Name = "Line"
-Line_3.Parent = LeftPart
-Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
-Line_3.BorderSizePixel = 0
-Line_3.Position = UDim2.new(1, 0, 0, 0)
-Line_3.Size = UDim2.new(0, 1, 1, 0)
+	Line_3.Name = "Line"
+	Line_3.Parent = LeftPart
+	Line_3.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+	Line_3.BorderSizePixel = 0
+	Line_3.Position = UDim2.new(1, 0, 0, 0)
+	Line_3.Size = UDim2.new(0, 1, 1, 0)
 
--- Abas e Botões
-ButtonsTab.Name = "ButtonsTab"
-ButtonsTab.Parent = LeftPart
-ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
-ButtonsTab.BorderSizePixel = 0
-ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
-ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
+	-- Abas e Botões
+	ButtonsTab.Name = "ButtonsTab"
+	ButtonsTab.Parent = LeftPart
+	ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	ButtonsTab.BorderSizePixel = 0
+	ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
+	ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
 
--- Barra de Pesquisa
-local SearchBox = Instance.new("TextBox")
-SearchBox.Name = "SearchBox"
-SearchBox.Parent = ButtonsTab
-SearchBox.Size = UDim2.new(0.9, 0, 0, 30)
-SearchBox.Position = UDim2.new(0.05, 0, 0, 0)
-SearchBox.BackgroundTransparency = 0
-SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-SearchBox.PlaceholderText = "🔍 Search"
-SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
-SearchBox.Font = Enum.Font.GothamBold
-SearchBox.TextWrapped = true
-SearchBox.Text = ''
-SearchBox.TextXAlignment = Enum.TextXAlignment.Center
-SearchBox.TextSize = 14
-SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-SearchBox.ClearTextOnFocus = true
+	-- Barra de Pesquisa
+	local SearchBox = Instance.new("TextBox")
+	SearchBox.Name = "SearchBox"
+	SearchBox.Parent = ButtonsTab
+	SearchBox.Size = UDim2.new(0.9, 0, 0, 30)
+	SearchBox.Position = UDim2.new(0.05, 0, 0, 0)
+	SearchBox.BackgroundTransparency = 0
+	SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	SearchBox.PlaceholderText = "🔍 Search"
+	SearchBox.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+	SearchBox.Font = Enum.Font.GothamBold
+	SearchBox.TextWrapped = true
+	SearchBox.Text = ''
+	SearchBox.TextXAlignment = Enum.TextXAlignment.Center
+	SearchBox.TextSize = 14
+	SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+	SearchBox.ClearTextOnFocus = true
 
-local SearchBoxCorner = Instance.new("UICorner")
-SearchBoxCorner.Parent = SearchBox
-SearchBoxCorner.CornerRadius = UDim.new(0, 6)
+	local SearchBoxCorner = Instance.new("UICorner")
+	SearchBoxCorner.Parent = SearchBox
+	SearchBoxCorner.CornerRadius = UDim.new(0, 6)
 
--- Lista de Elementos
-local List = Instance.new("ScrollingFrame")
-List.Name = "List"
-List.Parent = ButtonsTab
-List.Active = true
-List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-List.BackgroundTransparency = 1.000
-List.BorderSizePixel = 0
-List.Size = UDim2.new(0.998, 0, 1, -35)
-List.Position = UDim2.new(0, 0, 0, 35) -- Ajustado para baixo da barra de pesquisa
-List.AutomaticCanvasSize = Enum.AutomaticSize.Y
-List.ScrollBarThickness = 2
-List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo translúcido
-List.ScrollBarImageTransparency = 0.5
-List.CanvasSize = UDim2.new(0, 0, 0, 0)
+	-- Lista de Elementos
+	local List = Instance.new("ScrollingFrame")
+	List.Name = "List"
+	List.Parent = ButtonsTab
+	List.Active = true
+	List.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	List.BackgroundTransparency = 1.000
+	List.BorderSizePixel = 0
+	List.Size = UDim2.new(0.998, 0, 1, -35)
+	List.Position = UDim2.new(0, 0, 0, 35) -- Ajustado para baixo da barra de pesquisa
+	List.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	List.ScrollBarThickness = 2
+	List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo translúcido
+	List.ScrollBarImageTransparency = 0.5
+	List.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-local UIListLayout = Instance.new("UIListLayout")
-UIListLayout.Parent = List
-UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 5)
+	local UIListLayout = Instance.new("UIListLayout")
+	UIListLayout.Parent = List
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 5)
 
-local Ignore = Instance.new("Frame")
-Ignore.Name = "Ignore"
-Ignore.Parent = List
-Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Ignore.BackgroundTransparency = 1.000
-Ignore.BorderSizePixel = 0
-Ignore.LayoutOrder = -999
+	local Ignore = Instance.new("Frame")
+	Ignore.Name = "Ignore"
+	Ignore.Parent = List
+	Ignore.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Ignore.BackgroundTransparency = 1.000
+	Ignore.BorderSizePixel = 0
+	Ignore.LayoutOrder = -999
 
-local TabsList = {} -- Estrutura para armazenar abas e seus botões
+	local TabsList = {} -- Estrutura para armazenar abas e seus botões
 
--- Função de busca
+-- Função de busca (modificada para a estrutura da UILibrary)
 local function SearchHandle()
     local Text = string.lower(SearchBox.Text)
-    for tabName, tabButton in pairs(TabsList) do
-        if tabButton:IsA('TextButton') then
+    for tabName, tabData in pairs(TabsList) do
+        local tabButton = tabData.Button  -- Agora acessamos o botão através da tabela tabData
+        if tabButton and tabButton:IsA('TextButton') then
             if string.find(string.lower(tabName), Text) then
                 tabButton.Visible = true
             else
@@ -192,27 +193,27 @@ end
 -- Conectando a barra de pesquisa ao evento de texto alterado
 SearchBox:GetPropertyChangedSignal("Text"):Connect(SearchHandle)
 
--- Sistema para abrir e fechar o menu
-local IsMenuOpened = true
-local LastPos = Main.Position
-local InputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
+	-- Sistema para abrir e fechar o menu
+	local IsMenuOpened = true
+	local LastPos = Main.Position
+	local InputService = game:GetService("UserInputService")
+	local TweenService = game:GetService("TweenService")
 
-InputService.InputBegan:Connect(function(Input, IsTyping)
-    if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
-        IsMenuOpened = not IsMenuOpened
-        if IsMenuOpened then
-            LastPos = Main.Position
-            wait()
-            Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
-            TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
-        else
-            Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
-            wait(0.25)
-            TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
-        end
-    end
-end)
+	InputService.InputBegan:Connect(function(Input, IsTyping)
+		if Input.KeyCode == Enum.KeyCode[HideKey] and not IsTyping then
+			IsMenuOpened = not IsMenuOpened
+			if IsMenuOpened then
+				LastPos = Main.Position
+				wait()
+				Main:TweenPosition(UDim2.new(0.25, 0, -1.5, 0), "In", "Quint", 0.5, true)
+				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 0 }):Play()
+			else
+				Main:TweenPosition(LastPos, "Out", "Quint", 0.5, true)
+				wait(0.25)
+				TweenService:Create(HideMain, TweenInfo.new(0.15), { BackgroundTransparency = 1 }):Play()
+			end
+		end
+	end)
 
 	local dragging
 	local dragInput
@@ -339,81 +340,81 @@ end)
 		--Removendo a tela de notificacao
 		return
 	end
-   
+
 	function Tabs.NewTab(TabName)
 
-        local Frame = Instance.new("Frame")
-        local TabLabel = Instance.new("TextLabel")
-        local Elements = Instance.new("ScrollingFrame")
-        local FadeFrame = Instance.new("Frame")
-        local UIListLayout = Instance.new("UIListLayout")
-    
-        UIListLayout.Name = "ff"
-        UIListLayout.Parent = Elements
-        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-        UIListLayout.Padding = UDim.new(0, 10)
-    
-        Frame.Parent = Pages
-        Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Frame.BackgroundTransparency = 1
-        Frame.BorderSizePixel = 0
-        Frame.Size = UDim2.new(1, 0, 1, 0)
-        Frame.Name = TabName
-    
-        TabLabel.Name = "SectionLabel"
-        TabLabel.Parent = Frame
-        TabLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        TabLabel.BackgroundTransparency = 1.000
-        TabLabel.BorderSizePixel = 0
-        TabLabel.Position = UDim2.new(0, 7, 0, 7)
-        TabLabel.Size = UDim2.new(0, 127, 0, 18)
-        TabLabel.Font = Enum.Font.GothamBold
-        TabLabel.Text = TabName
-        TabLabel.TextColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
-        TabLabel.TextSize = 21
-        TabLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
-            Elements.Name = "Elements"
-        Elements.Parent = Frame
-        Elements.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Elements.BackgroundTransparency = 1
-        Elements.BorderSizePixel = 0
-        Elements.Position = UDim2.new(0.0178926438, 0, 0, 37)
-        Elements.Size = UDim2.new(1, -20, 0, 385)
-        Elements.CanvasSize = UDim2.new(0,0,0,0)
-        Elements.AutomaticCanvasSize = Enum.AutomaticSize.Y
-        Elements.ScrollBarThickness = 2
-        Elements.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
-        Elements.ScrollBarImageTransparency = 0.5
-    
-        FadeFrame.Name = "FadeFrame"
-        FadeFrame.Parent = Frame
-        FadeFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-        FadeFrame.BackgroundTransparency = 0
-        FadeFrame.BorderSizePixel = 0
-        FadeFrame.Position = UDim2.new(0, 0, 0, 0)
-        FadeFrame.Size = UDim2.new(1, 0, 1, 0)
-        FadeFrame.ZIndex = 19
-    
-        local TabButton = Instance.new("TextButton")
-        local TabButtonText = Instance.new("TextLabel")
-        local TabCorner = Instance.new("UICorner")
-        local IsTabOpened = Instance.new("BoolValue")
-    
-        IsTabOpened.Parent = TabButton
-        for index,page in next, Pages:GetChildren() do
-            if page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index == 2) then
-                IsTabOpened.Value = true
-                TweenService:Create(FadeFrame, TweenInfo.new(1.3), {BackgroundTransparency = 1}):Play()
-                TweenService:Create(TabButton, TweenInfo.new(0.25), {BackgroundTransparency = 0.3, BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()  -- Cor alterada para amarelo
-    elseif page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index ~= 2) then
-        IsTabOpened.Value = false
-    end
+    local Frame = Instance.new("Frame")
+    local TabLabel = Instance.new("TextLabel")
+    local Elements = Instance.new("ScrollingFrame")
+    local FadeFrame = Instance.new("Frame")
+    local UIListLayout = Instance.new("UIListLayout")
+
+    UIListLayout.Name = "ff"
+    UIListLayout.Parent = Elements
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 10)
+
+    Frame.Parent = Pages
+    Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Frame.BackgroundTransparency = 1
+    Frame.BorderSizePixel = 0
+    Frame.Size = UDim2.new(1, 0, 1, 0)
+    Frame.Name = TabName
+
+    TabLabel.Name = "SectionLabel"
+    TabLabel.Parent = Frame
+    TabLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TabLabel.BackgroundTransparency = 1.000
+    TabLabel.BorderSizePixel = 0
+    TabLabel.Position = UDim2.new(0, 7, 0, 7)
+    TabLabel.Size = UDim2.new(0, 127, 0, 18)
+    TabLabel.Font = Enum.Font.GothamBold
+    TabLabel.Text = TabName
+    TabLabel.TextColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
+    TabLabel.TextSize = 21
+    TabLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+        Elements.Name = "Elements"
+    Elements.Parent = Frame
+    Elements.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Elements.BackgroundTransparency = 1
+    Elements.BorderSizePixel = 0
+    Elements.Position = UDim2.new(0.0178926438, 0, 0, 37)
+    Elements.Size = UDim2.new(1, -20, 0, 385)
+    Elements.CanvasSize = UDim2.new(0,0,0,0)
+    Elements.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    Elements.ScrollBarThickness = 2
+    Elements.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0)  -- Cor alterada para amarelo
+    Elements.ScrollBarImageTransparency = 0.5
+
+    FadeFrame.Name = "FadeFrame"
+    FadeFrame.Parent = Frame
+    FadeFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+    FadeFrame.BackgroundTransparency = 0
+    FadeFrame.BorderSizePixel = 0
+    FadeFrame.Position = UDim2.new(0, 0, 0, 0)
+    FadeFrame.Size = UDim2.new(1, 0, 1, 0)
+    FadeFrame.ZIndex = 19
+
+    local TabButton = Instance.new("TextButton")
+    local TabButtonText = Instance.new("TextLabel")
+    local TabCorner = Instance.new("UICorner")
+    local IsTabOpened = Instance.new("BoolValue")
+
+    IsTabOpened.Parent = TabButton
+    for index,page in next, Pages:GetChildren() do
+        if page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index == 2) then
+            IsTabOpened.Value = true
+            TweenService:Create(FadeFrame, TweenInfo.new(1.3), {BackgroundTransparency = 1}):Play()
+            TweenService:Create(TabButton, TweenInfo.new(0.25), {BackgroundTransparency = 0.3, BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()  -- Cor alterada para amarelo
+elseif page.Name ~= "UIPageLayout" and (page.Name == Frame.Name and index ~= 2) then
+    IsTabOpened.Value = false
+end
 end
 IsTabOpened.Name = "bd"
-		--Properties:
+    --Properties:
 
-		TabButton.Name = TabName
+    TabButton.Name = TabName
 TabButton.Parent = List
 TabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Cor de fundo do botão
 TabButton.BackgroundTransparency = 1.000
@@ -443,195 +444,201 @@ TabButtonText.TextXAlignment = Enum.TextXAlignment.Left
 TabCorner.Parent = TabButton
 TabCorner.CornerRadius = UDim.new(0,8)
 
+-- Adicionando o botão à estrutura TabsList
+TabsList[TabName] = {
+    Button = TabButton,
+    Page = Frame
+}
+
 local function ReColorOtherBtns()
-    for _, Button in next, List:GetDescendants() do
-        if Button.Name == "bd" and Button.Parent.Name ~= TabButton.Name then
-            -- Alterando a cor de fundo para amarelo e a transparência
-            TweenService:Create(Button.Parent, TweenInfo.new(0.1), {BackgroundTransparency = 1, BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play() 
-            Button.Value = false    
-        end
-    end
-    for _, Page in next, Pages:GetChildren() do
-        if Page.Name ~= "UIPageLayout" and Page.Name ~= TabName then
-            -- Alterando a transparência de fundo da página para visível
-            TweenService:Create(Page.FadeFrame, TweenInfo.new(0.1), {BackgroundTransparency = 0}):Play()
-        end
+for _, Button in next, List:GetDescendants() do
+    if Button.Name == "bd" and Button.Parent.Name ~= TabButton.Name then
+        -- Alterando a cor de fundo para amarelo e a transparência
+        TweenService:Create(Button.Parent, TweenInfo.new(0.1), {BackgroundTransparency = 1, BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play() 
+        Button.Value = false    
     end
 end
+for _, Page in next, Pages:GetChildren() do
+    if Page.Name ~= "UIPageLayout" and Page.Name ~= TabName then
+        -- Alterando a transparência de fundo da página para visível
+        TweenService:Create(Page.FadeFrame, TweenInfo.new(0.1), {BackgroundTransparency = 0}):Play()
+    end
+end
+end
 
-		TabButton.MouseButton1Click:Connect(function()
-			IsTabOpened.Value = true
-			UIPageLayout:JumpTo(Frame)
-			TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()
-			TweenService:Create(FadeFrame,TweenInfo.new(0.5),{BackgroundTransparency = 1}):Play()
-			ReColorOtherBtns()
-		end)
+    TabButton.MouseButton1Click:Connect(function()
+        IsTabOpened.Value = true
+        UIPageLayout:JumpTo(Frame)
+        TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3,BackgroundColor3 = Color3.fromRGB(255, 255, 0)}):Play()
+        TweenService:Create(FadeFrame,TweenInfo.new(0.5),{BackgroundTransparency = 1}):Play()
+        ReColorOtherBtns()
+    end)
 
-		TabButton.MouseEnter:Connect(function()
-			if not IsTabOpened.Value then
-				TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.96}):Play()
-			else
-				TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.25}):Play()
-			end
-		end)
+    TabButton.MouseEnter:Connect(function()
+        if not IsTabOpened.Value then
+            TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.96}):Play()
+        else
+            TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.25}):Play()
+        end
+    end)
 
-		TabButton.MouseLeave:Connect(function()
-			if not IsTabOpened.Value then
-				TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 1}):Play()
-			else
-				TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3}):Play()
-			end
-		end)
+    TabButton.MouseLeave:Connect(function()
+        if not IsTabOpened.Value then
+            TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 1}):Play()
+        else
+            TweenService:Create(TabButton,TweenInfo.new(0.25),{BackgroundTransparency = 0.3}):Play()
+        end
+    end)
 
-		local ElementsLib = {}
+    local ElementsLib = {}
 
-		function ElementsLib.NewSection(SectionName)
-			local Section = Instance.new("Frame")
-			local UICorner = Instance.new("UICorner")
-			local SectionLabel = Instance.new("TextLabel")
-			local SectionElements = Instance.new("Frame")
-			local UIListLayout = Instance.new("UIListLayout")
+    function ElementsLib.NewSection(SectionName)
+        local Section = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+        local SectionLabel = Instance.new("TextLabel")
+        local SectionElements = Instance.new("Frame")
+        local UIListLayout = Instance.new("UIListLayout")
 
-			--Properties:
+        --Properties:
 
-			Section.Name = SectionName
-			Section.Parent = Elements
-			Section.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-			Section.BackgroundTransparency = 1
-			Section.BorderSizePixel = 0
-			Section.Size = UDim2.new(0, 482, 0, 18)
-			Section.AutomaticSize = Enum.AutomaticSize.Y
+        Section.Name = SectionName
+        Section.Parent = Elements
+        Section.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        Section.BackgroundTransparency = 1
+        Section.BorderSizePixel = 0
+        Section.Size = UDim2.new(0, 482, 0, 18)
+        Section.AutomaticSize = Enum.AutomaticSize.Y
 
-			UICorner.CornerRadius = UDim.new(0, 5)
-			UICorner.Parent = SectionElements
+        UICorner.CornerRadius = UDim.new(0, 5)
+        UICorner.Parent = SectionElements
 
-			SectionLabel.Name = "SectionLabel"
-			SectionLabel.Parent = Section
-			SectionLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SectionLabel.BackgroundTransparency = 1.000
-			SectionLabel.BorderSizePixel = 0
-			SectionLabel.Position = UDim2.new(0, 7, 0, 7)
-			SectionLabel.Size = UDim2.new(0, 127, 0, 18)
-			SectionLabel.Font = Enum.Font.GothamBold
-			SectionLabel.Text = SectionName
-			SectionLabel.TextColor3 = Color3.fromRGB(209, 209, 209)
-			SectionLabel.TextSize = 16.000
-			SectionLabel.TextXAlignment = Enum.TextXAlignment.Left
+        SectionLabel.Name = "SectionLabel"
+        SectionLabel.Parent = Section
+        SectionLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SectionLabel.BackgroundTransparency = 1.000
+        SectionLabel.BorderSizePixel = 0
+        SectionLabel.Position = UDim2.new(0, 7, 0, 7)
+        SectionLabel.Size = UDim2.new(0, 127, 0, 18)
+        SectionLabel.Font = Enum.Font.GothamBold
+        SectionLabel.Text = SectionName
+        SectionLabel.TextColor3 = Color3.fromRGB(209, 209, 209)
+        SectionLabel.TextSize = 16.000
+        SectionLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-			SectionElements.Name = "SectionElements"
-			SectionElements.Parent = Section
-			SectionElements.BackgroundColor3 = Color3.fromRGB(30,30,30)
-			SectionElements.BackgroundTransparency = 0
-			SectionElements.BorderSizePixel = 0
-			SectionElements.ClipsDescendants = true
-			SectionElements.Position = UDim2.new(0, 7, 0, 33)
-			SectionElements.Size = UDim2.new(0, 469, 0, 0)
-			SectionElements.AutomaticSize = Enum.AutomaticSize.Y
+        SectionElements.Name = "SectionElements"
+        SectionElements.Parent = Section
+        SectionElements.BackgroundColor3 = Color3.fromRGB(30,30,30)
+        SectionElements.BackgroundTransparency = 0
+        SectionElements.BorderSizePixel = 0
+        SectionElements.ClipsDescendants = true
+        SectionElements.Position = UDim2.new(0, 7, 0, 33)
+        SectionElements.Size = UDim2.new(0, 469, 0, 0)
+        SectionElements.AutomaticSize = Enum.AutomaticSize.Y
 
-			UIListLayout.Parent = SectionElements
-			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout.Padding = UDim.new(0, 5)
+        UIListLayout.Parent = SectionElements
+        UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 5)
 
-			local InSection = {}
-			function InSection.NewToggle(ToggleText,UserFunc,defbool)
-			--removendo toggles
-				return
-			end
+        local InSection = {}
+        function InSection.NewToggle(ToggleText,UserFunc,defbool)
+        --removendo toggles
+            return
+        end
 
-			function InSection.NewLabel(LabelText,IsScaled,LabelTextSize,LabelTextColor)
-				local Label = Instance.new("TextLabel")
+        function InSection.NewLabel(LabelText,IsScaled,LabelTextSize,LabelTextColor)
+            local Label = Instance.new("TextLabel")
 
-				Label.Name = LabelText
-				Label.Parent = SectionElements
-				Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Label.BackgroundTransparency = 1.000
-				Label.BorderColor3 = Color3.fromRGB(255, 255, 0)
-				Label.BorderSizePixel = 0
-				Label.Position = UDim2.new(0.0500000007, 0, 0, 0)
-				Label.Size = UDim2.new(0.949999988, 0, 0, 40)
-				Label.Font = Enum.Font.GothamSemibold
-				Label.Text = LabelText
-				Label.TextSize = LabelTextSize or 14
-				Label.TextColor3 = LabelTextColor or Color3.fromRGB(255, 255, 255)
-				Label.TextScaled = IsScaled or false
-				Label.TextXAlignment = Enum.TextXAlignment.Left
-				return Label;
-			end
+            Label.Name = LabelText
+            Label.Parent = SectionElements
+            Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Label.BackgroundTransparency = 1.000
+            Label.BorderColor3 = Color3.fromRGB(255, 255, 0)
+            Label.BorderSizePixel = 0
+            Label.Position = UDim2.new(0.0500000007, 0, 0, 0)
+            Label.Size = UDim2.new(0.949999988, 0, 0, 40)
+            Label.Font = Enum.Font.GothamSemibold
+            Label.Text = LabelText
+            Label.TextSize = LabelTextSize or 14
+            Label.TextColor3 = LabelTextColor or Color3.fromRGB(255, 255, 255)
+            Label.TextScaled = IsScaled or false
+            Label.TextXAlignment = Enum.TextXAlignment.Left
+            return Label;
+        end
 
-			function InSection.NewLabelWithComment(LabelText,CommentText,IsScaled,LabelTextSize,LabelTextColor)
-				local Label = Instance.new("TextLabel")
-				local DateMes = Instance.new("TextLabel")
+        function InSection.NewLabelWithComment(LabelText,CommentText,IsScaled,LabelTextSize,LabelTextColor)
+            local Label = Instance.new("TextLabel")
+            local DateMes = Instance.new("TextLabel")
 
-				Label.Name = LabelText
-				Label.Parent = SectionElements
-				Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Label.BackgroundTransparency = 1.000
-				Label.BorderColor3 = Color3.fromRGB(255, 255, 0)
-				Label.BorderSizePixel = 0
-				Label.Position = UDim2.new(0.0500000007, 0, 0, 0)
-				Label.Size = UDim2.new(0.949999988, 0, 0, 40)
-				Label.Font = Enum.Font.GothamSemibold
-				Label.Text = LabelText
-				Label.TextSize = LabelTextSize or 14
-				Label.TextColor3 = LabelTextColor or Color3.fromRGB(255, 255, 255)
-				Label.TextScaled = IsScaled or false
-				Label.TextXAlignment = Enum.TextXAlignment.Left
-				Label.TextYAlignment = Enum.TextYAlignment.Top
+            Label.Name = LabelText
+            Label.Parent = SectionElements
+            Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Label.BackgroundTransparency = 1.000
+            Label.BorderColor3 = Color3.fromRGB(255, 255, 0)
+            Label.BorderSizePixel = 0
+            Label.Position = UDim2.new(0.0500000007, 0, 0, 0)
+            Label.Size = UDim2.new(0.949999988, 0, 0, 40)
+            Label.Font = Enum.Font.GothamSemibold
+            Label.Text = LabelText
+            Label.TextSize = LabelTextSize or 14
+            Label.TextColor3 = LabelTextColor or Color3.fromRGB(255, 255, 255)
+            Label.TextScaled = IsScaled or false
+            Label.TextXAlignment = Enum.TextXAlignment.Left
+            Label.TextYAlignment = Enum.TextYAlignment.Top
 
-				DateMes.Name = "DateMes"
-				DateMes.Parent = Label
-				DateMes.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				DateMes.BackgroundTransparency = 1.000
-				DateMes.BorderSizePixel = 0
-				DateMes.Position = UDim2.new(0, 0, 0.76, 0)
-				DateMes.Size = UDim2.new(0.970777929, 0, -0.0263157897, 17)
-				DateMes.Font = Enum.Font.GothamSemibold
-				DateMes.Text = CommentText
-				DateMes.TextColor3 = Color3.fromRGB(197, 197, 197)
-				DateMes.TextSize = 12.000
-				DateMes.TextXAlignment = Enum.TextXAlignment.Left
-				return Label;
-			end
+            DateMes.Name = "DateMes"
+            DateMes.Parent = Label
+            DateMes.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            DateMes.BackgroundTransparency = 1.000
+            DateMes.BorderSizePixel = 0
+            DateMes.Position = UDim2.new(0, 0, 0.76, 0)
+            DateMes.Size = UDim2.new(0.970777929, 0, -0.0263157897, 17)
+            DateMes.Font = Enum.Font.GothamSemibold
+            DateMes.Text = CommentText
+            DateMes.TextColor3 = Color3.fromRGB(197, 197, 197)
+            DateMes.TextSize = 12.000
+            DateMes.TextXAlignment = Enum.TextXAlignment.Left
+            return Label;
+        end
 
-			function InSection.NewSlider(SliderText,min,max,precise,UserFunc,defvalue)
-				--Removendo Sliders
-				return
-			end
-			function InSection.NewDropdown(placeholder,Selectables,func,IsMulti)
-				-- Removendo Dropdowns
-				return
-			end
-			function InSection.NewButton(btnText,func)
+        function InSection.NewSlider(SliderText,min,max,precise,UserFunc,defvalue)
+            --Removendo Sliders
+            return
+        end
+        function InSection.NewDropdown(placeholder,Selectables,func,IsMulti)
+            -- Removendo Dropdowns
+            return
+        end
+        function InSection.NewButton(btnText,func)
 
-				local Button = Instance.new("TextButton")
-				local SecFrame = Instance.new("Frame")
-				local ButtonText = Instance.new("TextLabel")
-				local ButtonCorner = Instance.new("UICorner")
+            local Button = Instance.new("TextButton")
+            local SecFrame = Instance.new("Frame")
+            local ButtonText = Instance.new("TextLabel")
+            local ButtonCorner = Instance.new("UICorner")
 
-				Button.Name = btnText
-				Button.Parent = SectionElements
-				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Button.BackgroundTransparency = 1
-				Button.BorderSizePixel = 0
-				Button.Position = UDim2.new(0.0412844047, 0, 0, 0)
-				Button.Size = UDim2.new(1, 0, 0, 40)
-				Button.AutoButtonColor = false
-				Button.Font = Enum.Font.SourceSansSemibold
-				Button.Text = ""
-				Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-				Button.TextSize = 19.000
+            Button.Name = btnText
+            Button.Parent = SectionElements
+            Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Button.BackgroundTransparency = 1
+            Button.BorderSizePixel = 0
+            Button.Position = UDim2.new(0.0412844047, 0, 0, 0)
+            Button.Size = UDim2.new(1, 0, 0, 40)
+            Button.AutoButtonColor = false
+            Button.Font = Enum.Font.SourceSansSemibold
+            Button.Text = ""
+            Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Button.TextSize = 19.000
 
-				ButtonText.Name = "ButtonText"
-				ButtonText.Parent = Button
-				ButtonText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ButtonText.BackgroundTransparency = 1.000
-				ButtonText.BorderSizePixel = 0
-				ButtonText.Position = UDim2.new(0.05,0, 0, 0)
-				ButtonText.Size = UDim2.new(1, 0, 1, 0)
-				ButtonText.Font = Enum.Font.SourceSansSemibold
-				ButtonText.Text = btnText
-				ButtonText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            ButtonText.Name = "ButtonText"
+            ButtonText.Parent = Button
+            ButtonText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ButtonText.BackgroundTransparency = 1.000
+            ButtonText.BorderSizePixel = 0
+            ButtonText.Position = UDim2.new(0.05,0, 0, 0)
+            ButtonText.Size = UDim2.new(1, 0, 1, 0)
+            ButtonText.Font = Enum.Font.SourceSansSemibold
+            ButtonText.Text = btnText
+            ButtonText.TextColor3 = Color3.fromRGB(255, 255, 255)
 				ButtonText.TextSize = 18
 				ButtonText.TextWrapped = true
 				ButtonText.TextXAlignment = Enum.TextXAlignment.Left
