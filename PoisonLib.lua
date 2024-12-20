@@ -142,7 +142,6 @@ SearchBox.ClearTextOnFocus = true
 local SearchBoxCorner = Instance.new("UICorner")
 SearchBoxCorner.Parent = SearchBox
 SearchBoxCorner.CornerRadius = UDim.new(0, 6)
-
 -- Lista de Elementos
 local List = Instance.new("ScrollingFrame")
 List.Name = "List"
