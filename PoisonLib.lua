@@ -118,15 +118,15 @@ ButtonsTab.Name = "ButtonsTab"
 ButtonsTab.Parent = LeftPart
 ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
 ButtonsTab.BorderSizePixel = 0
-ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)  -- Posição restaurada ao valor original
+ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
 ButtonsTab.Size = UDim2.new(0.94, 0, 0, 362)
 
 -- Barra de Pesquisa
 local SearchBox = Instance.new("TextBox")
 SearchBox.Name = "SearchBox"
 SearchBox.Parent = ButtonsTab
-SearchBox.Size = UDim2.new(0.98, 0, 0, 30)  -- Largura aumentada para 0.98
-SearchBox.Position = UDim2.new(0.01, 0, 0, -40)  -- Ajustado para mover mais para cima
+SearchBox.Size = UDim2.new(1, 0, 0, 30) -- Largura ajustada para ocupar todo o quadrado
+SearchBox.Position = UDim2.new(0, 0, 0, 0) -- Alinhado ao topo do quadrado
 SearchBox.BackgroundTransparency = 0
 SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 SearchBox.PlaceholderText = "🔍 Search"
