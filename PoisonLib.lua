@@ -119,14 +119,14 @@ ButtonsTab.Parent = LeftPart
 ButtonsTab.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
 ButtonsTab.BorderSizePixel = 0
 ButtonsTab.Position = UDim2.new(0, 0, 0.184829056, 0)
-ButtonsTab.Size = UDim2.new(0.94, 0, 0, 362)
+ButtonsTab.Size = UDim2.new(0, 218, 0, 362)
 
 -- Barra de Pesquisa
 local SearchBox = Instance.new("TextBox")
 SearchBox.Name = "SearchBox"
 SearchBox.Parent = ButtonsTab
-SearchBox.Size = UDim2.new(1, 0, 0, 30) -- Largura ajustada para ocupar todo o quadrado
-SearchBox.Position = UDim2.new(0, 0, 0, 0) -- Alinhado ao topo do quadrado
+SearchBox.Size = UDim2.new(0.95, 0, 0, 30) -- Largura ajustada para ocupar o espaço corretamente
+SearchBox.Position = UDim2.new(0.025, 0, 0, -25) -- Posição ajustada para alinhar corretamente
 SearchBox.BackgroundTransparency = 0
 SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 SearchBox.PlaceholderText = "🔍 Search"
@@ -155,7 +155,7 @@ List.Size = UDim2.new(0.998, 0, 1, -35)
 List.Position = UDim2.new(0, 0, 0, 35) -- Ajustado para baixo da barra de pesquisa
 List.AutomaticCanvasSize = Enum.AutomaticSize.Y
 List.ScrollBarThickness = 2
-List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0) -- Amarelo translúcido
+List.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 0)
 List.ScrollBarImageTransparency = 0.5
 List.CanvasSize = UDim2.new(0, 0, 0, 0)
 
@@ -179,7 +179,7 @@ local TabsList = {} -- Estrutura para armazenar abas e seus botões
 local function SearchHandle()
     local Text = string.lower(SearchBox.Text)
     for tabName, tabData in pairs(TabsList) do
-        local tabButton = tabData.Button  -- Agora acessamos o botão através da tabela tabData
+        local tabButton = tabData.Button
         if tabButton and tabButton:IsA('TextButton') then
             if string.find(string.lower(tabName), Text) then
                 tabButton.Visible = true
