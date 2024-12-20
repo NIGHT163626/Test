@@ -126,7 +126,7 @@ local SearchBox = Instance.new("TextBox")
 SearchBox.Name = "SearchBox"
 SearchBox.Parent = ButtonsTab
 SearchBox.Size = UDim2.new(0.95, 0, 0, 30) -- Largura ajustada para ocupar o espaço corretamente
-SearchBox.Position = UDim2.new(0.025, 0, 0, -25) -- Posição ajustada para alinhar corretamente
+SearchBox.Position = UDim2.new(0.025, 0, 0, -50) -- Posição ajustada para alinhar mais para cima
 SearchBox.BackgroundTransparency = 0
 SearchBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 SearchBox.PlaceholderText = "🔍 Search"
@@ -214,7 +214,7 @@ InputService.InputBegan:Connect(function(Input, IsTyping)
         end
     end
 end)
-
+	
 	local dragging
 	local dragInput
 	local dragStart
