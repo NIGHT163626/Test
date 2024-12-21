@@ -23,25 +23,25 @@ local Prometheus = {}
 -- Função para criar um loader visual
 function Prometheus.createLoader(title)
     local existingGui = CoreGui:FindFirstChild("PrometheusLoader")
-    if existingGui then existingGui:Destroy() end -- Destrói qualquer loader existente
+    if existingGui then existingGui:Destroy() end
 
     -- ScreenGui (Loader)
     local loaderGui = Instance.new("ScreenGui")
     loaderGui.Name = "PrometheusLoader"
     loaderGui.Parent = CoreGui
     loaderGui.ResetOnSpawn = false
-    loaderGui.DisplayOrder = 999 -- Define a ordem de exibição para ficar no topo
+    loaderGui.DisplayOrder = 999
 
     -- LoaderFrame (Frame)
     local loaderFrame = Instance.new("Frame")
     loaderFrame.Name = "LoaderFrame"
     loaderFrame.Size = UDim2.new(0, 300, 0, 150)
-    loaderFrame.Position = UDim2.new(0.5, -150, 0.5, -75) -- Centraliza o frame
+    loaderFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
     loaderFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     loaderFrame.BorderSizePixel = 0
     loaderFrame.Parent = loaderGui
 
-    -- UICorner (para LoaderFrame) - Arredonda os cantos do frame
+    -- UICorner (para LoaderFrame)
     local loaderFrameCorner = Instance.new("UICorner")
     loaderFrameCorner.CornerRadius = UDim.new(0, 10)
     loaderFrameCorner.Parent = loaderFrame
@@ -61,7 +61,7 @@ function Prometheus.createLoader(title)
     titleLabel.Size = UDim2.new(1, -20, 0, 20)
     titleLabel.Position = UDim2.new(0, 10, 0, 85)
     titleLabel.BackgroundTransparency = 1
-    titleLabel.Text = title or "Loading..." -- Título fornecido ou "Loading..." por padrão
+    titleLabel.Text = title or "Loading..."
     titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     titleLabel.TextSize = 18
     titleLabel.Font = Enum.Font.SourceSansBold
@@ -88,12 +88,12 @@ function Prometheus.createLoader(title)
     loadingBarBackground.BorderSizePixel = 0
     loadingBarBackground.Parent = loaderFrame
 
-    -- UICorner (para LoadingBarBackground) - Arredonda os cantos da barra de fundo
+    -- UICorner (para LoadingBarBackground)
     local loadingBarBackgroundCorner = Instance.new("UICorner")
     loadingBarBackgroundCorner.CornerRadius = UDim.new(0, 5)
     loadingBarBackgroundCorner.Parent = loadingBarBackground
 
-    -- LoadingBarFill (Frame) - Barra de progresso amarela
+    -- LoadingBarFill (Frame)
     local loadingBarFill = Instance.new("Frame")
     loadingBarFill.Name = "LoadingBarFill"
     loadingBarFill.Size = UDim2.new(0, 0, 1, 0)
@@ -101,7 +101,7 @@ function Prometheus.createLoader(title)
     loadingBarFill.BorderSizePixel = 0
     loadingBarFill.Parent = loadingBarBackground
 
-    -- UICorner (para LoadingBarFill) - Arredonda os cantos da barra de progresso
+    -- UICorner (para LoadingBarFill)
     local loadingBarFillCorner = Instance.new("UICorner")
     loadingBarFillCorner.CornerRadius = UDim.new(0, 5)
     loadingBarFillCorner.Parent = loadingBarFill
@@ -206,17 +206,17 @@ local function runKeySystem()
     -- Cria o loader
     local updateLoader, closeLoader = Prometheus.createLoader("Poison Script Hub")
 
-    updateLoader("Verificando Key...", 0.2) -- Atualiza o status e o progresso
+    updateLoader("Verificando Key...", 0.2)
     wait(1)
 
     -- Verifica se há uma chave válida salva
     if chaveJaSalva() then
-        updateLoader("Key válida encontrada!", 0.8) -- Atualiza o status e o progresso
+        updateLoader("Key válida encontrada!", 0.8)
         wait(1)
         closeLoader()
         code() -- Executa o código se a chave for válida
     else
-        updateLoader("Key não encontrada. Abrindo sistema de Key...", 0.5) -- Atualiza o status e o progresso
+        updateLoader("Key não encontrada. Abrindo sistema de Key...", 0.5)
         wait(1)
         closeLoader()
 
@@ -341,7 +341,7 @@ local function runKeySystem()
 
             if responsePremium == trueData or responseDefault == trueData then
                 print("Chave válida!")
-                salvarChaveNaWorkspace(TextBox.Text) -- Salva a chave
+                salvarChaveNaWorkspace(TextBox.Text)
                 KeySystemGui:Destroy()
                 -- Recria o loader para a execução do script
                 local updateLoader, closeLoader = Prometheus.createLoader("Poison Script Hub")
