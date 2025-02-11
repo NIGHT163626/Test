@@ -6,17 +6,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Método não permitido' });
   }
 
-  const { nome, conteudo } = req.body;
+  const { conteudo } = req.body;
 
-  if (!nome || !conteudo) {
-    return res.status(400).json({ message: 'Nome e conteúdo são obrigatórios.' });
+  if (!conteudo) {
+    return res.status(400).json({ message: 'Conteúdo obrigatório.' });
   }
 
-  const filePath = path.resolve('./public/arquivos', nome);
+  const filePath = path.resolve('./public/arquivos', 'PoisonHub');
 
   try {
     fs.writeFileSync(filePath, conteudo);
-    return res.status(200).json({ message: `Arquivo "${nome}" atualizado com sucesso!` });
+    return res.status(200).json({ message: 'Arquivo PoisonHub atualizado com sucesso!' });
   } catch (error) {
     return res.status(500).json({ message: 'Erro ao atualizar o arquivo.', error: error.message });
   }
